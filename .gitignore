@@ -4,3 +4,4 @@ app/assets/js/actions/TodoServerActions.js
 app/assets/js/actions/TodoActions.js
 app/assets/js/components/index1.jsx
 app/assets/js/stores/TodoStore.js
+assets/
