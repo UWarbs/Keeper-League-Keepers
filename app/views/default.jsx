@@ -11,13 +11,14 @@ var Default = React.createClass({
 
         <meta charSet="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-        <title>League</title>
+        <title>Fantasy Keepers</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"></link>
         <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
       </head>
-      <body style={{fontFamily: ['Varela Round', 'sans-serif']}}>
+      <body>
+      	<div className="site-overlay"></div>
         <div id="app-container"></div>
         <script src="js/bundle.js"></script>
       </body>

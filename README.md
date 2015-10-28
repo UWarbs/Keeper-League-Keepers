@@ -16,6 +16,8 @@ SCSS - Love this CSS preprocessor.
 
 Webpack - I am more familiar with grunt, but time to branch out.
 
+Hapi - More familiar with express but see above.
+
 ###Preliminary data schema
 
 {

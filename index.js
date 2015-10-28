@@ -38,7 +38,7 @@ server.register([{
       path: '/{param*}',
       handler: {
         directory: {
-          path: 'assets',
+          path: 'dist',
           index: ['index.html']
         }
       }
