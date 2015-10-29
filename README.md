@@ -21,29 +21,51 @@ Hapi - More familiar with express but see above.
 ###Preliminary data schema
 
 {
+
 	"id": int,
+
 	"name": String,
+
 	"age": int,
-	"rating": String, (A+, B-, etc...)
-	"positionalRating": String,        Do we need both?
+
+	"positionalRating": String, (A+, B-, etc...)
+
 	"yearsExperience": int,
+
 	"writeUp": String,
+
 	"position": { 
+
 		"id": int,
+		
 		"name": String,
+		
 		"writeup": String
+	
 	},
+	
 	"team": {
+	
 		"id": int,
+	
 		"name": String,
+	
 		"writeup": String
+	
 	},
+	
 	"history" : {
+	
 		"pastPoints": {
+	
 			"nonPPR": Array of ints,
+	
 			"PPR": Array of ints
+	
 		}
+	
 	}
+
 }
 
 ###Testing Tech

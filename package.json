@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.21.0",
+    "eslint-plugin-react": "^3.6.3",
     "file-loader": "^0.8.4",
     "jsx-loader": "^0.13.2",
     "node-sass": "^3.4.1",
