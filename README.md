@@ -24,7 +24,9 @@ Hapi - More familiar with express but see above.
 
 	"id": int,
 
-	"name": String,
+	"firstName": String,
+
+	"lastName": String,
 
 	"age": int,
 

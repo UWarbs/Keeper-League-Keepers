@@ -14,7 +14,8 @@ var _store = {
 	players: [
 		{	
 			"id": 1,
-			"name": "Russel Wilson",
+			"firstName": "Russel",
+			"lastName": "Wilson",
 			"age": 26,
 			"positionalRating": "A-",      
 			"yearsExperience": 4,
@@ -40,7 +41,8 @@ var _store = {
 		},
 		{
 			"id": 2,
-			"name": "Marshawn Lynch",
+			"firstName": "Marshawn",
+			"lastName": "Lynch",
 			"age": 28,
 			"positionalRating": "B-",      
 			"yearsExperience": 9,
