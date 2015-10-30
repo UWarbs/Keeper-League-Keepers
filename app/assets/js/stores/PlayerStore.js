@@ -14,7 +14,7 @@ var _store = {
 	players: [
 		{	
 			"id": 1,
-			"firstName": "Russel",
+			"firstName": "Russell",
 			"lastName": "Wilson",
 			"age": 26,
 			"positionalRating": "A-",      
@@ -83,6 +83,18 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 
 	getPlayers: function() {
 		return _store;
+	},
+
+	getSinglePlayer: function(id) {
+		var playerToReturn;
+		
+		_store.players.forEach(function(player, index, array) {
+			if (player.id === id) {
+				playerToReturn = player;
+			}
+		});		
+		
+		return playerToReturn;
 	}
 });
 
@@ -99,9 +111,21 @@ AppDispatcher.register(function(payload) {
 			PlayerStore.emit(CHANGE_EVENT);
 			break;
 
-		case AppConstants.GET_SINGLE_PLAYER:
-			PlayerStore.emit(CHANGE_EVENT);
-			break;
+		// case AppConstants.GET_SINGLE_PLAYER:   //seems to call 
+		// 	var id = action.id;
+		// 	console.log('store action run with id: ' + id);
+		// 	var playerToReturn;
+			
+		// 	_store.players.forEach(function(player, index, array) {
+		// 		if (player.id === id) {
+		// 			playerToReturn = player;
+		// 		}
+		// 	});		
+			
+		// 	return playerToReturn;
+			
+		// 	PlayerStore.emit(CHANGE_EVENT);
+		// 	break;
 
     default: 
     	return true;

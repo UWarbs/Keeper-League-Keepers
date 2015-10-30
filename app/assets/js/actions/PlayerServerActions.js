@@ -2,7 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants     = require('../constants/Constants');
 
 module.exports = {
-	getSinglePlayer: function() {
+	getSinglePlayer: function(id) {
 		AppDispatcher.handleServerAction({
 			actionType: Constants.GET_SINGLE_PLAYER,
 			id: id

@@ -29,7 +29,6 @@ var App = React.createClass({
 	},
 
 	render: function() {
-		console.log(this.state);
 		return (
 				<div>
 					<Header />

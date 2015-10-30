@@ -8,7 +8,7 @@ ReactJs - I've been dying to learn this and this is a simple enough idea to buil
 
 Flux - This will keep the data aspect clean
 
-ES6 - Learning React? Might as well get up to speed on the newest JavaScript.
+ES6 - Learning React? Might as well get up to speed on the newest JavaScript. *To be implemented after player search is implemented.
 
 MongoDB - Perfect database solution for this project because performance won't be an issue because there are ~1,696 active NFL players and only a fraction of them are worth doing fantasy league write ups on. Not because all 1,696 aren't amazing athletes, but because roughly 480 is the how many fantasy players you will see in most fantasy leagues. Also, this idea is very fluid and mongodb is good for that sort of thing.
 
