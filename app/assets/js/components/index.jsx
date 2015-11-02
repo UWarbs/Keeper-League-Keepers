@@ -24,15 +24,11 @@ var Header = React.createClass({
 });
 
 var App = React.createClass({
-	getInitialState: function() {
-		return PlayerStore.getPlayers();
-	},
-
 	render: function() {
 		return (
 				<div>
 					<Header />
-					<MainPage playerList={this.state.players} />
+					<MainPage />
 				</div>
 		)
 	}
