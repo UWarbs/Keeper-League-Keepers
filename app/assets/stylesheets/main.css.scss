@@ -1,4 +1,5 @@
 @import "overrides";
+@import "player_search";
 @import "variables";
 
 *, *:before, *:after {
@@ -93,43 +94,5 @@ body {
 	}
 }
 
-//player search component
 
-.player-search-copy {
-	color: white;
-	text-shadow: $text-shadow;
-}
-.player-search-input,
-.player-search-input::-ms-input-placeholder,
-.player-search-input::-moz-input-placeholder,
-.player-search-input::-webkit-input-placeholder  {
-	font-weight: 600;
-}  
-.player-search-input {
-	padding: 5px 10px;
-	margin-right: 10px;
-	font-size: 18px;
-	display: inline-block;
-}
-.player-search-go {
-	display: inline-block;
-	padding: 5px 10px;
-	width: 90px;
-	font-size: 18px;
-	font-family: $site-font;
-	font-weight: 600;
-	text-transform: uppercase;
-	text-align: center;
-	cursor: pointer;
-	color: white;
-	background-color: $blue;
-	border: none;
-	box-shadow: $box-shadow;
-}
 
-.player-result-list {
-	li {
-		color: white;
-		list-style: none;
-	}
-}
