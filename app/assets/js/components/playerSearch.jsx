@@ -25,6 +25,8 @@ var PlayerName = React.createClass({
 
 var PlayerSearch = React.createClass({
 	getInitialState: function() {
+		console.log('REFS');
+		console.log(this.refs);
 		return {
 			searchTerm: ''
 		}
@@ -57,7 +59,7 @@ var PlayerSearch = React.createClass({
 		if(this.state.searchTerm == '') {
 			playerNameList = [];
 		}
-		
+
 		if (selectedPlayer) {
 			var playerCard = <PlayerCard player={selectedPlayer} />
 		}
@@ -65,7 +67,7 @@ var PlayerSearch = React.createClass({
 		return (
 			<div className="player-search-container">
 				<h3 className="player-search-copy">Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
-				<SearchInput className="player-search-input" type="text" placeholder="e.g Russell Wilson" ref='search' onChange={this.searchUpdated} defaultStyle={false} />
+				<SearchInput className="player-search-input" type="text" placeholder="e.g Russell Wilson" ref='search' onChange={this.searchUpdated} defaultStyle={false} value={this.state.searchTerm} />
 				<ul className="player-result-list">
 					{playerNameList}
 				</ul>
