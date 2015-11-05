@@ -28,30 +28,55 @@ var PlayerName = React.createClass({
 		this.props.resetSearch();
 	}
 });
-
+var RENDERED = 0;
 var PlayerSearch = React.createClass({
 	mixins: [PureRenderMixin],
-
 	getInitialState: function() {
 		return {
+			playerList: PlayerStore.getPlayers(),
+			playerSelected: false,
+			player: null,
+			isComparing: false,
+			comparePlayerSelected: false,
+			comparePlayer: null,
 			searchTerm: ''
+		};
+	},
+
+	handlePlayerSelect: function(id) {
+		var player = PlayerStore.getSinglePlayer(id);
+		//conditional for if player is first player or compared player
+		if(this.state.isComparing) {
+			this.setState({
+				comparePlayer: player,
+				comparePlayerSelected: true
+			});
+		}else {
+			this.setState({
+				playerSelected: true,
+				player: player
+			});		
 		}
 	},
 
 	render: function() {
 		//Put this stuff in function and call?
+		RENDERED++;
+		console.log('render: ' + RENDERED);
 		var searchTerm = this.state.searchTerm;
-		var selectedFunc = this.props.handlePlayerSelect;
-		var selectedPlayer = this.props.player;
+		var selectedFunc = this.handlePlayerSelect;
+		var selectedPlayer = this.state.player;
 		var comparedPlayer;
-		var potentialPlayers = this.props.playerList;
-		var isComparing = this.props.isComparing;
+		var potentialPlayers = this.state.playerList.players;
+		var isComparing = this.state.isComparing;
+		var comparePlayerSelected = this.state.comparePlayerSelected;
 		var resetFunc = this.resetSearch;
 		
 		var fullPlayerList = [];
 		var playerNameList = [];
 		var playerCard;
-		var comparedPlayer;
+		var compareBtn;
+		var comparedPlayer = this.state.comparePlayer || null;
 
 		
 		
@@ -72,12 +97,18 @@ var PlayerSearch = React.createClass({
 		}
 
 		if (selectedPlayer) {
-			playerCard = <PlayerCard player={selectedPlayer} />
-			var compareBtn = React.createElement('div', {className: "player-compare-btn", onClick: this.handleCompare}, "COMPARE");
+			if(comparePlayerSelected) {
+				compareBtn = React.createElement('div', {className: "player-compare-btn red", onClick: this.handleCompare}, "Stop Comparing");
+				playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={"first-card"} />
+			}else {
+				compareBtn = React.createElement('div', {className: "player-compare-btn", onClick: this.handleCompare}, "Compare");
+				playerCard = <PlayerCard player={selectedPlayer} isComparing={false} className={null}/>
+			}
+			
 		}
 
-		if (isComparing) {
-			comparedPlayer = <PlayerCard player={comparedPlayer}/>
+		if (isComparing && comparePlayerSelected) {
+			comparedPlayer = <PlayerCard player={comparedPlayer} className={"comp-card"}/>
 			console.log('comparing');
 		}
 
@@ -85,10 +116,10 @@ var PlayerSearch = React.createClass({
 			<div className="player-search-container">
 				<h3 className="player-search-copy">Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
 				<SearchHelper className="player-search-input" type="text" placeholder="e.g Russell Wilson" ref='search' onChange={this.searchUpdated} defaultStyle={false} value={searchTerm} />
-				{compareBtn}
 				<ul className="player-result-list">
 					{playerNameList}
 				</ul>
+				{compareBtn}
 				{playerCard}
 				{comparedPlayer}
 			</div>
@@ -100,11 +131,15 @@ var PlayerSearch = React.createClass({
 	},
 
 	searchUpdated: function(term) {
-		this.setState({searchTerm: term}); //forces re-render
+		this.setState({searchTerm: term});
 	},
 
-	handleCompare: function() {
-		console.log('compare');
+	handleCompare: function(e) {
+		// console.log(e.target);
+		// e.target.className = 'player-compare-btn hidden';
+		if(!this.state.isComparing) {
+			this.setState({isComparing: true});
+		}
 	}
 
 });
