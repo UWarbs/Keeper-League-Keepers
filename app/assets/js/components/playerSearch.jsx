@@ -61,8 +61,6 @@ var PlayerSearch = React.createClass({
 
 	render: function() {
 		//Put this stuff in function and call?
-		RENDERED++;
-		console.log('render: ' + RENDERED);
 		var searchTerm = this.state.searchTerm;
 		var selectedFunc = this.handlePlayerSelect;
 		var selectedPlayer = this.state.player;
@@ -98,18 +96,23 @@ var PlayerSearch = React.createClass({
 
 		if (selectedPlayer) {
 			if(comparePlayerSelected) {
-				compareBtn = React.createElement('div', {className: "player-compare-btn red", onClick: this.handleCompare}, "Stop Comparing");
+				compareBtn = React.createElement('div', {className: "player-compare-btn red", onClick: this.handleStopCompare}, "Stop Comparing");
 				playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={"first-card"} />
 			}else {
-				compareBtn = React.createElement('div', {className: "player-compare-btn", onClick: this.handleCompare}, "Compare");
-				playerCard = <PlayerCard player={selectedPlayer} isComparing={false} className={null}/>
+				if(!isComparing) {
+					compareBtn = React.createElement('div', {className: "player-compare-btn", onClick: this.handleCompare}, "Compare");
+					playerCard = <PlayerCard player={selectedPlayer} isComparing={false} className={null}/>					
+				}else {
+					compareBtn = React.createElement('div', {className: "player-compare-btn help"}, "Find another player");
+					playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={"first-card"} />
+				}
+
 			}
 			
 		}
 
 		if (isComparing && comparePlayerSelected) {
 			comparedPlayer = <PlayerCard player={comparedPlayer} className={"comp-card"}/>
-			console.log('comparing');
 		}
 
 		return (
@@ -135,11 +138,15 @@ var PlayerSearch = React.createClass({
 	},
 
 	handleCompare: function(e) {
-		// console.log(e.target);
-		// e.target.className = 'player-compare-btn hidden';
 		if(!this.state.isComparing) {
 			this.setState({isComparing: true});
 		}
+	},
+	handleStopCompare: function() {
+		this.setState({
+			isComparing: false,
+			comparePlayerSelected: false
+		})
 	}
 
 });
