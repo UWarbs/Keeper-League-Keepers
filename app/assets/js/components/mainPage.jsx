@@ -9,7 +9,9 @@ var MainPage = React.createClass({
 		return {
 			players: PlayerStore.getPlayers(),
 			playerSelected: false,
-			player: null
+			player: null,
+			isComparing: false,
+			comparePlayer: null
 		};
 	},
 
@@ -22,10 +24,18 @@ var MainPage = React.createClass({
 	},
 
 	render: function() {
+		// console.log('main page rendered');
 		return (
 			<div className="main-page-container">
 				<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
-				<PlayerSearch playerList={this.state.players.players} playerSelected={this.state.playerSelected} handlePlayerSelect={this.handlePlayerSelect} player={this.state.player}/>
+				<PlayerSearch 
+					playerList={this.state.players.players} 
+					playerSelected={this.state.playerSelected} 
+					handlePlayerSelect={this.handlePlayerSelect} 
+					player={this.state.player} 
+					isComparing={this.state.isComparing}
+					comparePlayer={this.state.comparePlayer}
+				/>
 			</div>
 		)
 	}

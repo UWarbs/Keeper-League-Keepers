@@ -15,11 +15,14 @@ server.connection({
 // As of Hapi 9.x, these two plugins are no longer
 // included in Hapi automatically
 // https://github.com/hapijs/hapi/issues/2682
-server.register([{
+server.register([
+{
   register: require('inert')
-}, {
+}, 
+{
   register: require('vision')
-}], function(err) {
+}
+], function(err) {
 
   if (err) return console.error(err);
 

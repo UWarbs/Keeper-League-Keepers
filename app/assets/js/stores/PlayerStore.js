@@ -19,7 +19,11 @@ var _store = {
 			"age": 26,
 			"positionalRating": "A-",      
 			"yearsExperience": 4,
-			"writeUp": "The dude balls out without an Oline",
+			"writeUp": {
+				"body": "This is a write up",
+				"author": "Greg",
+				"date" : "11/1/2015"
+			},
 			"position": { 
 				"id": 1,
 				"name": "Quarterback",
@@ -46,7 +50,11 @@ var _store = {
 			"age": 28,
 			"positionalRating": "B-",      
 			"yearsExperience": 9,
-			"writeUp": "Great player, getting old though",
+			"writeUp": {
+				"body": "This is a write up",
+				"author": "Greg",
+				"date" : "11/1/2015"
+			},
 			"position": { 
 				"id": 2,
 				"name": "Running Back",
@@ -58,6 +66,37 @@ var _store = {
 				"name": "Seattle Seahawks",
 				"abbrev": "SEA",
 				"writeup": "Best team around"
+			},
+			"history" : {
+				"pastPoints": {
+					"nonPPR": [{"2012": 150}, {"2013": 160}, {"2014": 180}],
+					"PPR": [{"2012": 150}, {"2013": 160}, {"2014": 180}]
+				}
+			}
+		},
+		{
+			"id": 3,
+			"firstName": "Allen",
+			"lastName": "Robinson",
+			"age": 22,
+			"positionalRating": "A",      
+			"yearsExperience": 2,
+			"writeUp": {
+				"body": "Not even the first WR taken by Jacksonville in the 2014 Draft (Marquise Lee), Allen Robinson has quickly emerged to become a true WR1. With great size (6\'3\" 215 lbs) and hops (39 inch vertical), Robinson has established himself as a dominant red zone target averaging almost a touchdown/game through 7 games.  With an insane amount of targets and still only 22 years old, Robinson will anchor your receiving corp for the next decade.",
+				"author": "Greg",
+				"date" : "11/1/2015"
+			},
+			"position": { 
+				"id": 3,
+				"name": "Wide Receiver",
+				"abbrev": "WR",
+				"writeup": "Keeper league WRs are similar to RBs"
+			},
+			"team": {
+				"id": 2,
+				"name": "Jacksonville Jaguars",
+				"abbrev": "JAC",
+				"writeup": "They aight."
 			},
 			"history" : {
 				"pastPoints": {
