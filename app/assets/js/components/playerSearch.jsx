@@ -12,13 +12,47 @@ var SearchHelper  = require('../components/search-helper.jsx');
 
 var SearchResults = React.createClass({
 	mixins: [PureRenderMixin],
+	
 	propTypes: {
-		playerList: React.proptypes.array
+		playerList: React.PropTypes.array,
+		selectedFunc: React.PropTypes.func,
+		resetFunc: React.PropTypes.func
 	},
-	render: function() {
 
-	}
+	render: function() {
+		var playerList = this.props.playerList;
+		var selectedFunc = this.props.selectedFunc;
+		var resetFunc = this.props.resetFunc;
+		var players = [];
+		playerList.forEach(function(player, index, array) {
+			players.push(<PlayerName player={player} key={player.id} id={player.id} handlePlayerSelect={selectedFunc} resetSearch={resetFunc} />);
+		});
+
+		return (
+			<ul className="player-result-list">
+				{players}
+			</ul>
+		)
+	},
+	componentDidMount() {
+    document.addEventListener('mousedown', this.handleOutsideMouseClick);
+    document.addEventListener('touchstart', this.handleOutsideMouseClick);
+  },
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleOutsideMouseClick);
+    document.removeEventListener('touchstart', this.handleOutsideMouseClick);
+    // this.close();
+  },
+
+  handleOutsideMouseClick(e) {
+    // this.props.playerList = []; 
+    e.stopPropagation();
+    console.log(e);
+  }
+
 });
+
 var PlayerName = React.createClass({
 	mixins: [PureRenderMixin],
 	render: function() {
@@ -35,19 +69,7 @@ var PlayerName = React.createClass({
 	getPlayer: function() {
 		this.props.handlePlayerSelect(this.props.id);
 		this.props.resetSearch();
-	},
-
-	componentDidMount() {
-    document.addEventListener('mousedown', this.handleOutsideMouseClick);
-  },
-  
-  handleOutsideMouseClick(e) {
-    // if (!this.state.active) { return; }
-    // if (isNodeInRoot(e.target, findDOMNode(this.portal))) { return; }
-    e.stopPropagation();
-    // this.closePortal();
-    console.log(e);
-  }
+	}
 
 });
 var PlayerSearch = React.createClass({
@@ -95,7 +117,7 @@ var PlayerSearch = React.createClass({
 		var playerNameList = [];
 		var playerCard;
 		var compareBtn;
-		var comparedPlayer = this.state.comparePlayer || null;
+		var comparedPlayer = this.state.comparePlayer || '';
 
 		
 		
@@ -106,7 +128,7 @@ var PlayerSearch = React.createClass({
 				var filters = ['firstName', 'lastName'];
 				fullPlayerList = potentialPlayers.filter(this.refs.search.filter(filters));
 				fullPlayerList.forEach(function(player, index, array) {
-					playerNameList.push(<PlayerName player={player} key={player.id} id={player.id} handlePlayerSelect={selectedFunc} resetSearch={resetFunc} />);
+					playerNameList.push(player);
 				});
 			}
 		}
@@ -140,9 +162,7 @@ var PlayerSearch = React.createClass({
 			<div className="player-search-container">
 				<h3 className="player-search-copy">Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
 				<SearchHelper className="player-search-input" type="text" placeholder="e.g Russell Wilson" ref='search' onChange={this.searchUpdated} defaultStyle={false} value={searchTerm} />
-				<ul className="player-result-list">
-					{playerNameList}
-				</ul>
+				<SearchResults className="player-result-list" playerList={playerNameList} selectedFunc={selectedFunc} resetFunc={resetFunc}/>
 				{compareBtn}
 				{playerCard}
 				{comparedPlayer}
@@ -163,6 +183,7 @@ var PlayerSearch = React.createClass({
 			this.setState({isComparing: true});
 		}
 	},
+
 	handleStopCompare: function() {
 		this.setState({
 			isComparing: false,
@@ -170,7 +191,6 @@ var PlayerSearch = React.createClass({
 			comparePlayer: null
 		})
 	}
-
 });
 
 module.exports = PlayerSearch;
