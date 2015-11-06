@@ -9,11 +9,20 @@ var PlayerStore   = require('../stores/PlayerStore');
 var PlayerCard    = require('../components/PlayerCard.jsx');
 var SearchHelper  = require('../components/search-helper.jsx');
 
+
+var SearchResults = React.createClass({
+	mixins: [PureRenderMixin],
+	propTypes: {
+		playerList: React.proptypes.array
+	},
+	render: function() {
+
+	}
+});
 var PlayerName = React.createClass({
 	mixins: [PureRenderMixin],
 	render: function() {
 		var player = this.props.player;
-		console.log(player);
 		return (
       <li onClick={this.getPlayer}>
       	<span className="search-team">{player.team.abbrev}</span>
@@ -26,9 +35,21 @@ var PlayerName = React.createClass({
 	getPlayer: function() {
 		this.props.handlePlayerSelect(this.props.id);
 		this.props.resetSearch();
-	}
+	},
+
+	componentDidMount() {
+    document.addEventListener('mousedown', this.handleOutsideMouseClick);
+  },
+  
+  handleOutsideMouseClick(e) {
+    // if (!this.state.active) { return; }
+    // if (isNodeInRoot(e.target, findDOMNode(this.portal))) { return; }
+    e.stopPropagation();
+    // this.closePortal();
+    console.log(e);
+  }
+
 });
-var RENDERED = 0;
 var PlayerSearch = React.createClass({
 	mixins: [PureRenderMixin],
 	getInitialState: function() {
@@ -145,7 +166,8 @@ var PlayerSearch = React.createClass({
 	handleStopCompare: function() {
 		this.setState({
 			isComparing: false,
-			comparePlayerSelected: false
+			comparePlayerSelected: false,
+			comparePlayer: null
 		})
 	}
 
