@@ -16,24 +16,28 @@ var SearchResults = React.createClass({
 	propTypes: {
 		playerList: React.PropTypes.array,
 		selectedFunc: React.PropTypes.func,
-		resetFunc: React.PropTypes.func
+		resetFunc: React.PropTypes.func,
+		hideResults: React.PropTypes.func,
+		hideChild: React.PropTypes.bool
 	},
 
 	render: function() {
 		var playerList = this.props.playerList;
 		var selectedFunc = this.props.selectedFunc;
 		var resetFunc = this.props.resetFunc;
+		var hideChild = this.props.hideChild;
 		var players = [];
 		playerList.forEach(function(player, index, array) {
-			players.push(<PlayerName player={player} key={player.id} id={player.id} handlePlayerSelect={selectedFunc} resetSearch={resetFunc} />);
+			players.push(<PlayerName player={player} key={player.id} id={player.id} handlePlayerSelect={selectedFunc} resetSearch={resetFunc} hideNow={hideChild} />);
 		});
 
 		return (
-			<ul className="player-result-list">
+			<ul className='player-result-list'>
 				{players}
 			</ul>
 		)
 	},
+	
 	componentDidMount() {
     document.addEventListener('mousedown', this.handleOutsideMouseClick);
     document.addEventListener('touchstart', this.handleOutsideMouseClick);
@@ -48,7 +52,9 @@ var SearchResults = React.createClass({
   handleOutsideMouseClick(e) {
     // this.props.playerList = []; 
     e.stopPropagation();
-    console.log(e);
+    if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
+    	this.props.hideResults(true);
+    }
   }
 
 });
@@ -57,11 +63,14 @@ var PlayerName = React.createClass({
 	mixins: [PureRenderMixin],
 	render: function() {
 		var player = this.props.player;
+		if(this.props.hideNow) {
+			return false;
+		}
 		return (
-      <li onClick={this.getPlayer}>
-      	<span className="search-team">{player.team.abbrev}</span>
-      	<span className="search-name">{player.firstName} {player.lastName}</span>
-      	<span className="search-pos">{player.position.abbrev}</span>
+      <li className='search-li' onClick={this.getPlayer}>
+      	<span className='search-team'>{player.team.abbrev}</span>
+      	<span className='search-name'>{player.firstName} {player.lastName}</span>
+      	<span className='search-pos'>{player.position.abbrev}</span>
       </li>
     )
 	},
@@ -82,14 +91,15 @@ var PlayerSearch = React.createClass({
 			isComparing: false,
 			comparePlayerSelected: false,
 			comparePlayer: null,
-			searchTerm: ''
+			searchTerm: '',
+			hideResults: false
 		};
 	},
 
 	handlePlayerSelect: function(id) {
 		var player = PlayerStore.getSinglePlayer(id);
 		//conditional for if player is first player or compared player
-		if(this.state.isComparing) {
+		if( this.state.isComparing ) {
 			this.setState({
 				comparePlayer: player,
 				comparePlayerSelected: true
@@ -106,12 +116,15 @@ var PlayerSearch = React.createClass({
 		//Put this stuff in function and call?
 		var searchTerm = this.state.searchTerm;
 		var selectedFunc = this.handlePlayerSelect;
+		var handleHideResults  = this.handleHideResults;
 		var selectedPlayer = this.state.player;
 		var comparedPlayer;
 		var potentialPlayers = this.state.playerList.players;
 		var isComparing = this.state.isComparing;
+		var hideResults = this.state.hideResults;
 		var comparePlayerSelected = this.state.comparePlayerSelected;
 		var resetFunc = this.resetSearch;
+
 		
 		var fullPlayerList = [];
 		var playerNameList = [];
@@ -121,8 +134,8 @@ var PlayerSearch = React.createClass({
 
 		
 		
-		if (this.refs.search) {
-			if (this.refs.search.state.searchTerm == '') { 
+		if ( this.refs.search ) {
+			if ( this.refs.search.state.searchTerm == '' ) { 
 				playerNameList = [];
 			}else {
 				var filters = ['firstName', 'lastName'];
@@ -133,36 +146,43 @@ var PlayerSearch = React.createClass({
 			}
 		}
 
-		if(this.state.searchTerm == '') {
+		if( this.state.searchTerm == '' ) {
 			playerNameList = [];
 		}
 
-		if (selectedPlayer) {
+		if ( selectedPlayer ) {
 			if(comparePlayerSelected) {
-				compareBtn = React.createElement('div', {className: "player-compare-btn red", onClick: this.handleStopCompare}, "Stop Comparing");
-				playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={"first-card"} />
+				compareBtn = React.createElement('div', {className: 'player-compare-btn red', onClick: this.handleStopCompare}, 'Stop Comparing');
+				playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={'first-card'} />
 			}else {
-				if(!isComparing) {
-					compareBtn = React.createElement('div', {className: "player-compare-btn", onClick: this.handleCompare}, "Compare");
+				if( !isComparing ) {
+					compareBtn = React.createElement('div', {className: 'player-compare-btn', onClick: this.handleCompare}, 'Compare');
 					playerCard = <PlayerCard player={selectedPlayer} isComparing={false} className={null}/>					
 				}else {
-					compareBtn = React.createElement('div', {className: "player-compare-btn help"}, "Find another player");
-					playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={"first-card"} />
+					compareBtn = React.createElement('div', {className: 'player-compare-btn help'}, 'Find another player');
+					playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={'first-card'} />
 				}
 
 			}
 			
 		}
 
-		if (isComparing && comparePlayerSelected) {
-			comparedPlayer = <PlayerCard player={comparedPlayer} className={"comp-card"}/>
+		if ( isComparing && comparePlayerSelected ) {
+			comparedPlayer = <PlayerCard player={comparedPlayer} className={'comp-card'}/>
 		}
 
 		return (
-			<div className="player-search-container">
-				<h3 className="player-search-copy">Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
-				<SearchHelper className="player-search-input" type="text" placeholder="e.g Russell Wilson" ref='search' onChange={this.searchUpdated} defaultStyle={false} value={searchTerm} />
-				<SearchResults className="player-result-list" playerList={playerNameList} selectedFunc={selectedFunc} resetFunc={resetFunc}/>
+			<div className='player-search-container'>
+				<h3 className='player-search-copy'>Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
+				<SearchHelper className='player-search-input' type='text' placeholder='e.g Russell Wilson' ref='search' onChange={this.searchUpdated} defaultStyle={false} value={searchTerm} />
+				<SearchResults 
+					className='player-result-list' 
+					playerList={playerNameList} 
+					selectedFunc={selectedFunc} 
+					resetFunc={resetFunc}
+					hideResults={handleHideResults}
+					hideChild={hideResults}
+				/>
 				{compareBtn}
 				{playerCard}
 				{comparedPlayer}
@@ -175,7 +195,7 @@ var PlayerSearch = React.createClass({
 	},
 
 	searchUpdated: function(term) {
-		this.setState({searchTerm: term});
+		this.setState({searchTerm: term, hideResults: false});
 	},
 
 	handleCompare: function(e) {
@@ -190,6 +210,14 @@ var PlayerSearch = React.createClass({
 			comparePlayerSelected: false,
 			comparePlayer: null
 		})
+	},
+
+	handleHideResults: function(hide) {
+		if(hide) {
+			this.setState({
+				hideResults: true
+			});			
+		}
 	}
 });
 

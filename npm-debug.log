@@ -1,215 +1,23 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node',
-1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   'react-addons-transition-group',
-1 verbose cli   '--save-dev' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'de', 'v' ]
 2 info using npm@2.14.4
 3 info using node@v4.1.1
-4 verbose install initial load of /Users/kyle/keeperleaguekeepers/package.json
-5 warn package.json react-start@1.0.0 No repository field.
-6 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/child-process-promise/package.json
-7 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/css-loader/package.json
-8 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/dateformat/package.json
-9 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/eslint-plugin-react/package.json
-10 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/file-loader/package.json
-11 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/flux/package.json
-12 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/hapi/package.json
-13 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/hapi-react-views/package.json
-14 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/inert/package.json
-15 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/jsx-loader/package.json
-16 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/node-sass/package.json
-17 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/nodemon/package.json
-18 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/object-assign/package.json
-19 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/pure-render-mixin/package.json
-20 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/react/package.json
-21 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group/package.json
-22 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/react-search-input/package.json
-23 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/request/package.json
-24 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/resolve-url-loader/package.json
-25 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/sass-loader/package.json
-26 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/style-loader/package.json
-27 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/superagent/package.json
-28 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/url-loader/package.json
-29 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/vision/package.json
-30 verbose installManyTop reading scoped package data from /Users/kyle/keeperleaguekeepers/node_modules/webpack/package.json
-31 info package.json dateformat@1.0.11 No license field.
-32 info package.json child-process-promise@1.1.0 license should be a valid SPDX license expression
-33 info package.json jsx-loader@0.13.2 license should be a valid SPDX license expression
-34 info package.json react-addons-transition-group@0.14.2 No repository field.
-35 verbose readDependencies loading dependencies from /Users/kyle/keeperleaguekeepers/package.json
-36 verbose install react-addons-transition-group is installed as 0.14.2
-37 silly cache add args [ 'react-addons-transition-group', null ]
-38 verbose cache add spec react-addons-transition-group
-39 silly cache add parsed spec Result {
-39 silly cache add   raw: 'react-addons-transition-group',
-39 silly cache add   scope: null,
-39 silly cache add   name: 'react-addons-transition-group',
-39 silly cache add   rawSpec: '',
-39 silly cache add   spec: '*',
-39 silly cache add   type: 'range' }
-40 silly addNamed react-addons-transition-group@*
-41 verbose addNamed "*" is a valid semver range for react-addons-transition-group
-42 silly addNameRange { name: 'react-addons-transition-group',
-42 silly addNameRange   range: '*',
-42 silly addNameRange   hasData: false }
-43 silly mapToRegistry name react-addons-transition-group
-44 silly mapToRegistry using default registry
-45 silly mapToRegistry registry https://registry.npmjs.org/
-46 silly mapToRegistry uri https://registry.npmjs.org/react-addons-transition-group
-47 verbose addNameRange registry:https://registry.npmjs.org/react-addons-transition-group not in flight; fetching
-48 verbose request uri https://registry.npmjs.org/react-addons-transition-group
-49 verbose request no auth needed
-50 info attempt registry request try #1 at 3:39:47 PM
-51 verbose request id 32160bbdbc307266
-52 verbose etag "9T4V5Z11DXTTHRH7OOGN8GU63"
-53 http request GET https://registry.npmjs.org/react-addons-transition-group
-54 http 304 https://registry.npmjs.org/react-addons-transition-group
-55 silly get cb [ 304,
-55 silly get   { date: 'Thu, 05 Nov 2015 23:39:47 GMT',
-55 silly get     via: '1.1 varnish',
-55 silly get     'cache-control': 'max-age=60',
-55 silly get     etag: '"9T4V5Z11DXTTHRH7OOGN8GU63"',
-55 silly get     age: '26',
-55 silly get     connection: 'keep-alive',
-55 silly get     'x-served-by': 'cache-lax1432-LAX',
-55 silly get     'x-cache': 'HIT',
-55 silly get     'x-cache-hits': '1',
-55 silly get     'x-timer': 'S1446766787.216086,VS0,VE1',
-55 silly get     vary: 'Accept' } ]
-56 verbose etag https://registry.npmjs.org/react-addons-transition-group from cache
-57 verbose get saving react-addons-transition-group to /Users/kyle/.npm/registry.npmjs.org/react-addons-transition-group/.cache.json
-58 silly addNameRange number 2 { name: 'react-addons-transition-group',
-58 silly addNameRange   range: '*',
-58 silly addNameRange   hasData: true }
-59 silly addNameRange versions [ 'react-addons-transition-group',
-59 silly addNameRange   [ '0.14.0-beta1',
-59 silly addNameRange     '0.14.0-beta2',
-59 silly addNameRange     '0.14.0-beta3',
-59 silly addNameRange     '0.14.0-rc1',
-59 silly addNameRange     '0.14.0',
-59 silly addNameRange     '0.14.1',
-59 silly addNameRange     '0.14.2' ] ]
-60 silly addNamed react-addons-transition-group@0.14.2
-61 verbose addNamed "0.14.2" is a plain semver version for react-addons-transition-group
-62 silly cache afterAdd react-addons-transition-group@0.14.2
-63 verbose afterAdd /Users/kyle/.npm/react-addons-transition-group/0.14.2/package/package.json not in flight; writing
-64 verbose afterAdd /Users/kyle/.npm/react-addons-transition-group/0.14.2/package/package.json written
-65 silly install resolved [ { name: 'react-addons-transition-group',
-65 silly install resolved     version: '0.14.2',
-65 silly install resolved     main: 'index.js',
-65 silly install resolved     license: 'BSD-3-Clause',
-65 silly install resolved     peerDependencies: { react: '^0.14.2' },
-65 silly install resolved     description: 'This package provides the React TransitionGroup add-on. See http://facebook.github.io/react/docs/addons.html for more information.',
-65 silly install resolved     _id: 'react-addons-transition-group@0.14.2',
-65 silly install resolved     _shasum: 'bd4471b1e9c779bb29a818bbb3bcc131baa9d893',
-65 silly install resolved     _resolved: 'https://registry.npmjs.org/react-addons-transition-group/-/react-addons-transition-group-0.14.2.tgz',
-65 silly install resolved     _from: 'react-addons-transition-group@*',
-65 silly install resolved     scripts: {},
-65 silly install resolved     _npmVersion: '2.14.9',
-65 silly install resolved     _nodeVersion: '4.2.0',
-65 silly install resolved     _npmUser: { name: 'zpao', email: 'paul@oshannessy.com' },
-65 silly install resolved     maintainers: [ [Object], [Object] ],
-65 silly install resolved     dist:
-65 silly install resolved      { shasum: 'bd4471b1e9c779bb29a818bbb3bcc131baa9d893',
-65 silly install resolved        tarball: 'http://registry.npmjs.org/react-addons-transition-group/-/react-addons-transition-group-0.14.2.tgz' },
-65 silly install resolved     directories: {},
-65 silly install resolved     readme: 'ERROR: No README data found!' } ]
-66 info install react-addons-transition-group@0.14.2 into /Users/kyle/keeperleaguekeepers
-67 info installOne react-addons-transition-group@0.14.2
-68 verbose installOne of react-addons-transition-group to /Users/kyle/keeperleaguekeepers not in flight; installing
-69 verbose lock using /Users/kyle/.npm/_locks/react-addons-transition--57f36ecac44cccd8.lock for /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-70 silly install write writing react-addons-transition-group 0.14.2 to /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-71 verbose unbuild node_modules/react-addons-transition-group
-72 info preuninstall react-addons-transition-group@0.14.2
-73 info uninstall react-addons-transition-group@0.14.2
-74 verbose unbuild rmStuff react-addons-transition-group@0.14.2 from /Users/kyle/keeperleaguekeepers/node_modules
-75 info postuninstall react-addons-transition-group@0.14.2
-76 silly gentlyRm /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group is being purged from base /Users/kyle/keeperleaguekeepers
-77 verbose gentlyRm don't care about contents; nuking /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-78 silly vacuum-fs purging /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-79 silly vacuum-fs quitting because other entries in /Users/kyle/keeperleaguekeepers/node_modules
-80 verbose tar unpack /Users/kyle/.npm/react-addons-transition-group/0.14.2/package.tgz
-81 verbose tar unpacking to /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-82 silly gentlyRm /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group is being purged
-83 verbose gentlyRm don't care about contents; nuking /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-84 silly gunzTarPerm modes [ '755', '644' ]
-85 silly gunzTarPerm extractEntry package.json
-86 silly gunzTarPerm extractEntry README.md
-87 silly gunzTarPerm extractEntry LICENSE
-88 silly gunzTarPerm extractEntry index.js
-89 silly gunzTarPerm extractEntry PATENTS
-90 verbose write writing to /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group/package.json
-91 info preinstall react-addons-transition-group@0.14.2
-92 verbose readDependencies loading dependencies from /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group/package.json
-93 silly prepareForInstallMany adding react@^0.14.2 from react-addons-transition-group peerDependencies
-94 warn peerDependencies The peer dependency react@^0.14.2 included from react-addons-transition-group will no
-95 warn peerDependencies longer be automatically installed to fulfill the peerDependency
-96 warn peerDependencies in npm 3+. Your application will need to depend on it explicitly.
-97 verbose readDependencies loading dependencies from /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group/package.json
-98 silly install resolved []
-99 verbose about to build /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-100 info build /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-101 info linkStuff react-addons-transition-group@0.14.2
-102 silly linkStuff react-addons-transition-group@0.14.2 has /Users/kyle/keeperleaguekeepers/node_modules as its parent node_modules
-103 verbose linkBins react-addons-transition-group@0.14.2
-104 verbose linkMans react-addons-transition-group@0.14.2
-105 verbose rebuildBundles react-addons-transition-group@0.14.2
-106 info install react-addons-transition-group@0.14.2
-107 info postinstall react-addons-transition-group@0.14.2
-108 verbose readDependencies loading dependencies from /Users/kyle/keeperleaguekeepers/package.json
-109 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/child-process-promise/package.json
-110 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/css-loader/package.json
-111 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/dateformat/package.json
-112 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/eslint-plugin-react/package.json
-113 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/file-loader/package.json
-114 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/flux/package.json
-115 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/hapi/package.json
-116 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/hapi-react-views/package.json
-117 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/inert/package.json
-118 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/jsx-loader/package.json
-119 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/node-sass/package.json
-120 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/nodemon/package.json
-121 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/object-assign/package.json
-122 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/pure-render-mixin/package.json
-123 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/react/package.json
-124 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group/package.json
-125 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/react-search-input/package.json
-126 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/request/package.json
-127 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/resolve-url-loader/package.json
-128 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/sass-loader/package.json
-129 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/style-loader/package.json
-130 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/superagent/package.json
-131 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/url-loader/package.json
-132 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/vision/package.json
-133 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/webpack/package.json
-134 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/.bin/dateformat/package.json
-135 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/.bin/node-sass/package.json
-136 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/.bin/nodemon/package.json
-137 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/.bin/phantomjs/package.json
-138 verbose targetResolver reading package data from /Users/kyle/keeperleaguekeepers/node_modules/.bin/webpack/package.json
-139 verbose already installed skipping react@^0.14.2 /Users/kyle/keeperleaguekeepers
-140 silly install resolved []
-141 verbose unlock done using /Users/kyle/.npm/_locks/react-addons-transition--57f36ecac44cccd8.lock for /Users/kyle/keeperleaguekeepers/node_modules/react-addons-transition-group
-142 verbose validateInstall loading /Users/kyle/keeperleaguekeepers/package.json for validation
-143 verbose stack Error: The package react@0.13.3 does not satisfy its siblings' peerDependencies requirements!
-143 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
-143 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
-143 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
-143 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-143 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-143 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-143 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-143 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-143 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-143 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-144 verbose cwd /Users/kyle/keeperleaguekeepers
-145 error Darwin 14.5.0
-146 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "react-addons-transition-group" "--save-dev"
-147 error node v4.1.1
-148 error npm  v2.14.4
-149 error code EPEERINVALID
-150 error peerinvalid The package react@0.13.3 does not satisfy its siblings' peerDependencies requirements!
-150 error peerinvalid Peer hapi-react-views@3.1.3 wants react@^0.13.x
-150 error peerinvalid Peer react-addons-transition-group@0.14.2 wants react@^0.14.2
-151 verbose exit [ 1, true ]
+4 verbose stack Error: missing script: de
+4 verbose stack     at run (/usr/local/lib/node_modules/npm/lib/run-script.js:142:19)
+4 verbose stack     at /usr/local/lib/node_modules/npm/lib/run-script.js:58:5
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+4 verbose stack     at checkBinReferences_ (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+4 verbose stack     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+4 verbose stack     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:300:12
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
+5 verbose cwd /Users/kyle/keeperleaguekeepers
+6 error Darwin 14.5.0
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "de" "v"
+8 error node v4.1.1
+9 error npm  v2.14.4
+10 error missing script: de
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
