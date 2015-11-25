@@ -52,9 +52,10 @@ var SearchResults = React.createClass({
   handleOutsideMouseClick(e) {
     // this.props.playerList = []; 
     e.stopPropagation();
-    if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
-    	this.props.hideResults(true);
-    }
+    console.log('outsidemouseclick');
+    // if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
+    // 	this.props.hideResults(true);
+    // }
   }
 
 });
