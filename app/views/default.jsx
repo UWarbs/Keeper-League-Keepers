@@ -18,7 +18,6 @@ var Default = React.createClass({
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
       </head>
       <body>
-      	<div className="site-overlay"></div>
         <div id="app-container"></div>
         <script src="js/bundle.js"></script>
       </body>
