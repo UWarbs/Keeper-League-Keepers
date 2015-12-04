@@ -17,6 +17,7 @@ class SearchResults extends React.Component {
 		var resetFunc = this.props.resetFunc;
 		var hideChild = this.props.hideChild;
 		var players = [];
+		
 		playerList.forEach(function(player, index, array) {
 			players.push(<PlayerName player={player} key={player.id} id={player.id} handlePlayerSelect={selectedFunc} resetSearch={resetFunc} hideNow={hideChild} />);
 		});
@@ -25,7 +26,7 @@ class SearchResults extends React.Component {
 			<ul className='player-result-list'>
 				{players}
 			</ul>
-		)
+		);
 	}
 	
 	componentDidMount() {
@@ -71,7 +72,6 @@ SearchResults.propTypes = {
 
 
 
-
 class PlayerName extends React.Component {
 	constructor() {
   	super();
@@ -88,7 +88,7 @@ class PlayerName extends React.Component {
       	<span className='search-name'>{player.firstName} {player.lastName}</span>
       	<span className='search-pos'>{player.position.abbrev}</span>
       </li>
-    )
+    );
 	}
 	
 	getPlayer() {
@@ -122,18 +122,6 @@ class PlayerSearch extends React.Component {
 		};
 
 	}
-	// getInitialState() {
-	// 	return {
-	// 		playerList: PlayerStore.getPlayers(), 
-	// 		playerSelected: false,
-	// 		player: null,
-	// 		isComparing: false,
-	// 		comparePlayerSelected: false,
-	// 		comparePlayer: null,
-	// 		searchTerm: '',
-	// 		hideResults: false
-	// 	};
-	// }
 
 	handlePlayerSelect(id) {
 		var player = PlayerStore.getSinglePlayer(id);
