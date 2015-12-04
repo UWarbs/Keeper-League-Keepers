@@ -1,17 +1,17 @@
 // React components
-var React    = require('react');
-var ReactDom = require('react-dom');
-var Router   = require('react-router').Router
-var Route    = require('react-router').Route
-var Link     = require('react-router').Link
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, Link, IndexRoute } from 'react-router';
+import { createHistory } from 'history';
 
-var PlayerStore   		  = require('../stores/PlayerStore');
-var PlayerServerActions = require('../actions/PlayerServerActions');
-var MainPage            = require('./mainPage.jsx');
+import PlayerStore         from '../stores/PlayerStore';
+import PlayerServerActions from '../actions/PlayerServerActions';
+import MainPage            from './mainPage.jsx';
+import PlayerSearch        from './playerSearch.jsx';
 require('../../stylesheets/main.css.scss');
 
-var Header = React.createClass({
-	render: function() {
+class Header extends React.Component { 
+	render () {
 		return (
 			<div className="header">
 				<nav className="header-container">
@@ -23,25 +23,25 @@ var Header = React.createClass({
 				<div className="hero-container">
 					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
 					<section className="section-tabs">
-						<div className="section-tab"><Link to={`/top-qb`}>Top QBs</Link></div>&nbsp;
+						<div className="section-tab"><Link to={'/top-qb'}>Top QBs</Link></div>&nbsp;
 						<div className="section-tab">Search</div>
 					</section>
 				</div>
 			</div>
-		)
+		);
 	}
-});
+}
 
-var App = React.createClass({
-	render: function() {
+class App extends React.Component {
+	render() {
 		return (
 				<div>
-					<Header />
+					<Header />	
 					<MainPage />
 				</div>
 		)
 	}
-});
+};
 
-ReactDom.render(<App />, document.getElementById('app-container') );
+render( <App />, document.getElementById('app-container') );
 

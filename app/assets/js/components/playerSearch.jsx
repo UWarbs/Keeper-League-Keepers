@@ -1,27 +1,17 @@
 /**This class is the main functionality part of the site at this point in time.
 *  It finds a player's DB entry based on user input or if the player doesn't exist, displays a helpful error message to the user.
 **/
-var React = require('react');
-var PureRenderMixin = require('pure-render-mixin').PureRenderMixin;
-var SearchInput = require('react-search-input');
+import React from 'react';
+import PureRenderMixin from 'pure-render-mixin';
+//mixins: [PureRenderMixin], want this back in
+import PlayerStore from '../stores/PlayerStore';
+import PlayerCard    from '../components/PlayerCard.jsx';
+import SearchHelper  from '../components/search-helper.jsx';
 
-var PlayerStore   = require('../stores/PlayerStore');
-var PlayerCard    = require('../components/PlayerCard.jsx');
-var SearchHelper  = require('../components/search-helper.jsx');
 
+class SearchResults extends React.Component {
 
-var SearchResults = React.createClass({
-	mixins: [PureRenderMixin],
-	
-	propTypes: {
-		playerList: React.PropTypes.array,
-		selectedFunc: React.PropTypes.func,
-		resetFunc: React.PropTypes.func,
-		hideResults: React.PropTypes.func,
-		hideChild: React.PropTypes.bool
-	},
-
-	render: function() {
+	render() {
 		var playerList = this.props.playerList;
 		var selectedFunc = this.props.selectedFunc;
 		var resetFunc = this.props.resetFunc;
@@ -36,19 +26,19 @@ var SearchResults = React.createClass({
 				{players}
 			</ul>
 		)
-	},
+	}
 	
 	componentDidMount() {
     document.addEventListener('mousedown', this.handleOutsideMouseClick);
     document.addEventListener('touchstart', this.handleOutsideMouseClick);
     document.addEventListener('keyup', this.handleKeyNav);
-  },
+  }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleOutsideMouseClick);
     document.removeEventListener('touchstart', this.handleOutsideMouseClick);
     // this.close();
-  },
+  }
 
   handleOutsideMouseClick(e) {
     // this.props.playerList = []; 
@@ -57,7 +47,7 @@ var SearchResults = React.createClass({
     // if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
     // 	this.props.hideResults(true);
     // }
-  },
+  }
 
   handleKeyNav(e) {
   	if(e.keyCode == 38) { //up
@@ -68,11 +58,26 @@ var SearchResults = React.createClass({
   	}
   }
 
-});
+}
 
-var PlayerName = React.createClass({
-	mixins: [PureRenderMixin],
-	render: function() {
+//Search Result Proptypes
+SearchResults.propTypes = {
+	playerList: React.PropTypes.array,
+	selectedFunc: React.PropTypes.func,
+	resetFunc: React.PropTypes.func,
+	hideResults: React.PropTypes.func,
+	hideChild: React.PropTypes.bool
+};
+
+
+
+
+class PlayerName extends React.Component {
+	constructor() {
+  	super();
+  	this.getPlayer = this.getPlayer.bind(this);
+  }	
+	render() {
 		var player = this.props.player;
 		if(this.props.hideNow) {
 			return false;
@@ -84,18 +89,28 @@ var PlayerName = React.createClass({
       	<span className='search-pos'>{player.position.abbrev}</span>
       </li>
     )
-	},
+	}
 	
-	getPlayer: function() {
+	getPlayer() {
 		this.props.handlePlayerSelect(this.props.id);
 		this.props.resetSearch();
 	}
 
-});
-var PlayerSearch = React.createClass({
-	mixins: [PureRenderMixin],
-	getInitialState: function() {
-		return {
+}
+
+
+
+
+class PlayerSearch extends React.Component {
+	constructor() {
+  	super();
+  	this.searchUpdated = this.searchUpdated.bind(this);
+  	this.handlePlayerSelect = this.handlePlayerSelect.bind(this);
+  	this.resetSearch = this.resetSearch.bind(this);
+  	this.handleCompare = this.handleCompare.bind(this);
+  	this.handleStopCompare = this.handleStopCompare.bind(this);
+  	this.handleHideResults = this.handleHideResults.bind(this);
+  	this.state = {
 			playerList: PlayerStore.getPlayers(), 
 			playerSelected: false,
 			player: null,
@@ -105,9 +120,22 @@ var PlayerSearch = React.createClass({
 			searchTerm: '',
 			hideResults: false
 		};
-	},
 
-	handlePlayerSelect: function(id) {
+	}
+	// getInitialState() {
+	// 	return {
+	// 		playerList: PlayerStore.getPlayers(), 
+	// 		playerSelected: false,
+	// 		player: null,
+	// 		isComparing: false,
+	// 		comparePlayerSelected: false,
+	// 		comparePlayer: null,
+	// 		searchTerm: '',
+	// 		hideResults: false
+	// 	};
+	// }
+
+	handlePlayerSelect(id) {
 		var player = PlayerStore.getSinglePlayer(id);
 		//conditional for if player is first player or compared player
 		if( this.state.isComparing ) {
@@ -121,9 +149,9 @@ var PlayerSearch = React.createClass({
 				player: player
 			});		
 		}
-	},
+	}
 
-	render: function() {
+	render() {
 		//Put this stuff in function and call?
 		var searchTerm = this.state.searchTerm;
 		var selectedFunc = this.handlePlayerSelect;
@@ -198,38 +226,38 @@ var PlayerSearch = React.createClass({
 				{playerCard}
 				{comparedPlayer}
 			</div>
-		)
-	},	
+		);
+	}	
 
-	resetSearch: function() {
+	resetSearch() {
 		this.setState({searchTerm: ''});
-	},
+	}
 
-	searchUpdated: function(term) {
+	searchUpdated(term) {
 		this.setState({searchTerm: term, hideResults: false});
-	},
+	}
 
-	handleCompare: function(e) {
+	handleCompare(e) {
 		if(!this.state.isComparing) {
 			this.setState({isComparing: true});
 		}
-	},
+	}
 
-	handleStopCompare: function() {
+	handleStopCompare() {
 		this.setState({
 			isComparing: false,
 			comparePlayerSelected: false,
 			comparePlayer: null
 		})
-	},
+	}
 
-	handleHideResults: function(hide) {
+	handleHideResults(hide) {
 		if(hide) {
 			this.setState({
 				hideResults: true
 			});			
 		}
 	}
-});
+}
 
 module.exports = PlayerSearch;

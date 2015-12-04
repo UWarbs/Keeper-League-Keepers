@@ -1,17 +1,17 @@
-var React = require('react');
-var PlayerStore = require('../stores/PlayerStore');
+import React from 'react';
+import PlayerStore from '../stores/PlayerStore';
 
-var PlayerSearch = require('./playerSearch.jsx');
+import PlayerSearch from './playerSearch.jsx';
 
-var MainPage = React.createClass({
-	render: function() {
+class MainPage extends React.Component {
+	render() {
 		// console.log('main page rendered');
 		return (
 			<div className="main-page-container">
 				<PlayerSearch />
 			</div>
-		)
+		);
 	}
-});
+}
 
 module.exports = MainPage;
