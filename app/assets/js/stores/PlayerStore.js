@@ -1,5 +1,3 @@
-// Todo store
-//
 // Requiring the Dispatcher, Constants, and
 // event emitter dependencies
 var AppDispatcher = require('../dispatcher/AppDispatcher');

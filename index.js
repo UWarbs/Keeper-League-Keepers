@@ -4,6 +4,10 @@ var dateFormat = require('dateformat');
 var request    = require('request');
 var format     = "dd mmm HH:MM:ss";
 
+require('babel-core/register')({
+    presets: ['react']
+});
+
 // Basic Hapi.js connection stuff
 var server = new Hapi.Server();
 server.connection({
@@ -54,19 +58,6 @@ server.register([
       handler: {
       	view: 'default'
       }
-      // handler: function(req, reply) {
-      // 	request('http://api.cbssports.com/fantasy/sports/sport/NCAAF?version=3.0', function(error, response, body){
-	     //    console.log("Request received");
-	        
-
-	     //    if(error) {
-	     //    	console.error('ERROR');
-	     //    	console.log(error);
-	     //    }
-	     //    console.log(response);
-	     //    console.log(response.statusCode);
-      // 	});
-      // }
     });
 
     server.start(function() {

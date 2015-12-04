@@ -41,6 +41,7 @@ var SearchResults = React.createClass({
 	componentDidMount() {
     document.addEventListener('mousedown', this.handleOutsideMouseClick);
     document.addEventListener('touchstart', this.handleOutsideMouseClick);
+    document.addEventListener('keyup', this.handleKeyNav);
   },
 
   componentWillUnmount() {
@@ -56,6 +57,15 @@ var SearchResults = React.createClass({
     // if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
     // 	this.props.hideResults(true);
     // }
+  },
+
+  handleKeyNav(e) {
+  	if(e.keyCode == 38) { //up
+
+  	}
+  	if(e.keyCode == 40) { //down
+  		console.log('down');
+  	}
   }
 
 });
@@ -86,7 +96,7 @@ var PlayerSearch = React.createClass({
 	mixins: [PureRenderMixin],
 	getInitialState: function() {
 		return {
-			playerList: PlayerStore.getPlayers(),
+			playerList: PlayerStore.getPlayers(), 
 			playerSelected: false,
 			player: null,
 			isComparing: false,

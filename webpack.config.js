@@ -7,9 +7,14 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx$/,
-        loader: 'jsx-loader'
-      },
+      {
+	      test: /\.jsx?$/,
+	      exclude: /(node_modules|bower_components)/,
+	      loader: 'babel',
+	      query: {
+	        presets: ['react', 'es2015']
+	      }
+    	}, 
       {
         test: /\.scss$/,
         loaders: ["style", "css?sourceMap", "sass?sourceMap"]
@@ -17,7 +22,7 @@ module.exports = {
       {
       	test: /\.(png|jpg)$/,
       	loader: 'url'
-    	}      
+    	}
     ]
   },
 };
