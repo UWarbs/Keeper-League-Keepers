@@ -8,6 +8,7 @@ import PlayerStore         from '../stores/PlayerStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
 import MainPage            from './mainPage.jsx';
 import PlayerSearch        from './playerSearch.jsx';
+import TopQb               from './TopTen.jsx';
 require('../../stylesheets/main.css.scss');
 
 class Header extends React.Component { 
@@ -37,11 +38,17 @@ class App extends React.Component {
 		return (
 				<div>
 					<Header />	
-					<MainPage />
+					{this.props.children}
 				</div>
 		)
 	}
-};
+}
 
-render( <App />, document.getElementById('app-container') );
+render((
+  <Router history={createHistory()}>
+    <Route path="/" component={ App }>
+      <IndexRoute component={ MainPage } />
+    </Route>
+  </Router>
+), document.getElementById('app-container') )
 
