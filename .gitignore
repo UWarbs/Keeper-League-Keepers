@@ -2,3 +2,4 @@ node_modules/
 dist/
 assets/
 npm.debug.log
+db/

@@ -7,7 +7,6 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
 
-//define store as empty array
 var _store = {
 	players: [
 		{	

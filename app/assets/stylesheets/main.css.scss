@@ -1,6 +1,7 @@
 @import "header";
 @import "overrides";
 @import "player_search";
+@import "top_lists";
 @import "variables";
 
 *, *:before, *:after {
@@ -35,7 +36,6 @@ body {
 
 //Page container
 .main-page-container {
-	padding-top: 20px;
 	height: 100%;
 	text-align: center;
 	background: white;

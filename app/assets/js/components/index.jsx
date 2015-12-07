@@ -2,13 +2,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, Link, IndexRoute } from 'react-router';
-import { createHistory } from 'history';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import PlayerStore         from '../stores/PlayerStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
-import MainPage            from './mainPage.jsx';
 import PlayerSearch        from './playerSearch.jsx';
-import TopQb               from './TopTen.jsx';
+import TopList             from './topList.jsx';
 require('../../stylesheets/main.css.scss');
 
 class Header extends React.Component { 
@@ -24,8 +23,9 @@ class Header extends React.Component {
 				<div className="hero-container">
 					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
 					<section className="section-tabs">
-						<div className="section-tab"><Link to={'/top-qb'}>Top QBs</Link></div>&nbsp;
-						<div className="section-tab">Search</div>
+						<div className="section-tab"><Link to={ '/top/qb' }>Top QBs</Link></div>&nbsp;
+						<div className="section-tab"><Link to={ '/top/rb' }>Top RBs</Link></div>&nbsp;
+						<div className="section-tab"><Link to={ '/' }>Search</Link></div>
 					</section>
 				</div>
 			</div>
@@ -38,16 +38,19 @@ class App extends React.Component {
 		return (
 				<div>
 					<Header />	
-					{this.props.children}
+					<div className="main-page-container">
+						{this.props.children}
+					</div>
 				</div>
 		)
 	}
 }
 
 render((
-  <Router history={createHistory()}>
+  <Router history={createBrowserHistory()}>
     <Route path="/" component={ App }>
-      <IndexRoute component={ MainPage } />
+      <IndexRoute component={ PlayerSearch } />
+      <Route path="top/:id" component={ TopList } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )

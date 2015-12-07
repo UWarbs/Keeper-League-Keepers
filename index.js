@@ -59,6 +59,14 @@ server.register([
       	view: 'default'
       }
     });
+    //Add route for top lists //TODO: Is there a better way than hard-coding every route?
+    server.route({
+      method: 'GET',
+      path: '/top',
+      handler: {
+      	view: 'default'
+      }
+    });
 
     server.start(function() {
       console.log(dateFormat(new Date(), format) + ' - Server started at: ' + server.info.uri);
