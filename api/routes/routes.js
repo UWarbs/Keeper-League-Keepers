@@ -28,38 +28,32 @@ exports.register = function(server, options, next) {
 	  
 	  {
 	    method: 'GET',
-		  path: '/api',
+		  path: '/api/all-players',
 		  handler: function(req, res) {
-		  	var allPlayers;
-		  	
 		  	knex.select().table('players')
 		  		.then(function(players) {
-		  			allPlayers = players;
-		  			return res(allPlayers);
-		  			//Give players to PlayerStore here.
+		  			return res(players);
 		  		}).catch(function(err) {
 		  			console.log(err);
-		  			//give error to PlayerStore
+		  			return err;
 		  		});
-
-				
 		  }
 		},
 
 		{
 			method: 'GET',
-			path: '/api/new-writeup',
+			path: '/api/new-player',
 			handler: function(req, res) {
 				knex('players').insert({
-					first_name: 'Russell',
-					last_name: 'Wilson',
+					first_name: 'Matt',
+					last_name: 'Stafford',
 					position: 'Quarterback',
 					position_abbrev: 'QB',
-					team:'Seattle Seahawks',
-					team_abbrev: 'SEA',
-					rating: 98,
-					age: 26,
-					experience:4
+					team:'Detroit Lions',
+					team_abbrev: 'DET',
+					rating: 89,
+					age: 28,
+					experience:6
 				}).then(function(data) {
 					console.log('succesful insert');
 					return res(data);
@@ -69,7 +63,6 @@ exports.register = function(server, options, next) {
 				});
 			}
 		}
-
 	]);
 	next();
 }

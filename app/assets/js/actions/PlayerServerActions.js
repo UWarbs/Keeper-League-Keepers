@@ -1,5 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants     = require('../constants/Constants');
+var Api 					= require('../Api');
 
 module.exports = {
 	getSinglePlayer: function(id) {
@@ -9,8 +10,12 @@ module.exports = {
 		});
 	},
 	getAllPlayers: function() {
-		AppDispatcher.handleServerAction({
-			actionType: Constants.GET_PLAYERS
-		});
+		Api.get('api/all-players')
+		.then(function(players) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_PLAYERS,
+				players: players
+			});			
+		})
 	}
 };

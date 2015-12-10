@@ -29,7 +29,7 @@ module.exports = knex;
 //   table.integer('experience');
 // 	table.timestamp('created_at').defaultTo(knex.fn.now())
 // })
-// .createTable('writeups', function(table) {
+// .createTable('writeups', function(table) { //NOT NEEDED
 //   table.increments('id');
 //   table.string('player_first_name');
 //   table.string('player_last_name');
@@ -41,10 +41,20 @@ module.exports = knex;
 // });
 
 
-//UPDATE TABLE
+// UPDATE TABLE
 // knex.schema.table('players', function(table) {
-// 	table.timestamp('updated_at').defaultTo(knex.fn.now())
+// 	table.string('writeup', 500);
 // })
 // .catch(function(e) {
 // 	console.error(e);
 // });
+
+//UPDATE PLAYER
+// knex('players')
+//   .where('first_name', 'Derek')
+//   .update({
+//     writeup: 'Returning the raiders to glory.'
+//   })
+//   .catch(function(e) {
+// 		console.error(e);
+// 	});

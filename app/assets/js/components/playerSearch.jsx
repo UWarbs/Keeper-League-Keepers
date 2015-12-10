@@ -6,8 +6,9 @@ import PureRenderMixin from 'pure-render-mixin';
 //mixins: [PureRenderMixin], want this back in
 import PlayerStore from '../stores/PlayerStore';
 import PlayerCard    from '../components/PlayerCard.jsx';
-import SearchHelper  from '../components/search-helper.jsx';
 import PlayerName from './shared/playerName.jsx';
+import PlayerServerActions from '../actions/PlayerServerActions'
+import SearchHelper  from '../components/search-helper.jsx';
 
 
 class SearchResults extends React.Component {
@@ -74,14 +75,15 @@ SearchResults.propTypes = {
 class PlayerSearch extends React.Component {
 	constructor() {
   	super();
-  	this.searchUpdated = this.searchUpdated.bind(this);
+  	this.searchUpdated      = this.searchUpdated.bind(this);
   	this.handlePlayerSelect = this.handlePlayerSelect.bind(this);
-  	this.resetSearch = this.resetSearch.bind(this);
-  	this.handleCompare = this.handleCompare.bind(this);
-  	this.handleStopCompare = this.handleStopCompare.bind(this);
-  	this.handleHideResults = this.handleHideResults.bind(this);
+  	this.resetSearch 			  = this.resetSearch.bind(this);
+  	this.handleCompare 			= this.handleCompare.bind(this);
+  	this.handleStopCompare  = this.handleStopCompare.bind(this);
+  	this.handleHideResults  = this.handleHideResults.bind(this);
+  	this.onChange 					= this.onChange.bind(this);
   	this.state = {
-			playerList: PlayerStore.getPlayers(), 
+			playerList: [], 
 			playerSelected: false,
 			player: null,
 			isComparing: false,
@@ -90,8 +92,26 @@ class PlayerSearch extends React.Component {
 			searchTerm: '',
 			hideResults: false
 		};
-
 	}
+
+	componentWillMount() {
+    PlayerStore.addChangeListener(this.onChange);
+  }
+
+	componentDidMount() {
+		PlayerServerActions.getAllPlayers();
+	}
+
+	componentWillUnmount() {
+    PlayerStore.removeChangeListener(this.onChange);
+  }
+
+  onChange() {
+  	console.log('component change');
+  	this.setState({
+  		playerList: PlayerStore.getPlayers()
+  	});
+  }
 
 	handlePlayerSelect(id) {
 		var player = PlayerStore.getSinglePlayer(id);
@@ -110,19 +130,19 @@ class PlayerSearch extends React.Component {
 	}
 
 	render() {
-		//Put this stuff in function and call?
+		console.log('search render');
+		//Put this stuff in function and call? change to const? let?
 		var searchTerm = this.state.searchTerm;
-		var selectedFunc = this.handlePlayerSelect;
-		var handleHideResults  = this.handleHideResults;
 		var selectedPlayer = this.state.player;
-		var comparedPlayer;
-		var potentialPlayers = this.state.playerList.players;
+		var potentialPlayers = this.state.playerList;
 		var isComparing = this.state.isComparing;
 		var hideResults = this.state.hideResults;
 		var comparePlayerSelected = this.state.comparePlayerSelected;
+
+		var selectedFunc = this.handlePlayerSelect; //TODO: change these to const? let?
+		var handleHideResults  = this.handleHideResults;
 		var resetFunc = this.resetSearch;
 
-		
 		var fullPlayerList = [];
 		var playerNameList = [];
 		var playerCard;
@@ -135,9 +155,9 @@ class PlayerSearch extends React.Component {
 			if ( this.refs.search.state.searchTerm == '' ) { 
 				playerNameList = [];
 			}else {
-				var filters = ['firstName', 'lastName'];
+				var filters = ['first_name', 'last_name'];
 				fullPlayerList = potentialPlayers.filter(this.refs.search.filter(filters));
-				fullPlayerList.forEach(function(player, index, array) {
+				fullPlayerList.forEach(function(player, index, array) { //TODO: arrow func 
 					playerNameList.push(player);
 				});
 			}
