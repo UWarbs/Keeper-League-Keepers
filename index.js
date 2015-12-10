@@ -4,8 +4,9 @@ var dateFormat = require('dateformat');
 var request    = require('request');
 var routes 	 	 = require('./api/routes/routes');
 var format     = "dd mmm HH:MM:ss";
-var DB_PORT    = process.env.NODE_PORT;
 var Player     = require('./api/models/Player');
+var knex       = require('./api/config/schema');
+
 require('babel-core/register')({
     presets: ['react']
 });
@@ -33,7 +34,7 @@ var plugins = [
 	{
 		register: require('./api/routes/routes.js'),
 		options: {
-			"test": "option"
+			"db": knex
 		}
 	}
 ];

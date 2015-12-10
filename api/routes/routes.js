@@ -4,6 +4,7 @@ var Player = require('../models/Player');
 
 exports.register = function(server, options, next) {
 	//Declare Routes
+	var knex = options.db; 
 	server.route([
 		{
 			// Add a route to serve static assets (CSS, JS, IMG)
@@ -29,34 +30,43 @@ exports.register = function(server, options, next) {
 	    method: 'GET',
 		  path: '/api',
 		  handler: function(req, res) {
-		  	models.Player.findAll({
-		  		attributes: ['firstName', 'lastName']
-		  	}).then(function(players) {
-		  		res({'players': players});
-		  	});
+		  	var allPlayers;
+		  	
+		  	knex.select().table('players')
+		  		.then(function(players) {
+		  			allPlayers = players;
+		  			return res(allPlayers);
+		  			//Give players to PlayerStore here.
+		  		}).catch(function(err) {
+		  			console.log(err);
+		  			//give error to PlayerStore
+		  		});
+
+				
 		  }
 		},
 
 		{
-			method: 'POST',
+			method: 'GET',
 			path: '/api/new-writeup',
 			handler: function(req, res) {
-				res('worked');
-				Player.create({
-					id: 5,
-					firstName:'Blaine',
-					lastName: 'Gabbert',
+				knex('players').insert({
+					first_name: 'Russell',
+					last_name: 'Wilson',
+					position: 'Quarterback',
+					position_abbrev: 'QB',
+					team:'Seattle Seahawks',
+					team_abbrev: 'SEA',
+					rating: 98,
 					age: 26,
-					positionalRating: 80,
-					position: 'Quarter Back',
-					positionAbbrev: 'QB',
-					team: 'San Francisco 49ers',
-					teamAbbrev: 'SF'
-				}).then(function(player) {
-					res('worked');
-					console.log(player.get({plain: true}));
+					experience:4
+				}).then(function(data) {
+					console.log('succesful insert');
+					return res(data);
+				}).catch(function(err) {
+					console.log(err);
+					return res(err);
 				});
-				res('worked');
 			}
 		}
 
