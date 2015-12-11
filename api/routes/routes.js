@@ -45,7 +45,6 @@ exports.register = function(server, options, next) {
 			path: '/api/new-player',
 			handler: function(req, res) {
 				var data = req.payload;
-				// console.log(res);
 				//TODO: set team and position abbrev
 				//TODO: Validation ... joi?
 				knex('players').insert({
