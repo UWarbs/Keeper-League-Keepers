@@ -11,13 +11,7 @@ require('babel-core/register')({
     presets: ['react']
 });
 
-// Basic Hapi.js connection stuff
 var server = new Hapi.Server({debug: {request: ['info', 'error']}});
-
-// Expose database
-if (process.env.NODE_ENV === 'development') {
-	console.log("DEVELOPMENT DATABASE");
-}
 
 server.connection({
   host: 'localhost',

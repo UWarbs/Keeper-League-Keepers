@@ -1,13 +1,14 @@
 /**This class is the main functionality part of the site at this point in time.
 *  It finds a player's DB entry based on user input or if the player doesn't exist, displays a helpful error message to the user.
 **/
+"use strict";
 import React from 'react';
 import PureRenderMixin from 'pure-render-mixin';
 //mixins: [PureRenderMixin], want this back in
 import PlayerStore from '../stores/PlayerStore';
 import PlayerCard    from '../components/PlayerCard.jsx';
 import PlayerName from './shared/playerName.jsx';
-import PlayerServerActions from '../actions/PlayerServerActions'
+import PlayerServerActions from '../actions/PlayerServerActions';
 import SearchHelper  from '../components/search-helper.jsx';
 
 

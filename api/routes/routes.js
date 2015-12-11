@@ -41,19 +41,24 @@ exports.register = function(server, options, next) {
 		},
 
 		{
-			method: 'GET',
+			method: 'POST',
 			path: '/api/new-player',
 			handler: function(req, res) {
+				var data = req.payload;
+				// console.log(res);
+				//TODO: set team and position abbrev
+				//TODO: Validation ... joi?
 				knex('players').insert({
-					first_name: 'Matt',
-					last_name: 'Stafford',
-					position: 'Quarterback',
+					first_name: data.firstName,
+					last_name: data.lastName,
+					position: data.position,
 					position_abbrev: 'QB',
-					team:'Detroit Lions',
-					team_abbrev: 'DET',
-					rating: 89,
-					age: 28,
-					experience:6
+					team: data.team,
+					team_abbrev: 'JAX',
+					rating: data.rating,
+					age: data.age,
+					experience: data.experience,
+					writeup: data.writeup
 				}).then(function(data) {
 					console.log('succesful insert');
 					return res(data);

@@ -1,3 +1,4 @@
+"use strict";
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants     = require('../constants/Constants');
 var Api 					= require('../Api');
@@ -16,6 +17,15 @@ module.exports = {
 				actionType: Constants.GET_PLAYERS,
 				players: players
 			});			
-		})
+		});
+	},
+	addNewPlayer: function(data) {
+		Api.post('/api/new-player', data)
+		.then(function(player) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.NEW_PLAYER,
+				player: player
+			});
+		});
 	}
 };

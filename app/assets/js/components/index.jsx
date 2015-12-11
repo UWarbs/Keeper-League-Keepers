@@ -6,6 +6,8 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import PlayerStore         from '../stores/PlayerStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
+//COMPONENTS
+import AddPlayer           from './admin/AddPlayer.jsx';
 import PlayerSearch        from './playerSearch.jsx';
 import TopList             from './topList.jsx';
 require('../../stylesheets/main.css.scss');
@@ -25,6 +27,7 @@ class Header extends React.Component {
 					<section className="section-tabs">
 						<div className="section-tab"><Link to={ '/top/qb' }>Top QBs</Link></div>&nbsp;
 						<div className="section-tab"><Link to={ '/top/rb' }>Top RBs</Link></div>&nbsp;
+						<div className="section-tab"><Link to={ '/admin/add-player' }>Add Player</Link></div>&nbsp;
 						<div className="section-tab"><Link to={ '/' }>Search</Link></div>
 					</section>
 				</div>
@@ -51,6 +54,7 @@ render((
     <Route path="/" component={ App }>
       <IndexRoute component={ PlayerSearch } />
       <Route path="top/:id" component={ TopList } />
+      <Route path="admin/add-player" component={ AddPlayer } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )
