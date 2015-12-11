@@ -4,21 +4,21 @@ Online database of NFL football player fantasy league Analysis tailored to keepe
 
 ##Technologies
 
-ReactJs - Enjoyable to use and makes sense for the scope of this project with reusable components and the SPA nature of it.
+**ReactJs** - Enjoyable to use and makes sense for the scope of this project with reusable components and the SPA nature of it.
 
-Flux - This will keep the data aspect clean and flowing the right direction.
+**Flux** - This will keep the data aspect clean and flowing the right direction.
 
-ES6 - Using this with the .jsx react files.
+**ES6** - Using this with the .jsx react files.
 
-Superagent - In place of ajax calls.
+**Superagent** - In place of ajax calls.
 
-MySQL w/knex wrapper - knex is an awesome wrapper/querybuilder for relational databases. Very lightweight and well-documented. 
+**MySQL w/[knex](http://knexjs.org/) wrapper** - knex is an awesome wrapper/querybuilder for relational databases. Very lightweight and well-documented. 
 
-SCSS - Love this CSS preprocessor. 
+**SCSS** - Love this CSS preprocessor. 
 
-Webpack - I am more familiar with grunt, but time to branch out.
+**Webpack** - I am more familiar with grunt, but time to branch out.
 
-Hapi - More familiar with express but see above.
+**Hapi** - More familiar with express but see above.
 
 ###Preliminary data schema
 
