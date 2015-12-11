@@ -1,6 +1,7 @@
 'use strict';
 var Joi    = require('joi');
 var Player = require('../models/Player');
+var Abbreviations = require('../config/abbreviations');
 
 exports.register = function(server, options, next) {
 	//Declare Routes
@@ -45,15 +46,17 @@ exports.register = function(server, options, next) {
 			path: '/api/new-player',
 			handler: function(req, res) {
 				var data = req.payload;
+				var positionAbbrev = Abbreviations.position(data.position);
+				var teamAbbrev = Abbreviations.team(data.team);
 				//TODO: set team and position abbrev
 				//TODO: Validation ... joi?
 				knex('players').insert({
 					first_name: data.firstName,
 					last_name: data.lastName,
 					position: data.position,
-					position_abbrev: 'QB',
+					position_abbrev: positionAbbrev,
 					team: data.team,
-					team_abbrev: 'JAX',
+					team_abbrev: teamAbbrev,
 					rating: data.rating,
 					age: data.age,
 					experience: data.experience,
