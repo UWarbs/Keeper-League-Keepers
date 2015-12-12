@@ -109,29 +109,34 @@ class PlayerSearch extends React.Component {
 
   onChange() {
   	console.log('component change');
-  	this.setState({
-  		playerList: PlayerStore.getPlayers()
-  	});
+  	if ( this.state.playerList.length == 0 ) {
+	  	this.setState({
+	  		playerList: PlayerStore.getPlayers()
+	  	});  		
+  	}else {
+	  	//conditional for if player is first player or compared player
+			if( this.state.isComparing ) {
+				this.setState({
+					comparePlayer: PlayerStore.getSinglePlayer(),
+					comparePlayerSelected: true
+				});
+			}else {
+				this.setState({
+					player: PlayerStore.getSinglePlayer(),
+					playerSelected: true
+				});		
+			}
+  	}
+
   }
 
 	handlePlayerSelect(id) {
-		var player = PlayerStore.getSinglePlayer(id);
-		//conditional for if player is first player or compared player
-		if( this.state.isComparing ) {
-			this.setState({
-				comparePlayer: player,
-				comparePlayerSelected: true
-			});
-		}else {
-			this.setState({
-				playerSelected: true,
-				player: player
-			});		
-		}
+		// var player = PlayerStore.getSinglePlayer(id);
+		PlayerServerActions.getSinglePlayer(id);
 	}
 
 	render() {
-		console.log('search render');
+		// console.log('search render'); /?TODO: Make this render less
 		//Put this stuff in function and call? change to const? let?
 		var searchTerm = this.state.searchTerm;
 		var selectedPlayer = this.state.player;
@@ -149,9 +154,6 @@ class PlayerSearch extends React.Component {
 		var playerCard;
 		var compareBtn;
 		var comparedPlayer = this.state.comparePlayer || '';
-
-		
-		
 		if ( this.refs.search ) {
 			if ( this.refs.search.state.searchTerm == '' ) { 
 				playerNameList = [];
@@ -180,9 +182,7 @@ class PlayerSearch extends React.Component {
 					compareBtn = React.createElement('div', {className: 'player-compare-btn help'}, 'Find another player');
 					playerCard = <PlayerCard player={selectedPlayer} isComparing={true} className={'first-card'} />
 				}
-
 			}
-			
 		}
 
 		if ( isComparing && comparePlayerSelected ) {

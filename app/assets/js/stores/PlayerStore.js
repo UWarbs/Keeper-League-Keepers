@@ -7,12 +7,15 @@ var EventEmitter = require('events').EventEmitter;
 
 var request = require('superagent');
 
-var CHANGE_EVENT = 'change';
+var CHANGE_EVENT = 'change'; //have different change events??? one for all players one for single player?
 
 var _allPlayers = [];
-
+var _player;
 function setPlayers (players) {
 	_allPlayers = players;
+}
+function setPlayer (player) {
+	_player = player;
 }
 // Define the public event listeners and getters that
 // the views will use to listen for changes and retrieve
@@ -30,14 +33,15 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 		return _allPlayers;
 	},
 
-	getSinglePlayer: function(id) {//TODO: Make this work the right way
-		var playerToReturn;
-		_allPlayers.forEach(function(player, index, array) {
-			if (player.id === id) {
-				playerToReturn = player;
-			}
-		});		
-		return playerToReturn;
+	getSinglePlayer: function() {//TODO: Make this work the right way
+		// var playerToReturn;
+		// _allPlayers.forEach(function(player, index, array) {
+		// 	if (player.id === id) {
+		// 		playerToReturn = player;
+		// 	}
+		// });		
+		// return playerToReturn;
+		return _player[0];
 	}
 });
 
@@ -47,29 +51,16 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(payload) {
 	var action = payload.action;
+	console.log(action);
 	switch(action.actionType) {
-		
 		case AppConstants.GET_PLAYERS:
 			setPlayers(action.players);
 			PlayerStore.emit(CHANGE_EVENT);
 			break;
-
-		// case AppConstants.GET_SINGLE_PLAYER:   //seems to call 
-		// 	var id = action.id;
-		// 	console.log('store action run with id: ' + id);
-		// 	var playerToReturn;
-			
-		// 	_store.players.forEach(function(player, index, array) {
-		// 		if (player.id === id) {
-		// 			playerToReturn = player;
-		// 		}
-		// 	});		
-			
-		// 	return playerToReturn;
-			
-		// 	PlayerStore.emit(CHANGE_EVENT);
-		// 	break;
-
+		case AppConstants.GET_SINGLE_PLAYER:
+			setPlayer(action.player);
+			PlayerStore.emit(CHANGE_EVENT);
+			break;
     default: 
     	return true;
 	}

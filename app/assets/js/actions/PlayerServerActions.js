@@ -5,10 +5,13 @@ var Api 					= require('../Api');
 
 module.exports = {
 	getSinglePlayer: function(id) {
-		AppDispatcher.handleServerAction({
-			actionType: Constants.GET_SINGLE_PLAYER,
-			id: id
-		});
+		Api.getSinglePlayer('api/player/' + id)
+		.then(function(player) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_SINGLE_PLAYER,
+				player: player
+			});			
+		})
 	},
 	getAllPlayers: function() {
 		Api.get('api/all-players')
