@@ -4,19 +4,21 @@ Online database of NFL football player fantasy league Analysis tailored to keepe
 
 ##Technologies
 
-ReactJs - I've been dying to learn this and this is a simple enough idea to build a solid foundation of react knowledge.
+**ReactJs** - Enjoyable to use and makes sense for the scope of this project with reusable components and the SPA nature of it.
 
-Flux - This will keep the data aspect clean
+**Flux** - This will keep the data aspect clean and flowing the right direction.
 
-ES6 - Learning React? Might as well get up to speed on the newest JavaScript. *To be implemented after player search is implemented.
+**ES6** - Using this with the .jsx react files.
 
-MongoDB - Perfect database solution for this project because performance won't be an issue because there are ~1,696 active NFL players and only a fraction of them are worth doing fantasy league write ups on. Not because all 1,696 aren't amazing athletes, but because roughly 480 is the how many fantasy players you will see in most fantasy leagues. Also, this idea is very fluid and mongodb is good for that sort of thing.
+**Superagent** - In place of ajax calls.
 
-SCSS - Love this CSS preprocessor. 
+**MySQL w/[knex](http://knexjs.org/) wrapper** - knex is an awesome wrapper/querybuilder for relational databases. Very lightweight and well-documented. 
 
-Webpack - I am more familiar with grunt, but time to branch out.
+**SCSS** - Love this CSS preprocessor. 
 
-Hapi - More familiar with express but see above.
+**Webpack** - I am more familiar with grunt, but time to branch out.
+
+**Hapi** - More familiar with express but see above.
 
 ###Preliminary data schema
 
@@ -30,54 +32,30 @@ Hapi - More familiar with express but see above.
 
 	"age": int,
 
-	"positionalRating": String, (A+, B-, etc...)
+	"positionalRating": int
 
 	"yearsExperience": int,
 
 	"writeUp": String,
 
-	"position": { 
-
-		"id": int,
-		
-		"name": String,
-		
-		"writeup": String
+	"position": String,
 	
-	},
+	"positionAbbrev": String,
 	
-	"team": {
+	"team": String,
 	
-		"id": int,
-	
-		"name": String,
-	
-		"writeup": String
-	
-	},
-	
-	"history" : {
-	
-		"pastPoints": {
-	
-			"nonPPR": Array of ints,
-	
-			"PPR": Array of ints
-	
-		}
-	
-	}
+	"teamAbbrev": String
 
 }
 
 ###Testing Tech
 
-Karma, Mocha, Chai seems like a good start.
+Karma, Mocha, Chai seems like a good start. Superagent for calls to the API.
 
 ###Content Creators
 
-Ryan, Greg, Eric, Nick, Lars, any qualified memebers of 'The League - Seattle Style'. Open source contributions?
+Ryan, Greg, Eric, Nick, Lars, any qualified members of 'The League - Seattle Style'. Open source contributions?
 
 ###Hosting
 
-This will start as a static site hosted on AWS FTP... I mean S3. This means a json file will take place of the mongo db to start. Is this a good decision? My gut tells me probably not.
+Amazon EC2 for now.
