@@ -42,6 +42,22 @@ exports.register = function(server, options, next) {
 		},
 
 		{
+			method: 'GET',
+			path: '/api/player/{id}',
+			handler: function(req, res) {
+				var id = encodeURIComponent(req.params.id);
+				knex('players').where('id', id)
+				.then(function(player) {
+					return(res(player));
+				}).catch(function(err){
+					console.log(err);
+					return res(err);
+				});
+
+			}
+		},
+
+		{
 			method: 'POST',
 			path: '/api/new-player',
 			handler: function(req, res) {
@@ -66,6 +82,21 @@ exports.register = function(server, options, next) {
 					return res(data);
 				}).catch(function(err) {
 					console.log(err);
+					return res(err);
+				});
+			}
+		},
+		{
+			method: 'DELETE',
+			path: '/api/delete/{id}',
+			handler: function(req, res) {
+				var id = encodeURIComponent(req.params.id);
+				knex('players').where('id', id).del()
+				.then(function(data) {
+					//data = true/1 if success
+					return res(data);
+				}).catch(function(err) {
+					console.error(error);
 					return res(err);
 				});
 			}

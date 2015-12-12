@@ -30,7 +30,7 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 		return _allPlayers;
 	},
 
-	getSinglePlayer: function(id) {
+	getSinglePlayer: function(id) {//TODO: Make this work the right way
 		var playerToReturn;
 		_allPlayers.forEach(function(player, index, array) {
 			if (player.id === id) {
