@@ -55,6 +55,7 @@ render((
       <IndexRoute component={ PlayerSearch } />
       <Route path="top/:id" component={ TopList } />
       <Route path="admin/add-player" component={ AddPlayer } />
+      <Route path="admin/edit-player/:id" component={ AddPlayer } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )

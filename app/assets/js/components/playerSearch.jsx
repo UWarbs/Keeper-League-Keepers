@@ -5,11 +5,11 @@
 import React from 'react';
 import PureRenderMixin from 'pure-render-mixin';
 //mixins: [PureRenderMixin], want this back in
-import PlayerStore from '../stores/PlayerStore';
-import PlayerCard    from '../components/PlayerCard.jsx';
-import PlayerName from './shared/playerName.jsx';
+import PlayerStore   			 from '../stores/PlayerStore';
+import PlayerCard    			 from '../components/PlayerCard.jsx';
+import PlayerName    			 from './shared/playerName.jsx';
 import PlayerServerActions from '../actions/PlayerServerActions';
-import SearchHelper  from '../components/search-helper.jsx';
+import SearchHelper  			 from '../components/search-helper.jsx';
 
 
 class SearchResults extends React.Component {
@@ -127,11 +127,9 @@ class PlayerSearch extends React.Component {
 				});		
 			}
   	}
-
   }
 
 	handlePlayerSelect(id) {
-		// var player = PlayerStore.getSinglePlayer(id);
 		PlayerServerActions.getSinglePlayer(id);
 	}
 

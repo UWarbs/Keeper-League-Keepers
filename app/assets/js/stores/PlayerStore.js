@@ -33,14 +33,7 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 		return _allPlayers;
 	},
 
-	getSinglePlayer: function() {//TODO: Make this work the right way
-		// var playerToReturn;
-		// _allPlayers.forEach(function(player, index, array) {
-		// 	if (player.id === id) {
-		// 		playerToReturn = player;
-		// 	}
-		// });		
-		// return playerToReturn;
+	getSinglePlayer: function() {
 		return _player[0];
 	}
 });
@@ -51,7 +44,7 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(payload) {
 	var action = payload.action;
-	console.log(action);
+	// console.log(action);
 	switch(action.actionType) {
 		case AppConstants.GET_PLAYERS:
 			setPlayers(action.players);

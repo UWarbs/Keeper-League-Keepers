@@ -40,15 +40,15 @@ describe('POST & DELETE Routes', function() {
 		writeup: 'Real scrappy gym rat.'
 	}
 	var id = 12;
-	it('can add a new player', function(done) {
-		superagent.post('http://localhost:8000/api/new-player')
-			.send(newPlayer)
-			.end(function(err, res) {
-				expect(err).to.eql(null);
-				expect(res.status).to.eql(200);
-				done();
-			});
-	});
+	// it('can add a new player', function(done) {
+	// 	superagent.post('http://localhost:8000/api/new-player')
+	// 		.send(newPlayer)
+	// 		.end(function(err, res) {
+	// 			expect(err).to.eql(null);
+	// 			expect(res.status).to.eql(200);
+	// 			done();
+	// 		});
+	// });
 	it('can delete a given player', function(done) {
 		superagent.delete('http://localhost:8000/api/delete/' + id)
 			.end(function(err, res) {

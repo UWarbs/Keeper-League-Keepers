@@ -63,7 +63,7 @@ exports.register = function(server, options, next) {
 			handler: function(req, res) {
 				var data = req.payload;
 				var positionAbbrev = Abbreviations.position(data.position);
-				var teamAbbrev = Abbreviations.team(data.team);bbrev
+				var teamAbbrev = Abbreviations.team(data.team);
 				//TODO: Validation ... joi?
 				knex('players').insert({
 					first_name: data.firstName,
