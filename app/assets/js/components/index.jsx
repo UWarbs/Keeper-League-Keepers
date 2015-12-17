@@ -10,7 +10,7 @@ import PlayerServerActions from '../actions/PlayerServerActions';
 import AddPlayer           from './admin/AddPlayer.jsx';
 import PlayerSearch        from './playerSearch.jsx';
 import TopList             from './topList.jsx';
-require('../../stylesheets/main.css.scss');
+import '../../stylesheets/main.css.scss';
 
 class Header extends React.Component { 
 	render () {

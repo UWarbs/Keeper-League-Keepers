@@ -1,19 +1,22 @@
-// Create a basic Hapi.js server
-var Hapi       = require('hapi');
 var dateFormat = require('dateformat');
+var format     = "dd mmm HH:MM:ss";
+var Hapi       = require('hapi');
+var knex       = require('./knexfile');
+var path 			 = require('path');
+var Player     = require('./api/models/Player');
 var request    = require('request');
 var routes 	 	 = require('./api/routes/routes');
-var format     = "dd mmm HH:MM:ss";
-var Player     = require('./api/models/Player');
-var knex       = require('./knexfile');
+
 require('babel-core/register')({
     presets: ['react']
 });
 
-var server = new Hapi.Server({debug: {request: ['info', 'error']}});
+var isDevelopment = (process.env.NODE_ENV !== 'production');
+var static_path 	= path.join(__dirname, 'dist');
+var server 				= new Hapi.Server({debug: {request: ['info', 'error']}});
 
 server.connection({ port: +process.env.PORT || 8000 });
-console.log(process.env.PORT);
+
 var plugins = [
 	{
 		register: require('inert')
@@ -45,6 +48,6 @@ server.register(plugins, function (err) {
 	server.start(function(err) {
 	  if (err) { console.log('start errror'); throw err; }
 	  server.log('info', 'Server running at: ' + server.info.uri);
-	  // console.log(process.env.LOCAL_PORT);
+	  console.log(process.env.NODE_ENV);
 	});
 });

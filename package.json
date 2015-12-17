@@ -4,6 +4,7 @@
   "description": "Website for rating fantasy league keepers",
   "main": "index.js",
   "scripts": {
+  	"postinstall": "webpack --config ./webpack.config.js --progress --colors",
     "start": "node index.js",
     "build": "webpack -p --progress",
     "dev": "webpack --progress --color --watch & nodemon"
@@ -31,6 +32,7 @@
     "mocha": "^2.3.4",
     "mysql": "^2.9.0",
     "object-assign": "^4.0.1",
+    "path": "^0.12.7",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-router": "^1.0.0",
