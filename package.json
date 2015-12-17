@@ -7,7 +7,7 @@
     "start": "node index.js",
     "build": "webpack -p --progress",
     "dev": "webpack --progress --color --watch & nodemon",
-    "postinstall": "webpack --progress --colors"
+    "postinstall": "webpack --progress --colors --display-error-details --debug"
   },
   "author": "Kyle Warbis",
   "license": "MIT",

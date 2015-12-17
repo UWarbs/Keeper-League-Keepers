@@ -7,9 +7,9 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import PlayerStore         from '../stores/PlayerStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
 //COMPONENTS
-import AddPlayer           from './admin/AddPlayer.jsx';
-import PlayerSearch        from './playerSearch.jsx';
-import TopList             from './topList.jsx';
+import AddPlayer           from './admin/AddPlayer';
+import PlayerSearch        from './playerSearch';
+import TopList             from './topList';
 import '../../stylesheets/main.css.scss';
 
 class Header extends React.Component { 
