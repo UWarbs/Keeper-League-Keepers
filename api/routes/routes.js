@@ -66,7 +66,7 @@ exports.register = function(server, options, next) {
 				//make 10 constant or a param.
 				knex('players').where('position_abbrev', pos).orderBy('rating', 'desc').limit(10)
 					.then(function(players) {
-						return res(players);
+						return res(players)
 					}).catch(function(err) {
 						console.error(err);
 						return err;

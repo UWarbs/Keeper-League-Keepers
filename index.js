@@ -15,7 +15,7 @@ var server = new Hapi.Server({debug: {request: ['info', 'error']}});
 
 server.connection({
   host: 'localhost',
-  port: 8000
+  port: process.env.PORT || 8000
 });
 
 var plugins = [
