@@ -47,7 +47,7 @@ class SearchResults extends React.Component {
   handleOutsideMouseClick(e) {
     // this.props.playerList = []; 
     e.stopPropagation();
-    console.log('outsidemouseclick');
+    // console.log('outsidemouseclick');
     // if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
     // 	this.props.hideResults(true);
     // }
@@ -108,7 +108,6 @@ class PlayerSearch extends React.Component {
   }
 
   onChange() {
-  	console.log('component change');
   	if ( this.state.playerList.length == 0 ) {
 	  	this.setState({
 	  		playerList: PlayerStore.getPlayers()
