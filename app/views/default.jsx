@@ -19,7 +19,7 @@ var Default = React.createClass({
 	      </head>
 	      <body>
 	        <div id="app-container"></div>
-	        <script src="http://keeper-league.s3-website-us-west-2.amazonaws.com/js/bundle.js"></script>
+	        <script src="/js/bundle.js"></script>
 	      </body>
       </html>
     );
