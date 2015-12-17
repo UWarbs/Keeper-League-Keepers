@@ -19,7 +19,7 @@ var Default = React.createClass({
 	      </head>
 	      <body>
 	        <div id="app-container"></div>
-	        <script src="js/bundle.js"></script>
+	        <script src="/dist/js/bundle.js"></script>
 	      </body>
       </html>
     );
