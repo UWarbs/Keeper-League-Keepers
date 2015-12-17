@@ -6,7 +6,9 @@ var path 			 = require('path');
 var Player     = require('./api/models/Player');
 var request    = require('request');
 var routes 	 	 = require('./api/routes/routes');
-knex.schema.createTable('players', function(table) {
+
+knex.schema.dropTable('players') 
+.createTable('players', function(table) {
   table.increments('id');
   table.string('first_name');
   table.string('last_name');
@@ -14,6 +16,7 @@ knex.schema.createTable('players', function(table) {
   table.string('position_abbrev');
   table.string('team');
   table.string('team_abbrev');
+  table.string('writeup');
   table.integer('rating');
   table.integer('age')
   table.integer('experience');
