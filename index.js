@@ -5,8 +5,7 @@ var request    = require('request');
 var routes 	 	 = require('./api/routes/routes');
 var format     = "dd mmm HH:MM:ss";
 var Player     = require('./api/models/Player');
-var knex       = require('./api/config/schema');
-
+var knex       = require('./knexfile');
 require('babel-core/register')({
     presets: ['react']
 });
@@ -47,5 +46,6 @@ server.register(plugins, function (err) {
 	server.start(function(err) {
 	  if (err) { console.log('start errror'); throw err; }
 	  server.log('info', 'Server running at: ' + server.info.uri);
+	  // console.log(process.env.LOCAL_PORT);
 	});
 });

@@ -1,15 +1,15 @@
-"use strict";
-var knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    host     : 'mysql://b125826682b977:f3b613d0@us-cdbr-iron-east-03.cleardb.net/heroku_7df5265db2aa61f?reconnect=true',
-    user     : 'root',
-    password : 'root',
-    database : 'keepers'
-  }
-});
+// "use strict";
+// var knex = require('knex')({
+//   client: 'mysql',
+//   connection: {
+//     host     : '127.0.0.1',
+//     user     : 'root',
+//     password : 'root',
+//     database : 'keepers'
+//   }
+// });
 
-module.exports = knex;
+// module.exports = knex;
 
 //CODE TO CREATE TABLES
 //TODO: Look into proper way to do this - ask kevin
