@@ -3,6 +3,7 @@ var path = require('path');
 module.exports = {
   entry: './app/assets/js/components/index.jsx',
   output: {
+  	devtool: 'source-map',
     path: path.join(__dirname + '/dist/js'),
     filename: 'bundle.js',
     publicPath: '/dist/'

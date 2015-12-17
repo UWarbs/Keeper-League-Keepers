@@ -12,7 +12,6 @@ require('babel-core/register')({
 });
 
 var isDevelopment = (process.env.NODE_ENV !== 'production');
-var static_path 	= path.join(__dirname, 'dist');
 var server 				= new Hapi.Server({debug: {request: ['info', 'error']}});
 
 server.connection({ port: +process.env.PORT || 8000 });

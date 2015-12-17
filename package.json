@@ -4,10 +4,10 @@
   "description": "Website for rating fantasy league keepers",
   "main": "index.js",
   "scripts": {
-  	"postinstall": "webpack --config ./webpack.config.js --progress --colors",
     "start": "node index.js",
     "build": "webpack -p --progress",
-    "dev": "webpack --progress --color --watch & nodemon"
+    "dev": "webpack --progress --color --watch & nodemon",
+    "postinstall": "webpack --progress --colors"
   },
   "author": "Kyle Warbis",
   "license": "MIT",
