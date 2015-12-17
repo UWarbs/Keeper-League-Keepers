@@ -28,7 +28,9 @@
 //   table.integer('age')
 //   table.integer('experience');
 // 	table.timestamp('created_at').defaultTo(knex.fn.now())
-// })
+// }).catch(function(e) {
+// 	console.error(e);
+// });
 // .createTable('writeups', function(table) { //NOT NEEDED
 //   table.increments('id');
 //   table.string('player_first_name');
