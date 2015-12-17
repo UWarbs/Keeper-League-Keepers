@@ -18,12 +18,15 @@
     "babel-preset-react": "^6.1.18",
     "chai": "^3.4.1",
     "child-process-promise": "^1.1.0",
+    "css-loader": "^0.23.0",
     "dateformat": "^1.0.11",
+    "file-loader": "^0.8.4",
     "flux": "^2.1.1",
     "hapi": "^11.1.2",
     "hapi-react-views": "^5.0.0",
     "inert": "^3.0.2",
     "joi": "^7.0.1",
+    "jsx-loader": "^0.13.2",
     "knex": "^0.8.6",
     "mocha": "^2.3.4",
     "mysql": "^2.9.0",
@@ -33,20 +36,17 @@
     "react-router": "^1.0.0",
     "react-search-input": "^0.3.1",
     "request": "^2.65.0",
-    "superagent": "^1.5.0",
-    "vision": "^4.0.1"
-  },
-  "devDependencies": {
-    "css-loader": "^0.23.0",
-    "eslint-plugin-react": "^3.6.3",
-    "file-loader": "^0.8.4",
-    "jsx-loader": "^0.13.2",
-    "node-sass": "^3.4.1",
-    "nodemon": "^1.7.1",
     "sass-loader": "^3.1.1",
     "style-loader": "^0.13.0",
+    "superagent": "^1.5.0",
     "url-loader": "^0.5.6",
+    "vision": "^4.0.1",
     "webpack": "^1.12.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^3.6.3",
+    "node-sass": "^3.4.1",
+    "nodemon": "^1.7.1"
   },
   "engines": {
     "node": "4.1.1"
