@@ -9,19 +9,7 @@ var knex       = require('./knexfile');
 require('babel-core/register')({
     presets: ['react']
 });
-knex.schema.createTable('players', function(table) {
-  table.increments('id');
-  table.string('first_name');
-  table.string('last_name');
-  table.string('position');
-  table.string('position_abbrev');
-  table.string('team');
-  table.string('team_abbrev');
-  table.integer('rating');
-  table.integer('age')
-  table.integer('experience');
-	table.timestamp('created_at').defaultTo(knex.fn.now())
-})
+
 var server = new Hapi.Server({debug: {request: ['info', 'error']}});
 
 server.connection({ port: +process.env.PORT || 8000 });
