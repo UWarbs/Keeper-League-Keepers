@@ -11,11 +11,15 @@ var CHANGE_EVENT = 'change'; //have different change events??? one for all playe
 
 var _allPlayers = [];
 var _player;
+var _list;
 function setPlayers (players) {
 	_allPlayers = players;
 }
 function setPlayer (player) {
 	_player = player;
+}
+function setList (list) {
+	_list = list;
 }
 // Define the public event listeners and getters that
 // the views will use to listen for changes and retrieve
@@ -35,6 +39,10 @@ var PlayerStore = ObjectAssign( {}, EventEmitter.prototype, {
 
 	getSinglePlayer: function() {
 		return _player[0];
+	},
+
+	getList: function() {
+		return _list;
 	}
 });
 
@@ -54,6 +62,9 @@ AppDispatcher.register(function(payload) {
 			setPlayer(action.player);
 			PlayerStore.emit(CHANGE_EVENT);
 			break;
+		case AppConstants.GET_LIST:
+			setList(action.list);
+			PlayerStore.emit(CHANGE_EVENT); 
     default: 
     	return true;
 	}

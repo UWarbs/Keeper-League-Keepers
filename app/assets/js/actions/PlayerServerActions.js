@@ -30,5 +30,23 @@ module.exports = {
 				player: player
 			});
 		});
+	},
+	editPlayer: function(id, data) {
+		Api.post('/api/edit-player/' + id, data)
+		.then(function(player) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.EDIT_PLAYER,
+				player: player
+			});
+		});
+	},
+	getList: function(id) {
+		Api.get('/api/top/' + id)
+		.then(function(list) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_LIST,
+				list: list
+			});
+		});
 	}
 };
