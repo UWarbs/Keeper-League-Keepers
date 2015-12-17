@@ -12,7 +12,14 @@ require('babel-core/register')({
 });
 
 var isDevelopment = (process.env.NODE_ENV !== 'production');
-var server 				= new Hapi.Server({debug: {request: ['info', 'error']}});
+var server = new Hapi.Server(
+	{
+		debug: {request: ['info', 'error']}
+	}, 
+	{
+		cors: {origin: '*'}
+	}
+);
 
 server.connection({ port: +process.env.PORT || 8000 });
 
@@ -47,6 +54,5 @@ server.register(plugins, function (err) {
 	server.start(function(err) {
 	  if (err) { console.log('start errror'); throw err; }
 	  server.log('info', 'Server running at: ' + server.info.uri);
-	  console.log(process.env.NODE_ENV);
 	});
 });

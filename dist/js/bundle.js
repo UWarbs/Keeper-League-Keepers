@@ -27573,7 +27573,7 @@
 			value: function handleOutsideMouseClick(e) {
 				// this.props.playerList = [];
 				e.stopPropagation();
-				console.log('outsidemouseclick');
+				// console.log('outsidemouseclick');
 				// if(e.target.className != 'search-li' && e.target.className != 'player-result-list') {
 				// 	this.props.hideResults(true);
 				// }
@@ -27650,7 +27650,6 @@
 		}, {
 			key: 'onChange',
 			value: function onChange() {
-				console.log('component change');
 				if (this.state.playerList.length == 0) {
 					this.setState({
 						playerList: _PlayerStore2.default.getPlayers()
