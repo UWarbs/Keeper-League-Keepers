@@ -12,11 +12,8 @@ require('babel-core/register')({
 
 var server = new Hapi.Server({debug: {request: ['info', 'error']}});
 
-server.connection({
-  host: 'localhost',
-  port: process.env.PORT || 8000
-});
-
+server.connection({ port: +process.env.PORT || 8000 });
+console.log(process.env.PORT);
 var plugins = [
 	{
 		register: require('inert')
