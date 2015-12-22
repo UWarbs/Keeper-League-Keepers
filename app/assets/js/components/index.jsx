@@ -39,11 +39,11 @@ class Header extends React.Component {
 				<div className="hero-container">
 					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
 					<section className="section-tabs">
+						<Link className="section-link" to={ '/' }><div className="section-tab selected" onClick={this.handleClick}>Search</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/qb' }><div className="section-tab" onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/rb' }><div className="section-tab" onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
-						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>&nbsp;
-						<Link className="section-link" to={ '/' }><div className="section-tab selected" onClick={this.handleClick}>Search</div></Link>
+						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>
 					</section>
 				</div>
 			</div>
