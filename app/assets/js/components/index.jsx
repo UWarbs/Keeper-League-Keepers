@@ -43,7 +43,7 @@ class Header extends React.Component {
 						<Link className="section-link" to={ '/top/rb' }><div className="section-tab" onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>&nbsp;
-						<Link className="section-link" to={ '/' }><div className="section-tab" onClick={this.handleClick}>Search</div></Link>
+						<Link className="section-link" to={ '/' }><div className="section-tab selected" onClick={this.handleClick}>Search</div></Link>
 					</section>
 				</div>
 			</div>
