@@ -98,10 +98,23 @@
 		function Header() {
 			_classCallCheck(this, Header);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this));
+
+			_this.handleClick = _this.handleClick.bind(_this);
+			return _this;
 		}
 
 		_createClass(Header, [{
+			key: 'handleClick',
+			value: function handleClick(e) {
+				console.log(e);
+				var tab = document.querySelector('.section-tab.selected');
+				if (tab) {
+					tab.className = 'section-tab';
+				}
+				e.target.className = 'section-tab selected';
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -138,51 +151,51 @@
 							'section',
 							{ className: 'section-tabs' },
 							_react2.default.createElement(
-								'div',
-								{ className: 'section-tab' },
+								_reactRouter.Link,
+								{ className: 'section-link', to: '/top/qb' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/top/qb' },
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
 									'Top QBs'
 								)
 							),
 							' ',
 							_react2.default.createElement(
-								'div',
-								{ className: 'section-tab' },
+								_reactRouter.Link,
+								{ className: 'section-link', to: '/top/rb' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/top/rb' },
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
 									'Top RBs'
 								)
 							),
 							' ',
 							_react2.default.createElement(
-								'div',
-								{ className: 'section-tab' },
+								_reactRouter.Link,
+								{ className: 'section-link', to: '/top/wr' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/top/wr' },
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
 									'Top WRs'
 								)
 							),
 							' ',
 							_react2.default.createElement(
-								'div',
-								{ className: 'section-tab' },
+								_reactRouter.Link,
+								{ className: 'section-link', to: '/admin/add-player' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/admin/add-player' },
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
 									'Add Player'
 								)
 							),
 							' ',
 							_react2.default.createElement(
-								'div',
-								{ className: 'section-tab' },
+								_reactRouter.Link,
+								{ className: 'section-link', to: '/' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
 									'Search'
 								)
 							)
@@ -27253,221 +27266,290 @@
 					_react2.default.createElement(
 						'form',
 						{ className: 'add-player-form', name: 'create-player', onSubmit: this.handleSubmit },
-						_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'First Name', name: 'firstName', value: this.state.firstName, onChange: this.handleFirstChange }),
-						_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Last Name', name: 'lastName', value: this.state.lastName, onChange: this.handleLastChange }),
 						_react2.default.createElement(
-							'select',
-							{ htmlFor: 'create-player', value: this.state.position, onChange: this.handlePositionChange },
+							'div',
+							{ className: 'col-md-12' },
 							_react2.default.createElement(
-								'option',
-								{ value: position },
-								position
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'firstName' },
+									'First Name'
+								),
+								_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', name: 'firstName', value: this.state.firstName, onChange: this.handleFirstChange, required: true })
 							),
 							_react2.default.createElement(
-								'option',
-								{ value: 'quarterback' },
-								'Quarterback'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'kicker' },
-								'Kicker'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'running back' },
-								'Running Back'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'tight end' },
-								'Tight End'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'wide receiver' },
-								'Wide Receiver'
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'lastName' },
+									'Last Name'
+								),
+								_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', name: 'lastName', value: this.state.lastName, onChange: this.handleLastChange, required: true })
 							)
 						),
 						_react2.default.createElement(
-							'span',
-							null,
-							this.state.team
-						),
-						_react2.default.createElement(
-							'select',
-							{ htmlFor: 'create-player', value: this.state.team, onChange: this.handleTeamChange },
+							'div',
+							{ className: 'col-md-12' },
 							_react2.default.createElement(
-								'option',
-								{ value: team },
-								team
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'position' },
+									'Position'
+								),
+								_react2.default.createElement(
+									'select',
+									{ className: 'form-control', htmlFor: 'create-player', value: this.state.position, onChange: this.handlePositionChange, required: true },
+									_react2.default.createElement(
+										'option',
+										{ value: position },
+										position
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Quarterback' },
+										'Quarterback'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Kicker' },
+										'Kicker'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Running Back' },
+										'Running Back'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Tight End' },
+										'Tight End'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Wide Receiver' },
+										'Wide Receiver'
+									)
+								)
 							),
 							_react2.default.createElement(
-								'option',
-								{ value: 'seattle seahawks' },
-								'SEA'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'san francisco 49ers' },
-								'SF'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'arizona cardinals' },
-								'ARI'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'st. louis rams' },
-								'STL'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'green bay packers' },
-								'GB'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'chicago bears' },
-								'CHI'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'detroit lions' },
-								'DET'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'minnesota viking' },
-								'MIN'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'tampa bay buccaneers' },
-								'TB'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'new orleans saints' },
-								'NO'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'atlanta falcons' },
-								'ATL'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'carolina panthers' },
-								'CAR'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'new york giants' },
-								'NYG'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'washington redskins' },
-								'WAS'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'philadelphia eagles' },
-								'PHI'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'dallas cowboys' },
-								'DAL'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'oakland raiders' },
-								'OAK'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'denver broncos' },
-								'DEN'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'san diego chargers' },
-								'SD'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'kansas city chiefs' },
-								'KC'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'houston texans' },
-								'HOU'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'indianapolis colts' },
-								'IND'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'jacksonville jaguars' },
-								'JAX'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'tennessee titans' },
-								'TEN'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'cincinnati bengals' },
-								'CIN'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'cleveland browns' },
-								'CLE'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'baltimore ravens' },
-								'BAL'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'pittsburgh steelers' },
-								'PIT'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'new england patriots' },
-								'NE'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'new york jets' },
-								'NYJ'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'miami dolphins' },
-								'MIA'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'buffalo bills' },
-								'BUF'
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'team' },
+									'Team'
+								),
+								_react2.default.createElement(
+									'select',
+									{ className: 'form-control', htmlFor: 'create-player', value: this.state.team, onChange: this.handleTeamChange, required: true },
+									_react2.default.createElement(
+										'option',
+										{ value: team },
+										team
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Seattle Seahawks' },
+										'SEA'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'San Francisco 49ers' },
+										'SF'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Arizona Cardinals' },
+										'ARI'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'St. Louis Rams' },
+										'STL'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Green Bay Packers' },
+										'GB'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Chicago Bears' },
+										'CHI'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Detroit Lions' },
+										'DET'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Minnesota Vikings' },
+										'MIN'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Tampa Bay Buccaneers' },
+										'TB'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'New Orleans Saints' },
+										'NO'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Atlanta Falcons' },
+										'ATL'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Carolina Panthers' },
+										'CAR'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'New York Giants' },
+										'NYG'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Washington Redskins' },
+										'WAS'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Philadelphia Eagles' },
+										'PHI'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Dallas Cowboys' },
+										'DAL'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Oakland Raiders' },
+										'OAK'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Denver Broncos' },
+										'DEN'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'San Diego Chargers' },
+										'SD'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Kansas City Chiefs' },
+										'KC'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Houston Texans' },
+										'HOU'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Indianapolis Colts' },
+										'IND'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Jacksonville Jaguars' },
+										'JAX'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Tennessee Titans' },
+										'TEN'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Cincinnati Bengals' },
+										'CIN'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Cleveland Browns' },
+										'CLE'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Baltimore Ravens' },
+										'BAL'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Pittsburgh Steelers' },
+										'PIT'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'New England Patriots' },
+										'NE'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'New York Jets' },
+										'NYJ'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Miami Dolphins' },
+										'MIA'
+									),
+									_react2.default.createElement(
+										'option',
+										{ value: 'Buffalo Bills' },
+										'BUF'
+									)
+								)
 							)
 						),
-						_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Rating(1-100)', name: 'rating', value: this.state.rating, onChange: this.handleRatingChange }),
-						_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Age', name: 'age', value: this.state.age, onChange: this.handleAgeChange }),
-						_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Experience(years)', name: 'experience', value: this.state.experience, onChange: this.handleExpChange }),
-						_react2.default.createElement('input', { type: 'textarea', htmlFor: 'create-player', placeholder: 'Player writeup', name: 'writeup', value: this.state.writeup, onChange: this.handleWriteupChange }),
-						_react2.default.createElement('input', { type: 'submit', value: 'Post' })
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-md-12' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'rating' },
+									'Rating'
+								),
+								_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Rating(1-100)', name: 'rating', value: this.state.rating, onChange: this.handleRatingChange, required: true })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-md-6' },
+								_react2.default.createElement(
+									'label',
+									{ className: 'label', htmlFor: 'age' },
+									'Age'
+								),
+								_react2.default.createElement('input', { type: 'text', htmlFor: 'create-player', placeholder: 'Age', name: 'age', value: this.state.age, onChange: this.handleAgeChange, required: true })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-md-12' },
+							_react2.default.createElement(
+								'label',
+								{ className: 'label', htmlFor: 'writeup' },
+								'Writeup'
+							),
+							_react2.default.createElement('textarea', { className: 'form-control', type: 'textarea', rows: '6', htmlFor: 'create-player', placeholder: 'Player writeup', name: 'writeup', value: this.state.writeup, onChange: this.handleWriteupChange, required: true })
+						),
+						_react2.default.createElement('input', { className: 'btn btn-primary add-player', type: 'submit', htmlFor: 'create-player', value: 'Save Player' })
 					)
 				);
 			}
@@ -28335,6 +28417,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _ListStore = __webpack_require__(233);
+
+	var _ListStore2 = _interopRequireDefault(_ListStore);
+
 	var _PlayerServerActions = __webpack_require__(222);
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
@@ -28342,10 +28428,6 @@
 	var _PlayerStore = __webpack_require__(211);
 
 	var _PlayerStore2 = _interopRequireDefault(_PlayerStore);
-
-	var _ListStore = __webpack_require__(233);
-
-	var _ListStore2 = _interopRequireDefault(_ListStore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28355,25 +28437,74 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var TopListContainer = (function (_React$Component) {
-		_inherits(TopListContainer, _React$Component);
+	var TopListItem = (function (_React$Component) {
+		_inherits(TopListItem, _React$Component);
+
+		function TopListItem() {
+			_classCallCheck(this, TopListItem);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(TopListItem).call(this));
+		}
+
+		_createClass(TopListItem, [{
+			key: 'render',
+			value: function render() {
+				var player = this.props.player;
+				var rank = this.props.rank;
+				return _react2.default.createElement(
+					'li',
+					{ className: 'top-position-list' },
+					_react2.default.createElement(
+						'p',
+						null,
+						_react2.default.createElement(
+							'strong',
+							null,
+							'#',
+							rank,
+							': ',
+							player.first_name,
+							' ',
+							player.last_name,
+							', ',
+							player.team,
+							' (',
+							player.rating,
+							')'
+						)
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						player.writeup
+					)
+				);
+			}
+		}]);
+
+		return TopListItem;
+	})(_react2.default.Component);
+
+	var TopListContainer = (function (_React$Component2) {
+		_inherits(TopListContainer, _React$Component2);
 
 		function TopListContainer() {
 			_classCallCheck(this, TopListContainer);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TopListContainer).call(this));
+			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(TopListContainer).call(this));
 
-			_this.onChange = _this.onChange.bind(_this);
-			_this.state = {
+			_this2.onChange = _this2.onChange.bind(_this2);
+			_this2.state = {
 				list: null,
 				position: null
 			};
-			return _this;
+			return _this2;
 		}
 
 		_createClass(TopListContainer, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
+				//TODO: arrow func?
 				_PlayerStore2.default.addChangeListener(this.onChange);
 			}
 		}, {
@@ -28394,6 +28525,7 @@
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
+				//TODO: arrow func?
 				_PlayerStore2.default.removeChangeListener(this.onChange);
 			}
 		}, {
@@ -28410,22 +28542,14 @@
 			value: function render() {
 				var list = this.state.list;
 				var position = this.state.position;
-				console.log(list);
-				console.log(position);
+				// console.log(list);
+				// console.log(position);
 				var topList = [];
-
+				//TODO: Take in number to show as a prop. until ow default to 10
 				if (list) {
 					list.forEach(function (player, index, array) {
 						//TODO: make playerListCard component that look cool as lists, instead of li.
-						topList.push(_react2.default.createElement(
-							'li',
-							{ key: player.id, id: player.id },
-							player.first_name,
-							' ',
-							player.last_name,
-							' ',
-							player.rating
-						));
+						topList.push(_react2.default.createElement(TopListItem, { key: player.id, id: player.id, player: player, rank: index + 1 }));
 					});
 				}
 
@@ -28435,12 +28559,13 @@
 					_react2.default.createElement(
 						'h2',
 						{ className: 'top-list-header' },
-						'TOP ',
-						position
+						'TOP 10 ',
+						position,
+						's'
 					),
 					_react2.default.createElement(
 						'ul',
-						null,
+						{ className: 'top-list-ul' },
 						topList
 					)
 				);
@@ -28552,7 +28677,7 @@
 
 
 	// module
-	exports.push([module.id, "input[type=\"textarea\"] {\n  display: block; }\n\n.header {\n  background: white;\n  -moz-background-size: cover;\n  -o-background-size: cover;\n  -webkit-background-size: cover;\n  background-size: cover;\n  position: relative;\n  background-position: center 30%;\n  min-height: 300px; }\n\n.header-container {\n  text-align: center;\n  padding: 20px; }\n  .header-container .logo,\n  .header-container .site-title,\n  .header-container .header-link-container {\n    display: inline-block; }\n  .header-container .logo {\n    float: left;\n    font-size: 36px; }\n  .header-container .site-title {\n    color: white;\n    text-shadow: 1px 1px 1px #000;\n    margin: 0; }\n  .header-container .header-link-container {\n    float: right; }\n    .header-container .header-link-container .header-link,\n    .header-container .header-link-container .header-link:hover,\n    .header-container .header-link-container .header-link:active,\n    .header-container .header-link-container .header-link:visited {\n      color: black;\n      text-decoration: none; }\n\n.hero-container {\n  text-align: center; }\n  .hero-container .marketing-copy {\n    color: white;\n    text-shadow: 1px 1px 1px #000;\n    width: 50%;\n    margin: 30px auto; }\n\n.section-tabs {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  text-align: center; }\n  .section-tabs .section-tab {\n    padding: 5px 10px;\n    display: inline-block;\n    background-color: white;\n    color: black;\n    cursor: pointer; }\n\n.search-input {\n  padding: 10px 10px;\n  height: 52px; }\n\n.search-input .search-wrapper {\n  position: relative; }\n\n.search-input .search-icon {\n  display: block;\n  position: absolute;\n  width: 15px;\n  z-index: 3;\n  height: 15px;\n  transform: rotate(-45deg);\n  font-size: 20px;\n  top: 2px;\n  left: 0;\n  line-height: 32px; }\n\n.search-input .search-field {\n  font-size: 18px;\n  border: none;\n  line-height: 22px;\n  padding: 5px 10px 5px 25px;\n  height: 32px;\n  position: relative;\n  display: inline-block; }\n\n.search-input .search-field:focus {\n  outline: none; }\n\n.player-search-container {\n  width: 70%;\n  max-width: 1200px;\n  margin: 0 auto;\n  position: relative; }\n\n.player-search-copy {\n  color: white;\n  text-shadow: 1px 1px 1px #000;\n  margin-top: 0px; }\n\n.player-search-input,\n.player-search-input::-ms-input-placeholder,\n.player-search-input::-moz-input-placeholder,\n.player-search-input::-webkit-input-placeholder {\n  font-weight: 600; }\n\n.player-search-input {\n  padding: 5px 10px;\n  width: 50%;\n  font-size: 18px;\n  display: inline-block; }\n\n.player-result-list {\n  background-color: white;\n  padding: 0px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);\n  position: absolute;\n  width: 50%;\n  margin: 0 auto;\n  left: 0;\n  right: 0; }\n  .player-result-list li {\n    cursor: pointer;\n    color: black;\n    list-style: none;\n    border-left: 2px solid white;\n    padding: 0 25px; }\n  .player-result-list li:hover {\n    background-color: #F1F1F1;\n    border-left: 2px solid #3872D5; }\n\n.search-pos {\n  float: right; }\n\n.search-team {\n  float: left; }\n\n.player-compare-btn {\n  width: 25%;\n  max-width: 200px;\n  min-width: 120px;\n  margin: 10px auto;\n  padding: 5px 10px;\n  font-size: 18px;\n  font-family: \"Varela Round\", \"sans-serif\";\n  font-weight: 600;\n  text-transform: uppercase;\n  text-align: center;\n  cursor: pointer;\n  color: white;\n  background-color: #3872D5;\n  border: none;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3); }\n\n.player-compare-btn:hover {\n  background-color: #4763FF; }\n\n.player-compare-btn.red {\n  background-color: red; }\n\n.player-compare-btn.help {\n  background-color: white;\n  cursor: default;\n  color: black; }\n\n.player-card-container {\n  font-family: \"Varela Round\", \"sans-serif\";\n  display: block;\n  width: 50%;\n  padding: 10px 50px;\n  margin: 0 auto;\n  margin-top: 10px;\n  background-color: #fff;\n  border: 2px solid #3872D5;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3); }\n  .player-card-container .player-card-writeup {\n    text-align: left; }\n  .player-card-container .player-card-name {\n    clear: both; }\n\n.player-card-details p {\n  display: inline-block; }\n\n.player-card-details .player-card-pos {\n  float: left; }\n\n.player-card-details .player-card-team {\n  float: right; }\n\n.player-card-container.first-card {\n  margin: 0px;\n  float: left;\n  width: 48%;\n  display: inline-block; }\n\n.player-card-container.comp-card {\n  margin: 0px;\n  float: right;\n  display: inline-block;\n  width: 48%; }\n\n.top-list-header {\n  text-transform: uppercase; }\n\n*, *:before, *:after {\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\ninput[type=\"text\"] {\n  appearance: none;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);\n  border: none;\n  outline: none; }\n\ninput[type=\"text\"]:focus {\n  outline: none; }\n\nhtml,\nbody {\n  font-size: 14px;\n  margin: 0px;\n  height: 100%;\n  width: 100%;\n  -webkit-font-smoothing: antialiased;\n  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;\n  background: white; }\n\n#app-container {\n  position: relative;\n  height: 100%; }\n\n.main-page-container {\n  height: 100%;\n  text-align: center;\n  background: white;\n  z-index: 10; }\n", "", {"version":3,"sources":["/./app/app/assets/stylesheets/_forms.scss","/./app/app/assets/stylesheets/_header.scss","/./app/app/assets/stylesheets/_variables.scss","/./app/app/assets/stylesheets/_overrides.scss","/./app/app/assets/stylesheets/_player_search.scss","/./app/app/assets/stylesheets/_top_lists.scss","/./app/app/assets/stylesheets/main.css.scss"],"names":[],"mappings":"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","file":"main.css.scss","sourcesContent":["@import \"variables\";\n\n//GENERAL\ninput[type=\"textarea\"] {\n\tdisplay: block;\n}\n//Add Players\n//Flexbox this form??????","@import \"variables\";\n//HEADER\n.header {\n  // background: linear-gradient(\n  //     rgba(0, 0, 0, 0.3),\n  //     rgba(0, 0, 0, 0.3)\n  //   ),url('../images/field_bg.png');\nbackground: white;\n  -moz-background-size: cover;\n  -o-background-size: cover;\n  -webkit-background-size: cover;\n\tbackground-size: cover;\t\n\tposition: relative;\n\tbackground-position: center 30%;\n\tmin-height: 300px;\n}\n.header-container {\n\ttext-align: center;\n\tpadding: 20px;\n\t.logo,\n\t.site-title,\n\t.header-link-container {\n\t\tdisplay: inline-block;\n\t}\n\t.logo {\n\t\tfloat: left;\n\t\tfont-size: 36px;\n\t}\n\t.site-title{\n\t\tcolor: white;\n\t\ttext-shadow: $text-shadow;\n\t\tmargin: 0;\n\t}\n\n\t.header-link-container {\n\t\tfloat: right;\n\t\t.header-link,\n\t\t.header-link:hover,\n\t\t.header-link:active,\n\t\t.header-link:visited {\n\t\t\tcolor: black;\n\t\t\ttext-decoration: none;\n\t\t}\n\t}\n}\n\n.hero-container {\n\ttext-align: center;\n\t.marketing-copy {\n\t\tcolor: white;\n\t\ttext-shadow: $text-shadow;\n\t\twidth: 50%;\n    margin: 30px auto;\n\t}\n}\n\n.section-tabs {\n\tposition: absolute;\n\twidth: 100%;\n\tbottom: 0;\n\ttext-align: center;\n\t.section-tab {\n\t\tpadding: 5px 10px;\n\t\tdisplay: inline-block;\n\t\tbackground-color: white;\n\t\tcolor: black;\n\t\tcursor: pointer;\n\t}\n\t.section-tab.selected {\n\t}\n}","$font-smooth: rgba(0,0,0,.01) 0 0 1px;\n$text-shadow: 1px 1px 1px #000;\n$box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);\n$site-font: 'Varela Round', 'sans-serif';\n$blue: #3872D5;\n$grey: #F1F1F1;\n$hover-blue: #4763FF;",".search-input {\n  padding: 10px 10px;\n  height: 52px;\n}\n\n.search-input .search-wrapper {\n  position: relative;\n}\n\n.search-input .search-icon {\n  display: block;\n  position: absolute;\n  width: 15px;\n  z-index: 3;\n  height: 15px;\n  transform: rotate(-45deg);\n  font-size: 20px;\n  top: 2px;\n  left: 0;\n  line-height: 32px;\n}\n\n.search-input .search-field {\n  font-size: 18px;\n  border: none;\n  line-height: 22px;\n  padding: 5px 10px 5px 25px;\n  height: 32px;\n  position: relative;\n  display: inline-block;\n}\n\n.search-input .search-field:focus {\n  outline: none;\n}","@import \"variables\";\n//player search component\n.player-search-container {\n\twidth: 70%;\n\tmax-width: 1200px;\t\n\tmargin: 0 auto;\n\tposition: relative;\n}\n.player-search-copy {\n\tcolor: white;\n\ttext-shadow: $text-shadow;\n\tmargin-top: 0px;\n}\n.player-search-input,\n.player-search-input::-ms-input-placeholder,\n.player-search-input::-moz-input-placeholder,\n.player-search-input::-webkit-input-placeholder  {\n\tfont-weight: 600;\n}  \n.player-search-input {\n\tpadding: 5px 10px;\n\twidth: 50%;\n\tfont-size: 18px;\n\tdisplay: inline-block;\n}\n\n.player-result-list {\n\tbackground-color: white;\n\tpadding: 0px;\n\tbox-shadow: $box-shadow;\n\tposition: absolute;\n  width: 50%;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n\tli {\n\t\tcursor: pointer;\n\t\tcolor: black;\n\t\tlist-style: none;\n\t\tborder-left: 2px solid white;\n\t\tpadding: 0 25px;\n\t}\n\tli:hover {\n\t\tbackground-color: $grey; \n\t\tborder-left: 2px solid $blue; \n\t}\n}\n.search-pos {\n\tfloat: right;\n}\n.search-team {\n\tfloat: left;\n}\n\n.player-compare-btn {\n\twidth: 25%;\n\tmax-width: 200px;\n\tmin-width: 120px;\n\tmargin: 10px auto;\n\tpadding: 5px 10px;\n\tfont-size: 18px;\n\tfont-family: $site-font;\n\tfont-weight: 600;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tcursor: pointer;\n\tcolor: white;\n\tbackground-color: $blue;\n\tborder: none;\n\tbox-shadow: $box-shadow;\n}\n.player-compare-btn:hover {\n\tbackground-color: $hover-blue;\n}\n.player-compare-btn.red {\n\tbackground-color: red;\n}\n.player-compare-btn.help{\n\tbackground-color: white;\n\tcursor: default;\n\tcolor: black;\n}\n\n//Player Card\n.player-card-container {\n\tfont-family: $site-font;\n\tdisplay: block;\n\twidth: 50%;\n\tpadding: 10px 50px;\n\tmargin: 0 auto;\n\tmargin-top: 10px;\n\tbackground-color: #fff;\n\tborder: 2px solid $blue;\n\tbox-shadow: $box-shadow;\n\t.player-card-writeup {\n\t\ttext-align: left;\n\t}\n\t.player-card-name {\n\t\tclear: both;\n\t}\n}\n.player-card-details {\n\tp {\n\t\tdisplay: inline-block;\n\t}\n\t.player-card-pos {\n\t\tfloat: left;\n\t}\n\t.player-card-team {\n\t\tfloat: right;\n\t}\n}\n\n.player-card-container.first-card {\n\tmargin: 0px;\n\tfloat: left;\n\twidth: 48%;\n\tdisplay: inline-block;\n}\n.player-card-container.comp-card {\n\tmargin: 0px;\n\tfloat: right;\n\tdisplay: inline-block;\n\twidth: 48%;\n}","@import \"variables\";\n\n.top-list-header {\n\ttext-transform: uppercase;\n}","@import \"forms\";\n@import \"header\";\n@import \"overrides\";\n@import \"player_search\";\n@import \"top_lists\";\n@import \"variables\";\n\n*, *:before, *:after {\n  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;\n}\n\ninput[type=\"text\"] {\n  appearance: none;\n  box-shadow: $box-shadow;\n  border: none;\n  outline: none;\n}\ninput[type=\"text\"]:focus {\n  outline: none;\n}\n\nhtml,\nbody {\n\tfont-size: 14px;\n\tmargin: 0px;\n\theight: 100%;\n\twidth: 100%;\n\t-webkit-font-smoothing: antialiased;\n  text-shadow: $font-smooth;\n  \tbackground: white;\n}\n\n#app-container {\n\tposition: relative;\n\theight: 100%;\n}\n\n//Page container\n.main-page-container {\n\theight: 100%;\n\ttext-align: center;\n\tbackground: white;\n\tz-index: 10;\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "input[type=\"textarea\"] {\n  display: block; }\n\n.add-player-form {\n  width: 30%;\n  margin: 0 auto;\n  margin-bottom: 100px;\n  min-width: 200px;\n  border: 1px solid black;\n  padding-top: 25px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3); }\n  .add-player-form input[type=\"text\"],\n  .add-player-form select {\n    display: inline-block;\n    height: 35px;\n    padding: 5px;\n    margin-bottom: 25px; }\n  .add-player-form .label {\n    display: block;\n    color: black; }\n  .add-player-form .btn.btn-primary.add-player {\n    margin: 25px 0px; }\n\n.header {\n  background: white;\n  -moz-background-size: cover;\n  -o-background-size: cover;\n  -webkit-background-size: cover;\n  background-size: cover;\n  position: relative;\n  background-position: center 30%;\n  min-height: 300px; }\n\n.header-container {\n  text-align: center;\n  padding: 20px; }\n  .header-container .logo,\n  .header-container .site-title,\n  .header-container .header-link-container {\n    display: inline-block; }\n  .header-container .logo {\n    float: left;\n    font-size: 36px; }\n  .header-container .site-title {\n    color: white;\n    text-shadow: 1px 1px 1px #000;\n    margin: 0; }\n  .header-container .header-link-container {\n    float: right; }\n    .header-container .header-link-container .header-link,\n    .header-container .header-link-container .header-link:hover,\n    .header-container .header-link-container .header-link:active,\n    .header-container .header-link-container .header-link:visited {\n      color: black;\n      text-decoration: none; }\n\n.hero-container {\n  text-align: center; }\n  .hero-container .marketing-copy {\n    color: white;\n    text-shadow: 1px 1px 1px #000;\n    width: 50%;\n    margin: 30px auto; }\n\n.section-tabs {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  text-align: center; }\n  .section-tabs .section-tab {\n    padding: 5px 10px;\n    display: inline-block;\n    background-color: white;\n    cursor: pointer;\n    -webkit-border-radius: 4px 4px 0px 0px;\n    -moz-border-radius: 4px 4px 0px 0px;\n    border-radius: 4px 4px 0px 0px;\n    background-color: #3872D5; }\n  .section-tabs .section-tab:hover {\n    background-color: #4763FF; }\n  .section-tabs .section-tab.selected {\n    background-color: white; }\n\n.section-link:visited,\n.section-link:hover,\n.section-link:active,\n.section-link:focus {\n  text-decoration: none;\n  color: #F1F1F1; }\n\n.section-link {\n  color: #F1F1F1; }\n\n.search-input {\n  padding: 10px 10px;\n  height: 52px; }\n\n.search-input .search-wrapper {\n  position: relative; }\n\n.search-input .search-icon {\n  display: block;\n  position: absolute;\n  width: 15px;\n  z-index: 3;\n  height: 15px;\n  transform: rotate(-45deg);\n  font-size: 20px;\n  top: 2px;\n  left: 0;\n  line-height: 32px; }\n\n.search-input .search-field {\n  font-size: 18px;\n  border: none;\n  line-height: 22px;\n  padding: 5px 10px 5px 25px;\n  height: 32px;\n  position: relative;\n  display: inline-block; }\n\n.search-input .search-field:focus {\n  outline: none; }\n\n.player-search-container {\n  width: 70%;\n  max-width: 1200px;\n  margin: 0 auto;\n  position: relative; }\n\n.player-search-copy {\n  color: black;\n  margin-top: 0px; }\n\n.player-search-input,\n.player-search-input::-ms-input-placeholder,\n.player-search-input::-moz-input-placeholder,\n.player-search-input::-webkit-input-placeholder {\n  font-weight: 600; }\n\n.player-search-input {\n  padding: 5px 10px;\n  width: 50%;\n  font-size: 18px;\n  display: inline-block; }\n\n.player-result-list {\n  background-color: white;\n  padding: 0px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);\n  position: absolute;\n  width: 50%;\n  margin: 0 auto;\n  left: 0;\n  right: 0; }\n  .player-result-list li {\n    cursor: pointer;\n    color: black;\n    list-style: none;\n    border-left: 2px solid white;\n    padding: 0 25px; }\n  .player-result-list li:hover {\n    background-color: #F1F1F1;\n    border-left: 2px solid #3872D5; }\n\n.search-pos {\n  float: right; }\n\n.search-team {\n  float: left; }\n\n.player-compare-btn {\n  width: 25%;\n  max-width: 200px;\n  min-width: 120px;\n  margin: 10px auto;\n  padding: 5px 10px;\n  font-size: 18px;\n  font-family: \"Varela Round\", \"sans-serif\";\n  font-weight: 600;\n  text-transform: uppercase;\n  text-align: center;\n  cursor: pointer;\n  color: white;\n  background-color: #3872D5;\n  border: none;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3); }\n\n.player-compare-btn:hover {\n  background-color: #4763FF; }\n\n.player-compare-btn.red {\n  background-color: red; }\n\n.player-compare-btn.help {\n  background-color: white;\n  cursor: default;\n  color: black; }\n\n.player-card-container {\n  font-family: \"Varela Round\", \"sans-serif\";\n  display: block;\n  width: 50%;\n  padding: 10px 50px;\n  margin: 0 auto;\n  margin-top: 10px;\n  background-color: #fff;\n  border: 2px solid #3872D5;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3); }\n  .player-card-container .player-card-writeup {\n    text-align: left; }\n  .player-card-container .player-card-name {\n    clear: both; }\n\n.player-card-details p {\n  display: inline-block; }\n\n.player-card-details .player-card-pos {\n  float: left; }\n\n.player-card-details .player-card-team {\n  float: right; }\n\n.player-card-container.first-card {\n  margin: 0px;\n  float: left;\n  width: 48%;\n  display: inline-block; }\n\n.player-card-container.comp-card {\n  margin: 0px;\n  float: right;\n  display: inline-block;\n  width: 48%; }\n\n.top-list-header {\n  text-transform: uppercase; }\n\n.top-list-ul {\n  list-style: none;\n  max-width: 700px;\n  text-align: left;\n  margin: 0 auto; }\n\n.top-list-item {\n  list-style: none; }\n\n*, *:before, *:after {\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\ninput[type=\"text\"],\ninput[type=\"textarea\"],\ntextarea {\n  appearance: none;\n  border: 1px solid black;\n  outline: none; }\n\ninput[type=\"text\"]:focus,\ninput[type=\"textarea\"]:focus,\ntextarea {\n  outline: none; }\n\nhtml,\nbody {\n  font-size: 14px;\n  margin: 0px;\n  height: 100%;\n  width: 100%;\n  -webkit-font-smoothing: antialiased;\n  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;\n  background: white; }\n\nbody {\n  overflow-y: scroll; }\n\nh1,\nh2,\nh3 {\n  font-family: \"Varela Round\", \"sans-serif\"; }\n\np {\n  line-height: 1.6em;\n  font-family: 'Montserrat', sans-serif; }\n\n#app-container {\n  position: relative;\n  height: 100%; }\n\n.main-page-container {\n  height: 100%;\n  text-align: center;\n  background: white;\n  z-index: 10; }\n", "", {"version":3,"sources":["/./app/app/assets/stylesheets/_forms.scss","/./app/app/assets/stylesheets/_variables.scss","/./app/app/assets/stylesheets/_header.scss","/./app/app/assets/stylesheets/_overrides.scss","/./app/app/assets/stylesheets/_player_search.scss","/./app/app/assets/stylesheets/_top_lists.scss","/./app/app/assets/stylesheets/main.css.scss"],"names":[],"mappings":"AAGA;EACC,eAAe,EACf;;AAID;EACC,WAAW;EACV,eAAe;EACf,qBAAqB;EACrB,iBAAiB;EACjB,wBAAwB;EACxB,kBAAkB;EAClB,+CCd+B,ED6BhC;EAtBD;;IAUE,sBAAsB;IACtB,aAAa;IACb,aAAa;IACb,oBAAoB,EACpB;EAdF;IAgBE,eAAe;IACf,aAAa,EACb;EAlBF;IAoBE,iBAAiB,EACjB;;AE5BF;EAKA,kBAAkB;EAChB,4BAA4B;EAC5B,0BAA0B;EAC1B,+BAA+B;EAChC,uBAAuB;EACvB,mBAAmB;EACnB,gCAAgC;EAChC,kBAAkB,EAClB;;AACD;EACC,mBAAmB;EACnB,cAAc,EA0Bd;EA5BD;;;IAME,sBAAsB,EACtB;EAPF;IASE,YAAY;IACZ,gBAAgB,EAChB;EAXF;IAaE,aAAa;IACb,8BD7B4B;IC8B5B,UAAU,EACV;EAhBF;IAmBE,aAAa,EAQb;IA3BF;;;;MAwBG,aAAa;MACb,sBAAsB,EACtB;;AAIH;EACC,mBAAmB,EAOnB;EARD;IAGE,aAAa;IACb,8BDjD4B;ICkD5B,WAAW;IACT,kBAAkB,EACpB;;AAGF;EACC,mBAAmB;EACnB,YAAY;EACZ,UAAU;EACV,mBAAmB,EAiBnB;EArBD;IAME,kBAAkB;IAClB,sBAAsB;IACtB,wBAAwB;IACxB,gBAAgB;IAChB,uCAAuC;IACvC,oCAAoC;IACpC,+BAA+B;IAC/B,0BDjEY,ECkEZ;EAdF;IAgBE,0BDlEkB,ECmElB;EAjBF;IAmBE,wBAAwB,EACxB;;AAGF;;;;EAIC,sBAAsB;EACtB,eD/Ea,ECgFb;;AACD;EACC,eDlFa,ECmFb;;ACxFD;EACE,mBAAmB;EACnB,aAAa,EACd;;AAED;EACE,mBAAmB,EACpB;;AAED;EACE,eAAe;EACf,mBAAmB;EACnB,YAAY;EACZ,WAAW;EACX,aAAa;EACb,0BAAiB;EACjB,gBAAgB;EAChB,SAAS;EACT,QAAQ;EACR,kBAAkB,EACnB;;AAED;EACE,gBAAgB;EAChB,aAAa;EACb,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,mBAAmB;EACnB,sBAAsB,EACvB;;AAED;EACE,cAAc,EACf;;AChCD;EACC,WAAW;EACX,kBAAkB;EAClB,eAAe;EACf,mBAAmB,EACnB;;AACD;EACC,aAAa;EACb,gBAAgB,EAChB;;AACD;;;;EAIC,iBAAiB,EACjB;;AACD;EACC,kBAAkB;EAClB,WAAW;EACX,gBAAgB;EAChB,sBAAsB,EACtB;;AAED;EACC,wBAAwB;EACxB,aAAa;EACb,+CH1BgC;EG2BhC,mBAAmB;EAClB,WAAW;EACX,eAAe;EACf,QAAQ;EACR,SAAS,EAYV;EApBD;IAUE,gBAAgB;IAChB,aAAa;IACb,iBAAiB;IACjB,6BAA6B;IAC7B,gBAAgB,EAChB;EAfF;IAiBE,0BHrCY;IGsCZ,+BHvCY,EGwCZ;;AAEF;EACC,aAAa,EACb;;AACD;EACC,YAAY,EACZ;;AAED;EACC,WAAW;EACX,iBAAiB;EACjB,iBAAiB;EACjB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,0CHzDuC;EG0DvC,iBAAiB;EACjB,0BAA0B;EAC1B,mBAAmB;EACnB,gBAAgB;EAChB,aAAa;EACb,0BH9Da;EG+Db,aAAa;EACb,+CHlEgC,EGmEhC;;AACD;EACC,0BHjEmB,EGkEnB;;AACD;EACC,sBAAsB,EACtB;;AACD;EACC,wBAAwB;EACxB,gBAAgB;EAChB,aAAa,EACb;;AAGD;EACC,0CHjFuC;EGkFvC,eAAe;EACf,WAAW;EACX,mBAAmB;EACnB,eAAe;EACf,iBAAiB;EACjB,uBAAuB;EACvB,0BHvFa;EGwFb,+CH1FgC,EGiGhC;EAhBD;IAWE,iBAAiB,EACjB;EAZF;IAcE,YAAY,EACZ;;AAEF;EAEE,sBAAsB,EACtB;;AAHF;EAKE,YAAY,EACZ;;AANF;EAQE,aAAa,EACb;;AAGF;EACC,YAAY;EACZ,YAAY;EACZ,WAAW;EACX,sBAAsB,EACtB;;AACD;EACC,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,WAAW,EACX;;ACzHD;EACC,0BAA0B,EAC1B;;AAED;EACC,iBAAiB;EACjB,iBAAiB;EACjB,iBAAiB;EACjB,eAAe,EACf;;AACD;EACC,iBAAiB,EACjB;;ACPD;EACE,4BAA4B;EAAE,+BAA+B;EAAE,uBAAuB,EACvF;;AAED;;;EAGE,iBAAiB;EACjB,wBAAwB;EACxB,cAAc,EACf;;AACD;;;EAGE,cAAc,EACf;;AAED;;EAEC,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,oCAAoC;EACnC,yCL/BmC;EKgCnC,kBAAkB,EACnB;;AACD;EACC,mBAAmB,EACnB;;AACD;;;EAGC,0CLrCuC,EKsCvC;;AACD;EACC,mBAAmB;EACnB,sCAAqC,EACrC;;AAED;EACC,mBAAmB;EACnB,aAAa,EACb;;AAGD;EACC,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,YAAY,EACZ","file":"main.css.scss","sourcesContent":["@import \"variables\";\n\n//GENERAL\ninput[type=\"textarea\"] {\n\tdisplay: block;\n}\n//Add Players\n\n\n.add-player-form {\n\twidth: 30%;\n  margin: 0 auto;\n  margin-bottom: 100px;\n  min-width: 200px;\n  border: 1px solid black;\n  padding-top: 25px;\n  box-shadow: $box-shadow;\n\tinput[type=\"text\"],\n\tselect {\n\t\tdisplay: inline-block;\n\t\theight: 35px;\n\t\tpadding: 5px;\n\t\tmargin-bottom: 25px;\n\t}\n\t.label {\n\t\tdisplay: block;\n\t\tcolor: black;\n\t}\n\t.btn.btn-primary.add-player {\n\t\tmargin: 25px 0px;\n\t}\n}","$font-smooth: rgba(0,0,0,.01) 0 0 1px;\n$text-shadow: 1px 1px 1px #000;\n$box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);\n$site-font: 'Varela Round', 'sans-serif';\n$blue: #3872D5;\n$grey: #F1F1F1;\n$hover-blue: #4763FF;","@import \"variables\";\n//HEADER\n.header {\n  // background: linear-gradient(\n  //     rgba(0, 0, 0, 0.3),\n  //     rgba(0, 0, 0, 0.3)\n  //   ),url('../images/field_bg.png');\nbackground: white;\n  -moz-background-size: cover;\n  -o-background-size: cover;\n  -webkit-background-size: cover;\n\tbackground-size: cover;\t\n\tposition: relative;\n\tbackground-position: center 30%;\n\tmin-height: 300px;\n}\n.header-container {\n\ttext-align: center;\n\tpadding: 20px;\n\t.logo,\n\t.site-title,\n\t.header-link-container {\n\t\tdisplay: inline-block;\n\t}\n\t.logo {\n\t\tfloat: left;\n\t\tfont-size: 36px;\n\t}\n\t.site-title{\n\t\tcolor: white;\n\t\ttext-shadow: $text-shadow;\n\t\tmargin: 0;\n\t}\n\n\t.header-link-container {\n\t\tfloat: right;\n\t\t.header-link,\n\t\t.header-link:hover,\n\t\t.header-link:active,\n\t\t.header-link:visited {\n\t\t\tcolor: black;\n\t\t\ttext-decoration: none;\n\t\t}\n\t}\n}\n\n.hero-container {\n\ttext-align: center;\n\t.marketing-copy {\n\t\tcolor: white;\n\t\ttext-shadow: $text-shadow;\n\t\twidth: 50%;\n    margin: 30px auto;\n\t}\n}\n\n.section-tabs {\n\tposition: absolute;\n\twidth: 100%;\n\tbottom: 0;\n\ttext-align: center;\n\t.section-tab {\n\t\tpadding: 5px 10px;\n\t\tdisplay: inline-block;\n\t\tbackground-color: white;\n\t\tcursor: pointer;\n\t\t-webkit-border-radius: 4px 4px 0px 0px;\n\t\t-moz-border-radius: 4px 4px 0px 0px;\n\t\tborder-radius: 4px 4px 0px 0px;\n\t\tbackground-color: $blue;\n\t}\n\t.section-tab:hover {\n\t\tbackground-color: $hover-blue;\n\t}\n\t.section-tab.selected {\n\t\tbackground-color: white;\n\t}\n}\n\n.section-link:visited,\n.section-link:hover,\n.section-link:active,\n.section-link:focus {\n\ttext-decoration: none;\n\tcolor: $grey;\n}\n.section-link {\n\tcolor: $grey;\n}",".search-input {\n  padding: 10px 10px;\n  height: 52px;\n}\n\n.search-input .search-wrapper {\n  position: relative;\n}\n\n.search-input .search-icon {\n  display: block;\n  position: absolute;\n  width: 15px;\n  z-index: 3;\n  height: 15px;\n  transform: rotate(-45deg);\n  font-size: 20px;\n  top: 2px;\n  left: 0;\n  line-height: 32px;\n}\n\n.search-input .search-field {\n  font-size: 18px;\n  border: none;\n  line-height: 22px;\n  padding: 5px 10px 5px 25px;\n  height: 32px;\n  position: relative;\n  display: inline-block;\n}\n\n.search-input .search-field:focus {\n  outline: none;\n}","@import \"variables\";\n//player search component\n.player-search-container {\n\twidth: 70%;\n\tmax-width: 1200px;\t\n\tmargin: 0 auto;\n\tposition: relative;\n}\n.player-search-copy {\n\tcolor: black;\n\tmargin-top: 0px;\n}\n.player-search-input,\n.player-search-input::-ms-input-placeholder,\n.player-search-input::-moz-input-placeholder,\n.player-search-input::-webkit-input-placeholder  {\n\tfont-weight: 600;\n}  \n.player-search-input {\n\tpadding: 5px 10px;\n\twidth: 50%;\n\tfont-size: 18px;\n\tdisplay: inline-block;\n}\n\n.player-result-list {\n\tbackground-color: white;\n\tpadding: 0px;\n\tbox-shadow: $box-shadow;\n\tposition: absolute;\n  width: 50%;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n\tli {\n\t\tcursor: pointer;\n\t\tcolor: black;\n\t\tlist-style: none;\n\t\tborder-left: 2px solid white;\n\t\tpadding: 0 25px;\n\t}\n\tli:hover {\n\t\tbackground-color: $grey; \n\t\tborder-left: 2px solid $blue; \n\t}\n}\n.search-pos {\n\tfloat: right;\n}\n.search-team {\n\tfloat: left;\n}\n\n.player-compare-btn {\n\twidth: 25%;\n\tmax-width: 200px;\n\tmin-width: 120px;\n\tmargin: 10px auto;\n\tpadding: 5px 10px;\n\tfont-size: 18px;\n\tfont-family: $site-font;\n\tfont-weight: 600;\n\ttext-transform: uppercase;\n\ttext-align: center;\n\tcursor: pointer;\n\tcolor: white;\n\tbackground-color: $blue;\n\tborder: none;\n\tbox-shadow: $box-shadow;\n}\n.player-compare-btn:hover {\n\tbackground-color: $hover-blue;\n}\n.player-compare-btn.red {\n\tbackground-color: red;\n}\n.player-compare-btn.help{\n\tbackground-color: white;\n\tcursor: default;\n\tcolor: black;\n}\n\n//Player Card\n.player-card-container {\n\tfont-family: $site-font;\n\tdisplay: block;\n\twidth: 50%;\n\tpadding: 10px 50px;\n\tmargin: 0 auto;\n\tmargin-top: 10px;\n\tbackground-color: #fff;\n\tborder: 2px solid $blue;\n\tbox-shadow: $box-shadow;\n\t.player-card-writeup {\n\t\ttext-align: left;\n\t}\n\t.player-card-name {\n\t\tclear: both;\n\t}\n}\n.player-card-details {\n\tp {\n\t\tdisplay: inline-block;\n\t}\n\t.player-card-pos {\n\t\tfloat: left;\n\t}\n\t.player-card-team {\n\t\tfloat: right;\n\t}\n}\n\n.player-card-container.first-card {\n\tmargin: 0px;\n\tfloat: left;\n\twidth: 48%;\n\tdisplay: inline-block;\n}\n.player-card-container.comp-card {\n\tmargin: 0px;\n\tfloat: right;\n\tdisplay: inline-block;\n\twidth: 48%;\n}","@import \"variables\";\n\n.top-list-header {\n\ttext-transform: uppercase;\n}\n\n.top-list-ul {\n\tlist-style: none;\n\tmax-width: 700px;\n\ttext-align: left;\n\tmargin: 0 auto;\n}\n.top-list-item {\n\tlist-style: none;\n}","@import \"forms\";\n@import \"header\";\n@import \"overrides\";\n@import \"player_search\";\n@import \"top_lists\";\n@import \"variables\";\n\n*, *:before, *:after {\n  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;\n}\n\ninput[type=\"text\"],\ninput[type=\"textarea\"],\ntextarea {\n  appearance: none;\n  border: 1px solid black;\n  outline: none;\n}\ninput[type=\"text\"]:focus,\ninput[type=\"textarea\"]:focus,\ntextarea {\n  outline: none;\n}\n\nhtml,\nbody {\n\tfont-size: 14px;\n\tmargin: 0px;\n\theight: 100%;\n\twidth: 100%;\n\t-webkit-font-smoothing: antialiased;\n  text-shadow: $font-smooth;\n  background: white;\n}\nbody {\n\toverflow-y: scroll;\n}\nh1,\nh2,\nh3 {\n\tfont-family: $site-font;\n}\np {\n\tline-height: 1.6em;\n\tfont-family:'Montserrat', sans-serif;\n}\n\n#app-container {\n\tposition: relative;\n\theight: 100%;\n}\n\n//Page container\n.main-page-container {\n\theight: 100%;\n\ttext-align: center;\n\tbackground: white;\n\tz-index: 10;\n}\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 

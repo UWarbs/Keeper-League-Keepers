@@ -24,23 +24,16 @@
 //   table.string('position_abbrev');
 //   table.string('team');
 //   table.string('team_abbrev');
+//	 table.string('writeup');
 //   table.integer('rating');
 //   table.integer('age')
 //   table.integer('experience');
-// 	table.timestamp('created_at').defaultTo(knex.fn.now())
+// 	 table.timestamp('created_at').defaultTo(knex.fn.now())
+//   table.timestamp('updated_at').defaultTo(knex.fn.now())
 // }).catch(function(e) {
 // 	console.error(e);
 // });
-// .createTable('writeups', function(table) { //NOT NEEDED
-//   table.increments('id');
-//   table.string('player_first_name');
-//   table.string('player_last_name');
-//   table.string('body');
-//   table.integer('player_id').unsigned().references('players.id');
-// 	table.timestamp('created_at').defaultTo(knex.fn.now())
-// }).catch(function(e) {
-// 	console.error(e);
-// });
+
 
 
 // UPDATE TABLE

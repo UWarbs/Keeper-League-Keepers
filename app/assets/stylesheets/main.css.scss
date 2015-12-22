@@ -9,13 +9,16 @@
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="textarea"],
+textarea {
   appearance: none;
-  box-shadow: $box-shadow;
-  border: none;
+  border: 1px solid black;
   outline: none;
 }
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="textarea"]:focus,
+textarea {
   outline: none;
 }
 
@@ -27,7 +30,19 @@ body {
 	width: 100%;
 	-webkit-font-smoothing: antialiased;
   text-shadow: $font-smooth;
-  	background: white;
+  background: white;
+}
+body {
+	overflow-y: scroll;
+}
+h1,
+h2,
+h3 {
+	font-family: $site-font;
+}
+p {
+	line-height: 1.6em;
+	font-family:'Montserrat', sans-serif;
 }
 
 #app-container {

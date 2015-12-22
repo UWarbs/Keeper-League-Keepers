@@ -13,6 +13,20 @@ import TopList             from './topList.jsx';
 import '../../stylesheets/main.css.scss';
 
 class Header extends React.Component { 
+	constructor() {
+		super();
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
+		console.log(e);
+		var tab = document.querySelector('.section-tab.selected');
+		if(tab) {
+			tab.className = 'section-tab';
+		}
+		e.target.className = 'section-tab selected';
+	}
+
 	render () {
 		return (
 			<div className="header">
@@ -25,11 +39,11 @@ class Header extends React.Component {
 				<div className="hero-container">
 					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
 					<section className="section-tabs">
-						<div className="section-tab"><Link to={ '/top/qb' }>Top QBs</Link></div>&nbsp;
-						<div className="section-tab"><Link to={ '/top/rb' }>Top RBs</Link></div>&nbsp;
-						<div className="section-tab"><Link to={ '/top/wr' }>Top WRs</Link></div>&nbsp;
-						<div className="section-tab"><Link to={ '/admin/add-player' }>Add Player</Link></div>&nbsp;
-						<div className="section-tab"><Link to={ '/' }>Search</Link></div>
+						<Link className="section-link" to={ '/top/qb' }><div className="section-tab" onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
+						<Link className="section-link" to={ '/top/rb' }><div className="section-tab" onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
+						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
+						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>&nbsp;
+						<Link className="section-link" to={ '/' }><div className="section-tab" onClick={this.handleClick}>Search</div></Link>
 					</section>
 				</div>
 			</div>
