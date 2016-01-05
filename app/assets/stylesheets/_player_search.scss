@@ -1,0 +1,126 @@
+@import "variables";
+//player search component
+.player-search-container {
+	width: 70%;
+	max-width: 1200px;	
+	margin: 0 auto;
+	position: relative;
+}
+.player-search-copy {
+	margin: 0 auto;
+	width: 60%;
+	color: black;
+	margin-top: 0px;
+}
+.player-search-input,
+.player-search-input::-ms-input-placeholder,
+.player-search-input::-moz-input-placeholder,
+.player-search-input::-webkit-input-placeholder  {
+	font-weight: 600;
+}  
+.player-search-input {
+	padding: 5px 10px;
+	width: 50%;
+	font-size: 18px;
+	display: inline-block;
+}
+
+.player-result-list {
+	background-color: white;
+	padding: 0px;
+	box-shadow: $box-shadow;
+	position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+	li {
+		cursor: pointer;
+		color: black;
+		list-style: none;
+		border-left: 2px solid white;
+		padding: 0 25px;
+	}
+	li:hover {
+		background-color: $grey; 
+		border-left: 2px solid $blue; 
+	}
+}
+.search-pos {
+	float: right;
+}
+.search-team {
+	float: left;
+}
+
+.player-compare-btn {
+	width: 25%;
+	max-width: 200px;
+	min-width: 120px;
+	margin: 10px auto;
+	padding: 5px 10px;
+	font-size: 18px;
+	font-family: $site-font;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+	background-color: $blue;
+	border: none;
+	box-shadow: $box-shadow;
+}
+.player-compare-btn:hover {
+	background-color: $hover-blue;
+}
+.player-compare-btn.red {
+	background-color: red;
+}
+.player-compare-btn.help{
+	background-color: white;
+	cursor: default;
+	color: black;
+}
+
+//Player Card
+.player-card-container {
+	font-family: $site-font;
+	display: block;
+	width: 50%;
+	padding: 10px 50px;
+	margin: 0 auto;
+	margin-top: 10px;
+	background-color: #fff;
+	border: 2px solid $blue;
+	box-shadow: $box-shadow;
+	.player-card-writeup {
+		text-align: left;
+	}
+	.player-card-name {
+		clear: both;
+	}
+}
+.player-card-details {
+	p {
+		display: inline-block;
+	}
+	.player-card-pos {
+		float: left;
+	}
+	.player-card-team {
+		float: right;
+	}
+}
+
+.player-card-container.first-card {
+	margin: 0px;
+	float: left;
+	width: 48%;
+	display: inline-block;
+}
+.player-card-container.comp-card {
+	margin: 0px;
+	float: right;
+	display: inline-block;
+	width: 48%;
+}

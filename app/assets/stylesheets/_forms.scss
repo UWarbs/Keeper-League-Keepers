@@ -1,0 +1,32 @@
+@import "variables";
+
+//GENERAL
+input[type="textarea"] {
+	display: block;
+}
+//Add Players
+
+
+.add-player-form {
+	width: 30%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  min-width: 200px;
+  border: 1px solid black;
+  padding-top: 25px;
+  box-shadow: $box-shadow;
+	input[type="text"],
+	select {
+		display: inline-block;
+		height: 35px;
+		padding: 5px;
+		margin-bottom: 25px;
+	}
+	.label {
+		display: block;
+		color: black;
+	}
+	.btn.btn-primary.add-player {
+		margin: 25px 0px;
+	}
+}
