@@ -3,7 +3,6 @@ import ListStore 				   from '../stores/ListStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
 import PlayerStore 				 from '../stores/PlayerStore';
 
-// TODO: FIX SLOW START
 class TopListItem extends React.Component {
 	constructor() {
 		super();
@@ -25,20 +24,18 @@ class TopListContainer extends React.Component {
   	super();
   	this.onChange = this.onChange.bind(this);
   	this.state = {
-			list: null,
+			list: PlayerStore.getList(),
 			position: null
 		};
 	}
 
-	componentWillMount() { //TODO: arrow func?
+	componentWillMount() { 
 		PlayerStore.addChangeListener(this.onChange);
-		let id = this.props.params.id;
-	  PlayerServerActions.getList(id);
-  }
+	}
 
 	componentDidMount() {
-	  // let id = this.props.params.id;
-	  // PlayerServerActions.getList(id);
+	  let id = this.props.params.id;
+	  PlayerServerActions.getList(id);
 	}
 
   componentWillReceiveProps(nextProps) {
@@ -63,17 +60,15 @@ class TopListContainer extends React.Component {
 	render () {
 		let list  = this.state.list;
 		let position = this.state.position;
-		console.log('render');
-		console.log(list);
-		// console.log(list);
-		// console.log(position);
 		let topList = [];
-		//TODO: Take in number to show as a prop. For now default to 10 paginate groups of 10?
+		//TODO: paginate groups of 10?
 		if ( list ) {
-			list.forEach(function(player, index, array) { //TODO: make playerListCard component that look cool as lists, instead of li.
+			list.forEach(function(player, index, array) {
 				topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={index + 1} />);
 			});
-		}
+		}else {
+			// topList.push(<h3>Loading...</h3>);  //only if the load time takes long
+		} 
 
 		return (
 			<div className="top-list-container">

@@ -1,10 +1,11 @@
 "use strict";
 import React from 'react';
 
-import PlayerServerActions from '../../actions/PlayerServerActions';
-import PlayerStore 				 from '../../stores/PlayerStore';
+import AuthenticatedComponent from '../admin/AuthenticatedComponent.jsx';
+import PlayerServerActions 	 	from '../../actions/PlayerServerActions';
+import PlayerStore 				 		from '../../stores/PlayerStore';
 
-class AddPlayer extends React.Component {
+export default AuthenticatedComponent(class AddPlayer extends React.Component {
 	constructor() {
 		super();
 		this.onChange = this.onChange.bind(this);
@@ -194,6 +195,4 @@ class AddPlayer extends React.Component {
 			</div>
 		);
 	}
-}
-
-module.exports = AddPlayer;
+});

@@ -1,3 +1,4 @@
+'use strict';
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/Constants');
 var ObjectAssign = require('object-assign');
@@ -66,4 +67,5 @@ AppDispatcher.register(function(payload) {
     	return true;
 	}
 });
+
 module.exports = ListStore;

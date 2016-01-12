@@ -1,11 +1,11 @@
 @import "variables";
 //HEADER
 .header {
-  background: linear-gradient(
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.3)
-    ),url('../images/field_bg.png');
-	// background: white;
+  // background: linear-gradient(
+  //     rgba(0, 0, 0, 0.3),
+  //     rgba(0, 0, 0, 0.3)
+  //   ),url('../images/field_bg.png');
+	background: white;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;

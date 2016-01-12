@@ -5,8 +5,6 @@ var AppConstants = require('../constants/Constants');
 var ObjectAssign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 
-var request = require('superagent');
-
 var CHANGE_EVENT = 'change'; //have different change events??? one for all players one for single player?
 
 var _allPlayers = [];

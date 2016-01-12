@@ -53,7 +53,7 @@ module.exports = {
 			case 'detroit lions':
 				abbrev = 'DET';
 				break;
-			case 'minnesota viking':
+			case 'minnesota vikings':
 				abbrev = 'MIN';
 				break;
 			case 'tampa bay buccaneers':

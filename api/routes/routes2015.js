@@ -1,11 +1,12 @@
 'use strict';
-var Joi    = require('joi');
-var Player = require('../models/Player');
-var Abbreviations = require('../config/abbreviations');
+import Joi from 'joi';
+import Player from '../models/Player';
+import Abbreviations from '../config/abbreviations';
+import Auth from '../services/AuthService';
 
-exports.register = function(server, options, next) {
+export default (server, options, next) => {
 	//Declare Routes
-	var knex = options.db; 
+	const knex = options.db; 
 	server.route([
 		{
 			// Add a route to serve static assets (CSS, JS, IMG)
@@ -32,15 +33,15 @@ exports.register = function(server, options, next) {
 	  {
 	  	method: 'POST',
 	  	path: '/sessions/create',
-	  	handler: function(req, res){
-	  		console.log(req.payload); //gives username/pass
+	  	handler: {
+	  		Auth
 	  	}
 	  },
 	  
 	  {
 	    method: 'GET',
 		  path: '/api/all-players',
-		  handler: function(req, res) {
+		  handler(req, res) {
 		  	knex.select().table('players')
 		  		.then(function(players) {
 		  			return res(players);
@@ -54,7 +55,7 @@ exports.register = function(server, options, next) {
 		{
 			method: 'GET',
 			path: '/api/player/{id}',
-			handler: function(req, res) {
+			handler(req, res) {
 				var id = encodeURIComponent(req.params.id);
 				knex('players').where('id', id)
 				.then(function(player) {
@@ -70,7 +71,7 @@ exports.register = function(server, options, next) {
 		{
 			method: 'GET',
 			path: '/api/top/{position}',
-			handler: function(req, res) {
+			handler(req, res) {
 				var position = encodeURIComponent(req.params.position);
 				var pos = position.toUpperCase();
 				//make 10 constant or a param.
@@ -87,7 +88,7 @@ exports.register = function(server, options, next) {
 		{
 			method: 'POST',
 			path: '/api/new-player',
-			handler: function(req, res) {
+			handler(req, res) {
 				var data = req.payload;
 				var positionAbbrev = Abbreviations.position(data.position);
 				var teamAbbrev = Abbreviations.team(data.team);
@@ -115,7 +116,7 @@ exports.register = function(server, options, next) {
 		{
 			method: 'POST',
 			path: '/api/edit-player/{id}',
-			handler: function(req, res) {
+			handler(req, res) {
 				var data = req.payload;
 				var id = encodeURIComponent(req.params.id);
 				var positionAbbrev = Abbreviations.position(data.position);
@@ -146,7 +147,7 @@ exports.register = function(server, options, next) {
 		{
 			method: 'DELETE',
 			path: '/api/delete/{id}',
-			handler: function(req, res) {
+			handler(req, res) {
 				var id = encodeURIComponent(req.params.id);
 				knex('players').where('id', id).del()
 				.then(function(data) {
