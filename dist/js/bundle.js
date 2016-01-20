@@ -76,15 +76,19 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _playerSearch = __webpack_require__(252);
+	var _Create = __webpack_require__(252);
+
+	var _Create2 = _interopRequireDefault(_Create);
+
+	var _playerSearch = __webpack_require__(253);
 
 	var _playerSearch2 = _interopRequireDefault(_playerSearch);
 
-	var _topList = __webpack_require__(259);
+	var _topList = __webpack_require__(260);
 
 	var _topList2 = _interopRequireDefault(_topList);
 
-	__webpack_require__(261);
+	__webpack_require__(262);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -206,6 +210,16 @@
 							' ',
 							_react2.default.createElement(
 								_reactRouter.Link,
+								{ className: 'section-link', to: '/create' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'section-tab', onClick: this.handleClick },
+									'Create'
+								)
+							),
+							' ',
+							_react2.default.createElement(
+								_reactRouter.Link,
 								{ className: 'section-link', to: '/admin/add-player' },
 								_react2.default.createElement(
 									'div',
@@ -260,7 +274,8 @@
 			_react2.default.createElement(_reactRouter.Route, { path: 'top/:id', component: _topList2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-player', component: _AddPlayer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/edit-player/:id', component: _AddPlayer2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default })
 		)
 	), document.getElementById('app-container'));
 
@@ -25257,17 +25272,19 @@
 
 	//Todo constants
 	module.exports = {
-		GET_PLAYERS: 'GET_PLAYERS',
-		GET_SINGLE_PLAYER: 'GET_SINGLE_PLAYER',
-		GET_LIST: 'GET_LIST',
-		NEW_ITEM: 'NEW_ITEM', //remove from here down
-		SAVE_ITEM: 'SAVE_ITEM',
-		REMOVE_ITEM: 'REMOVE_ITEM',
-		GET_RANDOM: 'GET_RANDOM',
-		GET_RANDOM_RESPONSE: 'GET_RANDOM_RESPONSE',
-		NEW_PLAYER: 'NEW_PLAYER',
-		EDIT_PLAYER: 'EDIT_PLAYER',
-		USER_LOGGED_IN: 'USER_LOGGED_IN'
+	  GET_PLAYERS: 'GET_PLAYERS',
+	  GET_SINGLE_PLAYER: 'GET_SINGLE_PLAYER',
+	  GET_LIST: 'GET_LIST',
+	  NEW_ITEM: 'NEW_ITEM', //remove from here down
+	  SAVE_ITEM: 'SAVE_ITEM',
+	  REMOVE_ITEM: 'REMOVE_ITEM',
+	  GET_RANDOM: 'GET_RANDOM',
+	  GET_RANDOM_RESPONSE: 'GET_RANDOM_RESPONSE',
+	  NEW_PLAYER: 'NEW_PLAYER',
+	  EDIT_PLAYER: 'EDIT_PLAYER',
+	  USER_LOGGED_IN: 'USER_LOGGED_IN',
+	  LOGIN_USER: 'LOGIN_USER',
+	  CREATE_USER: 'CREATE_USER'
 	};
 
 /***/ },
@@ -27894,9 +27911,9 @@
 
 	var _when2 = _interopRequireDefault(_when);
 
-	var _LoginAction = __webpack_require__(251);
+	var _AuthAction = __webpack_require__(251);
 
-	var _LoginAction2 = _interopRequireDefault(_LoginAction);
+	var _AuthAction2 = _interopRequireDefault(_AuthAction);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27908,11 +27925,35 @@
 		}
 
 		_createClass(AuthService, [{
+			key: 'create',
+			value: function create(username, password) {
+				//call server to log user in
+				return (0, _when2.default)((0, _reqwest2.default)({
+					url: '/user-create',
+					method: 'POST',
+					crossOrigin: true,
+					type: 'json',
+					data: {
+						username: username, password: password
+					}
+				})).then(function (response) {
+					//get JWT back
+					var jwt = response.id_token;
+					//trigger LoginAction and give jwt
+					_AuthAction2.default.createUser(jwt);
+					return true;
+				}).catch(function (err) {
+					console.log('error in authservice creating user');
+					console.log(err);
+					return err;
+				});
+			}
+		}, {
 			key: 'login',
 			value: function login(username, password) {
-				//call server to log user in
 				console.log('login called with:');
-				console.log(username + ' ' + password);
+				console.log(username, password);
+
 				return (0, _when2.default)((0, _reqwest2.default)({
 					url: '/sessions/create',
 					method: 'POST',
@@ -27925,10 +27966,10 @@
 					//get JWT back
 					var jwt = response.id_token;
 					//trigger LoginAction and give jwt
-					_LoginAction2.default.loginUser(jwt);
+					_AuthAction2.default.loginUser(jwt);
 					return true;
 				}).catch(function (err) {
-					console.log('error');
+					console.log('error in authservice logging in user');
 					console.log(err);
 					return err;
 				});
@@ -31006,15 +31047,24 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-		loginUser: function loginUser(jwt) {
-			console.log('login user called with this jwt:');
+		createUser: function createUser(jwt) {
 			console.log(jwt);
-			//redirect homepage once logged in
-			RouterContainer.get().transitionTo('/');
 			//save JWT in localstorage
 			localStorage.setItem('jwt', jwt);
 			//dispatch action to all stores
-			_AppDispatcher2.default.dispatch({
+			_AppDispatcher2.default.handleServerAction({
+				actionType: CREATE_USER,
+				jwt: jwt
+			});
+		},
+
+		loginUser: function loginUser(jwt) {
+			console.log('login user called with this jwt');
+			console.log(jwt);
+			//save JWT in localstorage
+			localStorage.setItem('jwt', jwt);
+			//dispatch action to all stores
+			_AppDispatcher2.default.handleServerAction({
 				actionType: LOGIN_USER,
 				jwt: jwt
 			});
@@ -31023,6 +31073,95 @@
 
 /***/ },
 /* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _AuthService = __webpack_require__(228);
+
+	var _AuthService2 = _interopRequireDefault(_AuthService);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Create = (function (_React$Component) {
+		_inherits(Create, _React$Component);
+
+		function Create() {
+			_classCallCheck(this, Create);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Create).call(this));
+
+			_this.handleNameChange = _this.handleNameChange.bind(_this);
+			_this.handlePasswordChange = _this.handlePasswordChange.bind(_this);
+			_this.state = {
+				user: '',
+				password: ''
+			};
+			return _this;
+		}
+
+		_createClass(Create, [{
+			key: 'create',
+			value: function create(e) {
+				e.preventDefault();
+				_AuthService2.default.create(this.state.user, this.state.password).catch(function (err) {
+					console.log('Error creating', err);
+				});
+			}
+		}, {
+			key: 'handleNameChange',
+			value: function handleNameChange(e) {
+				this.setState({ user: e.target.value });
+			}
+		}, {
+			key: 'handlePasswordChange',
+			value: function handlePasswordChange(e) {
+				this.setState({ password: e.target.value });
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'form',
+						{ role: 'form' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement('input', { type: 'text', value: this.state.username, onChange: this.handleNameChange, placeholder: 'Username' }),
+							_react2.default.createElement('input', { type: 'password', value: this.state.password, onChange: this.handlePasswordChange, placeholder: 'Password' })
+						),
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', onClick: this.create.bind(this) },
+							'Submit'
+						)
+					)
+				);
+			}
+		}]);
+
+		return Create;
+	})(_react2.default.Component);
+
+	module.exports = Create;
+
+/***/ },
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**This class is the main functionality part of the site at this point in time.
@@ -31036,7 +31175,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pureRenderMixin = __webpack_require__(253);
+	var _pureRenderMixin = __webpack_require__(254);
 
 	var _pureRenderMixin2 = _interopRequireDefault(_pureRenderMixin);
 
@@ -31044,11 +31183,11 @@
 
 	var _PlayerStore2 = _interopRequireDefault(_PlayerStore);
 
-	var _PlayerCard = __webpack_require__(256);
+	var _PlayerCard = __webpack_require__(257);
 
 	var _PlayerCard2 = _interopRequireDefault(_PlayerCard);
 
-	var _playerName = __webpack_require__(257);
+	var _playerName = __webpack_require__(258);
 
 	var _playerName2 = _interopRequireDefault(_playerName);
 
@@ -31056,7 +31195,7 @@
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 
-	var _searchHelper = __webpack_require__(258);
+	var _searchHelper = __webpack_require__(259);
 
 	var _searchHelper2 = _interopRequireDefault(_searchHelper);
 
@@ -31339,7 +31478,7 @@
 	module.exports = PlayerSearch;
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31355,7 +31494,7 @@
 
 	'use strict';
 
-	var shallowCompare = __webpack_require__(254);
+	var shallowCompare = __webpack_require__(255);
 
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -31392,12 +31531,12 @@
 
 	    // For convenience also export shallowCompare and shallowEqual
 	    shallowCompare: shallowCompare,
-	    shallowEqual: __webpack_require__(255)
+	    shallowEqual: __webpack_require__(256)
 	};
 
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31413,7 +31552,7 @@
 
 	'use strict';
 
-	var shallowEqual = __webpack_require__(255);
+	var shallowEqual = __webpack_require__(256);
 
 	/**
 	 * Does a shallow comparison for props and state.
@@ -31430,7 +31569,7 @@
 
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports) {
 
 	/**
@@ -31485,7 +31624,7 @@
 
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31590,7 +31729,7 @@
 	module.exports = PlayerCard;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31666,7 +31805,7 @@
 	module.exports = PlayerName;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31677,7 +31816,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var PureRenderMixin = __webpack_require__(253).PureRenderMixin;
+	var PureRenderMixin = __webpack_require__(254).PureRenderMixin;
 
 	function _objectWithoutProperties(obj, keys) {
 	  var target = {};for (var i in obj) {
@@ -31867,7 +32006,7 @@
 	module.exports = Search;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31878,7 +32017,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListStore = __webpack_require__(260);
+	var _ListStore = __webpack_require__(261);
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
 
@@ -32036,7 +32175,7 @@
 	module.exports = TopListContainer;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32102,16 +32241,16 @@
 	module.exports = ListStore;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(262);
+	var content = __webpack_require__(263);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(264)(content, {});
+	var update = __webpack_require__(265)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -32128,10 +32267,10 @@
 	}
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(263)();
+	exports = module.exports = __webpack_require__(264)();
 	// imports
 
 
@@ -32142,7 +32281,7 @@
 
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports) {
 
 	/*
@@ -32198,7 +32337,7 @@
 
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

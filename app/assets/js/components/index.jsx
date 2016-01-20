@@ -9,6 +9,7 @@ import PlayerServerActions from '../actions/PlayerServerActions';
 //COMPONENTS
 import AddPlayer           from './admin/AddPlayer.jsx';
 import Login 							 from './admin/Login.jsx';
+import Create 							 from './admin/Create.jsx';
 import PlayerSearch        from './playerSearch.jsx';
 import TopList             from './topList.jsx';
 import '../../stylesheets/main.css.scss';
@@ -45,6 +46,7 @@ class Header extends React.Component {
 						<Link className="section-link" to={ '/top/rb' }><div className="section-tab" onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/login' }><div className="section-tab" onClick={this.handleClick}>Login</div></Link>&nbsp;
+						<Link className="section-link" to={ '/create' }><div className="section-tab" onClick={this.handleClick}>Create</div></Link>&nbsp;
 						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>
 					</section>
 				</div>
@@ -74,6 +76,7 @@ render((
       <Route path="admin/add-player" component={ AddPlayer } />
       <Route path="admin/edit-player/:id" component={ AddPlayer } />
       <Route path="login" component={ Login } />
+      <Route path="create" component={ Create } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )

@@ -1,11 +1,15 @@
 'use strict';
-var Joi    = require('joi');
-var Player = require('../models/Player');
+var Joi = require('joi');
+var jwt = require('jsonwebtoken');
+var _   = require('lodash');
+
 var Abbreviations = require('../config/abbreviations');
+var Player = require('../models/Player');
 
 exports.register = function(server, options, next) {
 	//Declare Routes
 	var knex = options.db; 
+	
 	server.route([
 		{
 			// Add a route to serve static assets (CSS, JS, IMG)
@@ -25,15 +29,6 @@ exports.register = function(server, options, next) {
 	  	path: '/',
 	  	handler: {
 	  		view: 'default'
-	  	}
-	  },
-
-	  // Login route
-	  {
-	  	method: 'POST',
-	  	path: '/sessions/create',
-	  	handler: function(req, res){
-	  		console.log(req.payload); //gives username/pass
 	  	}
 	  },
 	  

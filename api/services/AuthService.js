@@ -5,14 +5,39 @@ Authentication piece taken from here https://github.com/auth0/react-flux-jwt-aut
 import request from 'reqwest';
 import when from 'when';
 
-import LoginActions from  '../actions/LoginAction';
+import AuthActions from  '../actions/AuthAction';
 
 class AuthService {
 
-	login(username, password) {
+	create(username, password) {
 		//call server to log user in
+		return when(request({
+			url: '/user-create',
+			method: 'POST',
+			crossOrigin: true,
+			type: 'json',
+			data: {
+				username, password
+			}
+		}))
+		.then(function(response) {
+			//get JWT back
+			let jwt = response.id_token;
+			//trigger LoginAction and give jwt
+			AuthActions.createUser(jwt);
+			return true;
+		})
+		.catch(function(err) {
+			console.log('error in authservice creating user');
+			console.log(err);
+			return err;
+		});
+	}
+
+	login(username, password) {
 		console.log('login called with:');
-		console.log(username + ' ' + password);
+		console.log(username, password);
+		
 		return when(request({
 			url: '/sessions/create',
 			method: 'POST',
@@ -26,14 +51,14 @@ class AuthService {
 			//get JWT back
 			let jwt = response.id_token;
 			//trigger LoginAction and give jwt
-			LoginActions.loginUser(jwt);
+			AuthActions.loginUser(jwt);
 			return true;
 		})
 		.catch(function(err) {
-			console.log('error');
+			console.log('error in authservice logging in user');
 			console.log(err);
 			return err;
-		});
+		});		
 	}
 }
 
