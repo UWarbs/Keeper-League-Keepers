@@ -148,7 +148,7 @@ exports.register = function(server, options, next) {
 
 					  return res({
 					  	status: 201,
-					  	id_token: createToken(profile)
+					  	id_token: createToken(user)
 					  }); 
 
 

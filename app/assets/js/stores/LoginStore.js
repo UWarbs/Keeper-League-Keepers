@@ -2,6 +2,7 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/Constants';
 import { EventEmitter } from 'events';
+import jwt_decode from 'jwt-decode';
 
 const CHANGE_EVENT = 'change';
 
@@ -22,10 +23,13 @@ class LoginStore extends EventEmitter {
 		this.removeListener(CHANGE_EVENT, cb);
 	}
 
-	_registerToActions(action) {
+	_registerToActions(actionObj) {
+		console.log(actionObj);
+		let action = actionObj.action;
 		switch(action.actionType) {
-			case AppConstants.USER_LOGGED_IN:
+			case AppConstants.LOGIN_USER:
 				console.log('user logged in');
+
 				//get JWT from token and store it
 				this._jwt = action.jwt;
 				//decode to get user info
