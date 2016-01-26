@@ -6,12 +6,12 @@ import LoginStore from '../../stores/LoginStore';
 export default (ComposedComponent) => {
 	return class AuthenticatedComponent extends React.Component {
 		
-		static willTransitionTo(transition) {
-			if (!LoginStore.isLoggedIn()) {
-				console.log('supposed to transition');
-				transition.redirect('/login', {}, {'nextPath' : transition.path});
-			}
-		}
+		// static willTransitionTo(transition) {
+		// 	if (!LoginStore.isLoggedIn()) {
+		// 		console.log('supposed to transition');
+		// 		transition.redirect('/login', {}, {'nextPath' : transition.path});
+		// 	}
+		// }
 
 		constructor() {
 			super();
@@ -40,6 +40,7 @@ export default (ComposedComponent) => {
 		}
 
 		render() {
+			console.log('inside authenticatd component render:')
 			return(
 				<ComposedComponent
 					{...this.props}

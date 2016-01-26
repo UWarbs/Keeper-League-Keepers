@@ -64,11 +64,15 @@
 
 	var _PlayerStore2 = _interopRequireDefault(_PlayerStore);
 
-	var _PlayerServerActions = __webpack_require__(219);
+	var _LoginStore = __webpack_require__(219);
+
+	var _LoginStore2 = _interopRequireDefault(_LoginStore);
+
+	var _PlayerServerActions = __webpack_require__(224);
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 
-	var _AddPlayer = __webpack_require__(224);
+	var _AddPlayer = __webpack_require__(229);
 
 	var _AddPlayer2 = _interopRequireDefault(_AddPlayer);
 
@@ -264,6 +268,15 @@
 		return App;
 	})(_react2.default.Component);
 
+	var requireAuth = function requireAuth(nextState, replace) {
+		if (!_LoginStore2.default.isLoggedIn()) {
+			replace({
+				pathname: '/login',
+				state: { nextPathname: nextState.location.pathname }
+			});
+		}
+	};
+
 	(0, _reactDom.render)(_react2.default.createElement(
 		_reactRouter.Router,
 		{ history: (0, _createBrowserHistory2.default)() },
@@ -272,10 +285,10 @@
 			{ path: '/', component: App },
 			_react2.default.createElement(_reactRouter.IndexRoute, { component: _playerSearch2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'top/:id', component: _topList2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-player', component: _AddPlayer2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-player', component: _AddPlayer2.default, onEnter: requireAuth }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/edit-player/:id', component: _AddPlayer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default })
+			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default, onEnter: requireAuth })
 		)
 	), document.getElementById('app-container'));
 
@@ -25640,11 +25653,251 @@
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _AppDispatcher = __webpack_require__(212);
+
+	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
+
+	var _Constants = __webpack_require__(216);
+
+	var _Constants2 = _interopRequireDefault(_Constants);
+
+	var _events = __webpack_require__(218);
+
+	var _jwtDecode = __webpack_require__(220);
+
+	var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CHANGE_EVENT = 'change';
+
+	var LoginStore = (function (_EventEmitter) {
+		_inherits(LoginStore, _EventEmitter);
+
+		function LoginStore() {
+			_classCallCheck(this, LoginStore);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginStore).call(this));
+
+			_this.dispatchToken = _AppDispatcher2.default.register(_this._registerToActions.bind(_this));
+			_this._user = null;
+			_this._jwt = null;
+			return _this;
+		}
+
+		_createClass(LoginStore, [{
+			key: 'addChangeListener',
+			value: function addChangeListener(cb) {
+				//TODO: Make store superclass
+				this.on(CHANGE_EVENT, cb);
+			}
+		}, {
+			key: 'removeChangeListener',
+			value: function removeChangeListener(cb) {
+				this.removeListener(CHANGE_EVENT, cb);
+			}
+		}, {
+			key: '_registerToActions',
+			value: function _registerToActions(actionObj) {
+				console.log(actionObj);
+				var action = actionObj.action;
+				switch (action.actionType) {
+					case _Constants2.default.LOGIN_USER:
+						console.log('user logged in');
+						console.log('calling isLoggedIn:');
+						isLoggedIn();
+						//get JWT from token and store it
+						this._jwt = action.jwt;
+						//decode to get user info
+						this._user = (0, _jwtDecode2.default)(this._jwt);
+						this.emit(CHANGE_EVENT);
+						break;
+					default:
+						console.log('user not logged in');
+						break;
+				};
+			}
+
+			//getters for the properties it got from the action.
+
+		}, {
+			key: 'isLoggedIn',
+			value: function isLoggedIn() {
+				return !!this._user;
+			}
+		}, {
+			key: 'user',
+			get: function get() {
+				return this._user;
+			}
+		}, {
+			key: 'jwt',
+			get: function get() {
+				return this._jwt;
+			}
+		}]);
+
+		return LoginStore;
+	})(_events.EventEmitter);
+
+	exports.default = new LoginStore();
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var base64_url_decode = __webpack_require__(221);
+	var json_parse = __webpack_require__(223);
+
+	module.exports = function (token) {
+	  if (!token) {
+	    throw new Error('Invalid token specified');
+	  }
+	  
+	  return json_parse(base64_url_decode(token.split('.')[1]));
+	};
+
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Base64 = __webpack_require__(222);
+
+	function b64DecodeUnicode(str) {
+	  return decodeURIComponent(atob(str).replace(/(.)/g, function (m, p) {
+	    var code = p.charCodeAt(0).toString(16).toUpperCase();
+	    if (code.length < 2) {
+	      code = '0' + code;
+	    }
+	    return '%' + code;
+	  }));
+	}
+
+	module.exports = function(str) {
+	  var output = str.replace(/-/g, "+").replace(/_/g, "/");
+	  switch (output.length % 4) {
+	    case 0:
+	      break;
+	    case 2:
+	      output += "==";
+	      break;
+	    case 3:
+	      output += "=";
+	      break;
+	    default:
+	      throw "Illegal base64url string!";
+	  }
+
+	  try{
+	    return b64DecodeUnicode(output);
+	  } catch (err) {
+	    return Base64.atob(output);
+	  }
+	};
+
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	;(function () {
+
+	  var
+	    object =  true ? exports : this, // #8: web workers
+	    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+	    INVALID_CHARACTER_ERR = (function () {
+	      // fabricate a suitable error object
+	      try { document.createElement('$'); }
+	      catch (error) { return error; }}());
+
+	  // encoder
+	  // [https://gist.github.com/999166] by [https://github.com/nignag]
+	  object.btoa || (
+	  object.btoa = function (input) {
+	    for (
+	      // initialize result and counter
+	      var block, charCode, idx = 0, map = chars, output = '';
+	      // if the next input index does not exist:
+	      //   change the mapping table to "="
+	      //   check if d has no fractional digits
+	      input.charAt(idx | 0) || (map = '=', idx % 1);
+	      // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
+	      output += map.charAt(63 & block >> 8 - idx % 1 * 8)
+	    ) {
+	      charCode = input.charCodeAt(idx += 3/4);
+	      if (charCode > 0xFF) throw INVALID_CHARACTER_ERR;
+	      block = block << 8 | charCode;
+	    }
+	    return output;
+	  });
+
+	  // decoder
+	  // [https://gist.github.com/1020396] by [https://github.com/atk]
+	  object.atob || (
+	  object.atob = function (input) {
+	    input = input.replace(/=+$/, '')
+	    if (input.length % 4 == 1) throw INVALID_CHARACTER_ERR;
+	    for (
+	      // initialize result and counters
+	      var bc = 0, bs, buffer, idx = 0, output = '';
+	      // get next character
+	      buffer = input.charAt(idx++);
+	      // character found in table? initialize bit storage and add its ascii value;
+	      ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+	        // and if not first of each 4 characters,
+	        // convert the first 8 bits to one ascii character
+	        bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
+	    ) {
+	      // try to find character in table (0-63, not found => -1)
+	      buffer = chars.indexOf(buffer);
+	    }
+	    return output;
+	  });
+
+	}());
+
+
+/***/ },
+/* 223 */
+/***/ function(module, exports) {
+
+	module.exports = function (str) {
+	  var parsed;
+	  if (typeof JSON === 'object') {
+	    parsed = JSON.parse(str);
+	  } else {
+	    parsed = eval('(' + str + ')');
+	  }
+	  return parsed;
+	};
+
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(212);
 	var Constants = __webpack_require__(216);
-	var Api = __webpack_require__(220);
+	var Api = __webpack_require__(225);
 
 	module.exports = {
 		getSinglePlayer: function getSinglePlayer(id) {
@@ -25690,12 +25943,12 @@
 	};
 
 /***/ },
-/* 220 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var request = __webpack_require__(221);
+	var request = __webpack_require__(226);
 
 	module.exports = {
 		get: function get(url) {
@@ -25745,15 +25998,15 @@
 	};
 
 /***/ },
-/* 221 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(222);
-	var reduce = __webpack_require__(223);
+	var Emitter = __webpack_require__(227);
+	var reduce = __webpack_require__(228);
 
 	/**
 	 * Root reference for iframes.
@@ -26932,7 +27185,7 @@
 
 
 /***/ },
-/* 222 */
+/* 227 */
 /***/ function(module, exports) {
 
 	
@@ -27102,7 +27355,7 @@
 
 
 /***/ },
-/* 223 */
+/* 228 */
 /***/ function(module, exports) {
 
 	
@@ -27131,7 +27384,7 @@
 	};
 
 /***/ },
-/* 224 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27146,11 +27399,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AuthenticatedComponent = __webpack_require__(225);
+	var _AuthenticatedComponent = __webpack_require__(230);
 
 	var _AuthenticatedComponent2 = _interopRequireDefault(_AuthenticatedComponent);
 
-	var _PlayerServerActions = __webpack_require__(219);
+	var _PlayerServerActions = __webpack_require__(224);
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 
@@ -27302,6 +27555,8 @@
 				var length = this.state.writeupLength;
 				var team = this.state.team || 'SELECT A TEAM';
 				var position = this.state.position || 'SELECT A POSITION';
+				console.log('addPLayer render props:');
+				console.log(this.props.userLoggedIn);
 				//Best practices WILL be used. REASON. WILL. PREVAIL.
 				return _react2.default.createElement(
 					'div',
@@ -27608,7 +27863,7 @@
 	})(_react2.default.Component));
 
 /***/ },
-/* 225 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27625,7 +27880,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _LoginStore = __webpack_require__(226);
+	var _LoginStore = __webpack_require__(219);
 
 	var _LoginStore2 = _interopRequireDefault(_LoginStore);
 
@@ -27641,15 +27896,12 @@
 		return (function (_React$Component) {
 			_inherits(AuthenticatedComponent, _React$Component);
 
-			_createClass(AuthenticatedComponent, null, [{
-				key: 'willTransitionTo',
-				value: function willTransitionTo(transition) {
-					if (!_LoginStore2.default.isLoggedIn()) {
-						console.log('supposed to transition');
-						transition.redirect('/login', {}, { 'nextPath': transition.path });
-					}
-				}
-			}]);
+			// static willTransitionTo(transition) {
+			// 	if (!LoginStore.isLoggedIn()) {
+			// 		console.log('supposed to transition');
+			// 		transition.redirect('/login', {}, {'nextPath' : transition.path});
+			// 	}
+			// }
 
 			function AuthenticatedComponent() {
 				_classCallCheck(this, AuthenticatedComponent);
@@ -27688,6 +27940,7 @@
 			}, {
 				key: 'render',
 				value: function render() {
+					console.log('inside authenticatd component render:');
 					return _react2.default.createElement(ComposedComponent, _extends({}, this.props, {
 						user: this.state.user,
 						jwt: this.state.jwt,
@@ -27698,245 +27951,6 @@
 			return AuthenticatedComponent;
 		})(_react2.default.Component);
 	};
-
-/***/ },
-/* 226 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _AppDispatcher = __webpack_require__(212);
-
-	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
-
-	var _Constants = __webpack_require__(216);
-
-	var _Constants2 = _interopRequireDefault(_Constants);
-
-	var _events = __webpack_require__(218);
-
-	var _jwtDecode = __webpack_require__(227);
-
-	var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CHANGE_EVENT = 'change';
-
-	var LoginStore = (function (_EventEmitter) {
-		_inherits(LoginStore, _EventEmitter);
-
-		function LoginStore() {
-			_classCallCheck(this, LoginStore);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginStore).call(this));
-
-			_this.dispatchToken = _AppDispatcher2.default.register(_this._registerToActions.bind(_this));
-			_this._user = null;
-			_this._jwt = null;
-			return _this;
-		}
-
-		_createClass(LoginStore, [{
-			key: 'addChangeListener',
-			value: function addChangeListener(cb) {
-				//TODO: Make store superclass
-				this.on(CHANGE_EVENT, cb);
-			}
-		}, {
-			key: 'removeChangeListener',
-			value: function removeChangeListener(cb) {
-				this.removeListener(CHANGE_EVENT, cb);
-			}
-		}, {
-			key: '_registerToActions',
-			value: function _registerToActions(actionObj) {
-				console.log(actionObj);
-				var action = actionObj.action;
-				switch (action.actionType) {
-					case _Constants2.default.LOGIN_USER:
-						console.log('user logged in');
-
-						//get JWT from token and store it
-						this._jwt = action.jwt;
-						//decode to get user info
-						this._user = (0, _jwtDecode2.default)(this._jwt);
-						this.emit(CHANGE_EVENT);
-						break;
-					default:
-						console.log('user not logged in');
-						break;
-				};
-			}
-
-			//getters for the properties it got from the action.
-
-		}, {
-			key: 'isLoggedIn',
-			value: function isLoggedIn() {
-				return !!this._user;
-			}
-		}, {
-			key: 'user',
-			get: function get() {
-				return this._user;
-			}
-		}, {
-			key: 'jwt',
-			get: function get() {
-				return this._jwt;
-			}
-		}]);
-
-		return LoginStore;
-	})(_events.EventEmitter);
-
-	exports.default = new LoginStore();
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var base64_url_decode = __webpack_require__(228);
-	var json_parse = __webpack_require__(230);
-
-	module.exports = function (token) {
-	  if (!token) {
-	    throw new Error('Invalid token specified');
-	  }
-	  
-	  return json_parse(base64_url_decode(token.split('.')[1]));
-	};
-
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Base64 = __webpack_require__(229);
-
-	function b64DecodeUnicode(str) {
-	  return decodeURIComponent(atob(str).replace(/(.)/g, function (m, p) {
-	    var code = p.charCodeAt(0).toString(16).toUpperCase();
-	    if (code.length < 2) {
-	      code = '0' + code;
-	    }
-	    return '%' + code;
-	  }));
-	}
-
-	module.exports = function(str) {
-	  var output = str.replace(/-/g, "+").replace(/_/g, "/");
-	  switch (output.length % 4) {
-	    case 0:
-	      break;
-	    case 2:
-	      output += "==";
-	      break;
-	    case 3:
-	      output += "=";
-	      break;
-	    default:
-	      throw "Illegal base64url string!";
-	  }
-
-	  try{
-	    return b64DecodeUnicode(output);
-	  } catch (err) {
-	    return Base64.atob(output);
-	  }
-	};
-
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	;(function () {
-
-	  var
-	    object =  true ? exports : this, // #8: web workers
-	    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
-	    INVALID_CHARACTER_ERR = (function () {
-	      // fabricate a suitable error object
-	      try { document.createElement('$'); }
-	      catch (error) { return error; }}());
-
-	  // encoder
-	  // [https://gist.github.com/999166] by [https://github.com/nignag]
-	  object.btoa || (
-	  object.btoa = function (input) {
-	    for (
-	      // initialize result and counter
-	      var block, charCode, idx = 0, map = chars, output = '';
-	      // if the next input index does not exist:
-	      //   change the mapping table to "="
-	      //   check if d has no fractional digits
-	      input.charAt(idx | 0) || (map = '=', idx % 1);
-	      // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-	      output += map.charAt(63 & block >> 8 - idx % 1 * 8)
-	    ) {
-	      charCode = input.charCodeAt(idx += 3/4);
-	      if (charCode > 0xFF) throw INVALID_CHARACTER_ERR;
-	      block = block << 8 | charCode;
-	    }
-	    return output;
-	  });
-
-	  // decoder
-	  // [https://gist.github.com/1020396] by [https://github.com/atk]
-	  object.atob || (
-	  object.atob = function (input) {
-	    input = input.replace(/=+$/, '')
-	    if (input.length % 4 == 1) throw INVALID_CHARACTER_ERR;
-	    for (
-	      // initialize result and counters
-	      var bc = 0, bs, buffer, idx = 0, output = '';
-	      // get next character
-	      buffer = input.charAt(idx++);
-	      // character found in table? initialize bit storage and add its ascii value;
-	      ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
-	        // and if not first of each 4 characters,
-	        // convert the first 8 bits to one ascii character
-	        bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
-	    ) {
-	      // try to find character in table (0-63, not found => -1)
-	      buffer = chars.indexOf(buffer);
-	    }
-	    return output;
-	  });
-
-	}());
-
-
-/***/ },
-/* 230 */
-/***/ function(module, exports) {
-
-	module.exports = function (str) {
-	  var parsed;
-	  if (typeof JSON === 'object') {
-	    parsed = JSON.parse(str);
-	  } else {
-	    parsed = eval('(' + str + ')');
-	  }
-	  return parsed;
-	};
-
 
 /***/ },
 /* 231 */
@@ -31335,7 +31349,7 @@
 
 	var _playerName2 = _interopRequireDefault(_playerName);
 
-	var _PlayerServerActions = __webpack_require__(219);
+	var _PlayerServerActions = __webpack_require__(224);
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 
@@ -32165,7 +32179,7 @@
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
 
-	var _PlayerServerActions = __webpack_require__(219);
+	var _PlayerServerActions = __webpack_require__(224);
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 

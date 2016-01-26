@@ -29,7 +29,8 @@ class LoginStore extends EventEmitter {
 		switch(action.actionType) {
 			case AppConstants.LOGIN_USER:
 				console.log('user logged in');
-
+				console.log('calling isLoggedIn:');
+				isLoggedIn();
 				//get JWT from token and store it
 				this._jwt = action.jwt;
 				//decode to get user info

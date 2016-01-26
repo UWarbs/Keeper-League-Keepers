@@ -5,6 +5,7 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import PlayerStore         from '../stores/PlayerStore';
+import LoginStore          from '../stores/LoginStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
 //COMPONENTS
 import AddPlayer           from './admin/AddPlayer.jsx';
@@ -68,15 +69,25 @@ class App extends React.Component {
 	}
 }
 
+
+var requireAuth = (nextState, replace) => {
+  if (!LoginStore.isLoggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
 render((
   <Router history={createBrowserHistory()}>
     <Route path="/" component={ App }>
       <IndexRoute component={ PlayerSearch } />
       <Route path="top/:id" component={ TopList } />
-      <Route path="admin/add-player" component={ AddPlayer } />
+      <Route path="admin/add-player" component={ AddPlayer } onEnter={ requireAuth } />
       <Route path="admin/edit-player/:id" component={ AddPlayer } />
       <Route path="login" component={ Login } />
-      <Route path="create" component={ Create } />
+      <Route path="create" component={ Create } onEnter={ requireAuth } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )
