@@ -72,6 +72,10 @@
 
 	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
 
+	var _AuthAction = __webpack_require__(279);
+
+	var _AuthAction2 = _interopRequireDefault(_AuthAction);
+
 	var _AddPlayer = __webpack_require__(253);
 
 	var _AddPlayer2 = _interopRequireDefault(_AddPlayer);
@@ -277,6 +281,10 @@
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				//check for user here
+				var jwt = localStorage.getItem('jwt');
+				if (jwt) {
+					_AuthAction2.default.loginUser(jwt);
+				}
 			}
 		}, {
 			key: 'componentWillUnmount',

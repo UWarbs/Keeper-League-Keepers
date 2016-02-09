@@ -7,6 +7,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import PlayerStore         from '../stores/PlayerStore';
 import LoginStore          from '../stores/LoginStore';
 import PlayerServerActions from '../actions/PlayerServerActions';
+import AuthActions         from '../actions/AuthAction';
 //COMPONENTS
 import AddPlayer           from './admin/AddPlayer.jsx';
 import Login 							 from './admin/Login.jsx';
@@ -83,6 +84,10 @@ class App extends React.Component {
 
 	componentDidMount() {
 		//check for user here
+		let jwt = localStorage.getItem('jwt');
+		if (jwt) {
+  		AuthActions.loginUser(jwt);
+		}
 	}
 
 	componentWillUnmount() {
