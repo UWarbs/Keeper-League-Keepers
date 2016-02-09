@@ -14,7 +14,7 @@ exports.register = function(server, options, next) {
 		{
 			// Add a route to serve static assets (CSS, JS, IMG)
 			method: 'GET',
-			path: '/{param*}',
+			path: '/{param*}',  //how this works in hapi is that every route is tested and if none match it will go to routes wrapped in brackets
 			handler: {
 				directory: {
 					path: 'dist',
@@ -27,6 +27,30 @@ exports.register = function(server, options, next) {
 	  {
 	  	method: 'GET',
 	  	path: '/',
+	  	handler: {
+	  		view: 'default'
+	  	}
+	  },
+
+	  {
+	  	method: 'GET',
+	  	path: '/top/{pos}',
+	  	handler: {
+	  		view: 'default'
+	  	}
+	  },
+	  
+	  {
+	  	method: 'GET',
+	  	path: '/admin/{path}',
+	  	handler: {
+	  		view: 'default'
+	  	}
+	  },
+
+	  {
+	  	method: 'GET',
+	  	path: '/login',
 	  	handler: {
 	  		view: 'default'
 	  	}

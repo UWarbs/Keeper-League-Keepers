@@ -35,11 +35,14 @@ class Header extends React.Component {
 		let isLoggedIn = LoginStore.isLoggedIn() || this.props.user;
 		console.log('index render with user: ', isLoggedIn);	
 		let addPlayer;
+		let loginLink;
 		
 		if(isLoggedIn) { //TODO: Add changelistener for when someone logs in.
-			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>
+			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>;
+			loginLink = null;
 		}else {
 			addPlayer = null;
+			loginLink = <Link className="section-link" to={ '/login' }><div className="section-tab" onClick={this.handleClick}>Login</div></Link>;
 		}
 
 		return (
@@ -57,8 +60,7 @@ class Header extends React.Component {
 						<Link className="section-link" to={ '/top/qb' }><div className="section-tab" onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/rb' }><div className="section-tab" onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
-						<Link className="section-link" to={ '/login' }><div className="section-tab" onClick={this.handleClick}>Login</div></Link>&nbsp;
-						<Link className="section-link" to={ '/create' }><div className="section-tab" onClick={this.handleClick}>Create</div></Link>&nbsp;
+						{loginLink}
 						{addPlayer}
 					</section>
 				</div>
@@ -79,7 +81,6 @@ class App extends React.Component {
 	//check for logged in here and pass as prop to header
 	componentWillMount() { 
 		LoginStore.addChangeListener(this.onChange);
-		console.log('index will mount');
   }
 
 	componentDidMount() {
@@ -91,7 +92,6 @@ class App extends React.Component {
 	}
 
 	componentWillUnmount() {
-		console.log('index will unmount');
     LoginStore.removeChangeListener(this.onChange);
   }
   
