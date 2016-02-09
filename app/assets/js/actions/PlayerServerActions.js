@@ -1,3 +1,4 @@
+// TODO: ES6 this guy
 "use strict";
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants     = require('../constants/Constants');

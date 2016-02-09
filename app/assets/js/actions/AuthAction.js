@@ -1,7 +1,7 @@
 'use strict';
 
-import AppDispatcher from '../../app/assets/js/dispatcher/AppDispatcher';
-import Constants from '../../app/assets/js/constants/Constants';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import Constants from '../constants/Constants';
 
 export default {
 	createUser: (jwt) => {
@@ -10,7 +10,7 @@ export default {
 		localStorage.setItem('jwt', jwt);
 		//dispatch action to all stores
 		AppDispatcher.handleServerAction({
-			actionType: Constanst.CREATE_USER,
+			actionType: Constants.CREATE_USER,
 			jwt: jwt
 		});
 	},

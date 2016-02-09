@@ -1,7 +1,7 @@
 // React components
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute } from 'react-router';
+import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import PlayerStore         from '../stores/PlayerStore';
@@ -10,7 +10,7 @@ import PlayerServerActions from '../actions/PlayerServerActions';
 //COMPONENTS
 import AddPlayer           from './admin/AddPlayer.jsx';
 import Login 							 from './admin/Login.jsx';
-import Create 							 from './admin/Create.jsx';
+import Create 						 from './admin/Create.jsx';
 import PlayerSearch        from './playerSearch.jsx';
 import TopList             from './topList.jsx';
 import '../../stylesheets/main.css.scss';
@@ -29,8 +29,18 @@ class Header extends React.Component {
 		}
 		e.target.className = 'section-tab selected';
 	}
-
+	
 	render () {
+		let isLoggedIn = LoginStore.isLoggedIn() || this.props.user;
+		console.log('index render with user: ', isLoggedIn);	
+		let addPlayer;
+		
+		if(isLoggedIn) { //TODO: Add changelistener for when someone logs in.
+			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>
+		}else {
+			addPlayer = null;
+		}
+
 		return (
 			<div className="header">
 				<nav className="header-container">
@@ -48,7 +58,7 @@ class Header extends React.Component {
 						<Link className="section-link" to={ '/top/wr' }><div className="section-tab" onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/login' }><div className="section-tab" onClick={this.handleClick}>Login</div></Link>&nbsp;
 						<Link className="section-link" to={ '/create' }><div className="section-tab" onClick={this.handleClick}>Create</div></Link>&nbsp;
-						<Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>
+						{addPlayer}
 					</section>
 				</div>
 			</div>
@@ -56,31 +66,62 @@ class Header extends React.Component {
 	}
 }
 
+
 class App extends React.Component {
-	render() {
-		return (
-				<div>
-					<Header />	
-					<div className="main-page-container">
-						{this.props.children}
-					</div>
-				</div>
-		)
+	constructor() {
+		super();
+		this.onChange = this.onChange.bind(this);
+		this.state = {
+			user: null
+		}
 	}
+	//check for logged in here and pass as prop to header
+	componentWillMount() { 
+		LoginStore.addChangeListener(this.onChange);
+		console.log('index will mount');
+  }
+
+	componentDidMount() {
+		//check for user here
+	}
+
+	componentWillUnmount() {
+		console.log('index will unmount');
+    LoginStore.removeChangeListener(this.onChange);
+  }
+  
+  onChange() {
+  	console.log('LOGIN STORE THROWS CHANGE')
+  	let user = LoginStore.getUser() || null;
+  	this.setState({
+  		user: user
+  	});
+  }
+
+  render() {
+  	return (
+  		<div>
+  			<Header user={this.state.user} />	
+  			<div className="main-page-container">
+  				{this.props.children}
+  			</div>
+  		</div>
+  		)
+  }
 }
 
 
 var requireAuth = (nextState, replace) => {
   if (!LoginStore.isLoggedIn()) {
     replace({
-      pathname: '/login',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname }
     })
   }
 }
 
 render((
-  <Router history={createBrowserHistory()}>
+  <Router history={browserHistory}>
     <Route path="/" component={ App }>
       <IndexRoute component={ PlayerSearch } />
       <Route path="top/:id" component={ TopList } />
@@ -92,3 +133,5 @@ render((
   </Router>
 ), document.getElementById('app-container') )
 
+
+module.exports = App;

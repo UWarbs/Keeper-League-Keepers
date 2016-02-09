@@ -5,7 +5,7 @@ Authentication piece taken from here https://github.com/auth0/react-flux-jwt-aut
 import request from 'reqwest';
 import when from 'when';
 
-import AuthActions from  '../actions/AuthAction';
+import AuthActions from  '../../app/assets/js/actions/AuthAction';
 
 class AuthService {
 

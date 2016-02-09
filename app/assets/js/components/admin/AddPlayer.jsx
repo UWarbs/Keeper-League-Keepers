@@ -110,7 +110,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 		let length = this.state.writeupLength;
 		let team = this.state.team || 'SELECT A TEAM';
 		let position = this.state.position || 'SELECT A POSITION';
-		console.log('addPLayer render props:');
+		console.log('addPlayer render props:');
 		console.log(this.props.userLoggedIn);
 		//Best practices WILL be used. REASON. WILL. PREVAIL.
 		return(

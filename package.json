@@ -25,6 +25,7 @@
     "flux": "^2.1.1",
     "hapi": "^11.1.2",
     "hapi-react-views": "^5.0.0",
+    "history": "1.13.x",
     "inert": "^3.0.2",
     "joi": "^7.0.1",
     "jsonwebtoken": "^5.5.4",
@@ -38,7 +39,7 @@
     "path": "^0.12.7",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "react-router": "^1.0.0",
+    "react-router": "2.0.0-rc5",
     "react-search-input": "^0.3.1",
     "request": "^2.65.0",
     "reqwest": "^2.0.5",
@@ -51,6 +52,7 @@
     "when": "^3.7.7"
   },
   "devDependencies": {
+    "boom": "^3.1.2",
     "eslint-plugin-react": "^3.6.3",
     "node-sass": "^3.4.1",
     "nodemon": "^1.7.1"

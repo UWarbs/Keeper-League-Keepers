@@ -56,9 +56,7 @@ var ListStore = ObjectAssign( {}, EventEmitter.prototype, {
 // change
 AppDispatcher.register(function(payload) {
 	var action = payload.action;
-	
 	switch(action.actionType) {
-		
 		case AppConstants.GET_LIST:
 			ListStore.emit(CHANGE_EVENT);
 			break;

@@ -22,15 +22,16 @@ class LoginStore extends EventEmitter {
 	removeChangeListener (cb) {
 		this.removeListener(CHANGE_EVENT, cb);
 	}
+  
+  isLoggedIn() {
+    return !!this._user;
+  }
 
 	_registerToActions(actionObj) {
 		console.log(actionObj);
 		let action = actionObj.action;
 		switch(action.actionType) {
 			case AppConstants.LOGIN_USER:
-				console.log('user logged in');
-				console.log('calling isLoggedIn:');
-				isLoggedIn();
 				//get JWT from token and store it
 				this._jwt = action.jwt;
 				//decode to get user info
@@ -38,13 +39,14 @@ class LoginStore extends EventEmitter {
 				this.emit(CHANGE_EVENT);
 				break;
 			default:
-				console.log('user not logged in');
 				break;
 		};
 	}
 
 	//getters for the properties it got from the action.
-  get user() {
+  getUser() {
+  	console.log('getUser() function.');
+  	console.log(this._user);
     return this._user;
   }
 
@@ -52,9 +54,6 @@ class LoginStore extends EventEmitter {
     return this._jwt;
   }
 
-  isLoggedIn() {
-    return !!this._user;
-  }
 
 }
 
