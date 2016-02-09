@@ -20,6 +20,7 @@ class Header extends React.Component {
 	constructor() {
 		super();
 		this.handleClick = this.handleClick.bind(this);
+		this.logoutUser  = this.logoutUser.bind(this);
 	}
 
 	handleClick(e) {
@@ -30,18 +31,25 @@ class Header extends React.Component {
 		}
 		e.target.className = 'section-tab selected';
 	}
+
+	logoutUser() {
+		AuthActions.logoutUser();
+	}
 	
 	render () {
 		let isLoggedIn = LoginStore.isLoggedIn() || this.props.user;
 		console.log('index render with user: ', isLoggedIn);	
 		let addPlayer;
 		let loginLink;
+		let logoutLink;
 		
 		if(isLoggedIn) { //TODO: Add changelistener for when someone logs in.
 			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div className="section-tab" onClick={this.handleClick}>Add Player</div></Link>;
+			logoutLink = <a onClick={this.logoutUser}>Log Out</a>;
 			loginLink = null;
 		}else {
 			addPlayer = null;
+			logoutLink = null;
 			loginLink = <Link className="section-link" to={ '/login' }><div className="section-tab" onClick={this.handleClick}>Login</div></Link>;
 		}
 
@@ -51,6 +59,7 @@ class Header extends React.Component {
 					<div className="logo"><Link to={ '/' }>KLK</Link></div>
 					<h1 className="site-title">Keeper League Keepers</h1>
 					<div className="header-link-container">
+						{logoutLink}
 					</div>
 				</nav>
 				<div className="hero-container">

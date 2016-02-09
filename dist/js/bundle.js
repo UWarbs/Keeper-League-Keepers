@@ -117,6 +117,7 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this));
 
 			_this.handleClick = _this.handleClick.bind(_this);
+			_this.logoutUser = _this.logoutUser.bind(_this);
 			return _this;
 		}
 
@@ -131,12 +132,18 @@
 				e.target.className = 'section-tab selected';
 			}
 		}, {
+			key: 'logoutUser',
+			value: function logoutUser() {
+				_AuthAction2.default.logoutUser();
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var isLoggedIn = _LoginStore2.default.isLoggedIn() || this.props.user;
 				console.log('index render with user: ', isLoggedIn);
 				var addPlayer = undefined;
 				var loginLink = undefined;
+				var logoutLink = undefined;
 
 				if (isLoggedIn) {
 					//TODO: Add changelistener for when someone logs in.
@@ -149,9 +156,15 @@
 							'Add Player'
 						)
 					);
+					logoutLink = _react2.default.createElement(
+						'a',
+						{ onClick: this.logoutUser },
+						'Log Out'
+					);
 					loginLink = null;
 				} else {
 					addPlayer = null;
+					logoutLink = null;
 					loginLink = _react2.default.createElement(
 						_reactRouter.Link,
 						{ className: 'section-link', to: '/login' },
@@ -183,7 +196,11 @@
 							{ className: 'site-title' },
 							'Keeper League Keepers'
 						),
-						_react2.default.createElement('div', { className: 'header-link-container' })
+						_react2.default.createElement(
+							'div',
+							{ className: 'header-link-container' },
+							logoutLink
+						)
 					),
 					_react2.default.createElement(
 						'div',
@@ -26119,6 +26136,7 @@
 			case AppConstants.GET_LIST:
 				setList(action.list);
 				PlayerStore.emit(CHANGE_EVENT);
+				break;
 			default:
 				return true;
 		}
@@ -26480,7 +26498,8 @@
 	  EDIT_PLAYER: 'EDIT_PLAYER',
 	  USER_LOGGED_IN: 'USER_LOGGED_IN',
 	  LOGIN_USER: 'LOGIN_USER',
-	  CREATE_USER: 'CREATE_USER'
+	  CREATE_USER: 'CREATE_USER',
+	  LOGOUT_USER: 'LOGOUT_USER'
 	};
 
 /***/ },
@@ -26909,6 +26928,13 @@
 						this._jwt = action.jwt;
 						//decode to get user info
 						this._user = (0, _jwtDecode2.default)(this._jwt);
+						this.emit(CHANGE_EVENT);
+						break;
+					case _Constants2.default.LOGOUT_USER:
+						this._jwt = null;
+						this._user = null;
+						console.log('right place');
+						console.log(this._user);
 						this.emit(CHANGE_EVENT);
 						break;
 					default:
@@ -28606,6 +28632,13 @@
 			_AppDispatcher2.default.handleServerAction({
 				actionType: _Constants2.default.LOGIN_USER,
 				jwt: jwt
+			});
+		},
+
+		logoutUser: function logoutUser() {
+			localStorage.removeItem('jwt');
+			_AppDispatcher2.default.handleServerAction({
+				actionType: _Constants2.default.LOGOUT_USER
 			});
 		}
 	};

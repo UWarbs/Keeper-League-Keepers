@@ -63,6 +63,7 @@ AppDispatcher.register(function(payload) {
 		case AppConstants.GET_LIST:
 			setList(action.list);
 			PlayerStore.emit(CHANGE_EVENT); 
+			break;
     default: 
     	return true;
 	}

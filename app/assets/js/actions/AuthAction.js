@@ -25,5 +25,12 @@ export default {
 			actionType: Constants.LOGIN_USER,
 			jwt: jwt
 		});
+	},
+
+	logoutUser: () => {
+		localStorage.removeItem('jwt');
+		AppDispatcher.handleServerAction({
+			actionType: Constants.LOGOUT_USER
+		})
 	}
 }
