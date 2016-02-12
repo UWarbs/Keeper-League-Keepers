@@ -33,3 +33,10 @@
 .search-input .search-field:focus {
   outline: none;
 }
+
+//WYSIWYG Overrides
+.ql-container {
+	width: 100%;
+  height: 200px;
+  border: 1px solid black;
+}

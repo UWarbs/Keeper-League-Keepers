@@ -26,7 +26,8 @@ module.exports = {
       	test: /\.(png|jpg)$/,
       	loader: 'url'
     	}
-    ]
+    ],
+    noParse: /node_modules\/quill\/dist/
   },
 };
 

@@ -1,5 +1,6 @@
 "use strict";
 import React from 'react';
+import ReactQuill from 'react-quill';
 
 import AuthenticatedComponent from '../admin/AuthenticatedComponent.jsx';
 import PlayerServerActions 	 	from '../../actions/PlayerServerActions';
@@ -82,8 +83,8 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
     this.setState({experience: e.target.value});
   }
   handleWriteupChange(e) {
-    this.setState({writeup: e.target.value, writeupLength: e.target.value.length});
-    console.log(e.target.value.length);
+  	console.log(e);
+    this.setState({writeup: e, writeupLength: e.length});
   }
   handleSubmit(e) {
   	e.preventDefault();
@@ -116,6 +117,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 		return(
 			<div className="form-container">
 				<form className="add-player-form" name="create-player" onSubmit={this.handleSubmit}>
+					
 					<div className="col-md-12">
 						<div className="col-md-6">
 							<label className="label" htmlFor="firstName">First Name</label>
@@ -126,6 +128,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 							<input type="text" htmlFor="create-player" name="lastName" value={this.state.lastName} onChange={this.handleLastChange} required />
 						</div>
 					</div>
+					
 					<div className="col-md-12">
 						<div className="col-md-6">
 							<label className="label" htmlFor="position">Position</label>
@@ -138,6 +141,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 		    				<option value="Wide Receiver">Wide Receiver</option>
 							</select>
 						</div>
+						
 						<div className="col-md-6">
 							<label className="label" htmlFor="team">Team</label>
 							<select className="form-control" htmlFor="create-player" value={this.state.team} onChange={this.handleTeamChange} required> 
@@ -177,6 +181,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 							</select>
 						</div>
 					</div>
+					
 					<div className="col-md-12">
 					  <div className="col-md-6">
 							<label className="label" htmlFor="rating">Rating</label>
@@ -187,11 +192,11 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 							<input type="text" htmlFor="create-player" placeholder="Age" name="age" value={this.state.age} onChange={this.handleAgeChange} required />
 						</div>
 					</div>
-					<div className="col-md-12">
-							<label className="label" htmlFor="writeup">Writeup</label>
-							<span>{length}/500 characters</span>
-							<textarea className="form-control" type="textarea" rows="6" htmlFor="create-player" placeholder="Player writeup" name="writeup" value={this.state.writeup} onChange={this.handleWriteupChange} required></textarea>
+
+					<div className="col-md-12 quill-container">
+						<ReactQuill theme="snow" value={this.state.writeup} onChange={this.handleWriteupChange} />
 					</div>
+					
 					<input className="btn btn-primary add-player" type="submit" htmlFor="create-player" value="Save Player" />
 				</form>
 			</div>
