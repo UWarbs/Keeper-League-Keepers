@@ -41,8 +41,6 @@ class LoginStore extends EventEmitter {
 			case AppConstants.LOGOUT_USER:
 				this._jwt = null;
 				this._user = null;
-				console.log('right place');
-				console.log(this._user);
 				this.emit(CHANGE_EVENT);
 				break;
 			default:

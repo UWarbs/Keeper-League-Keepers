@@ -11,6 +11,8 @@ import PlayerServerActions from '../actions/PlayerServerActions';
 import AuthActions         from '../actions/AuthAction';
 //COMPONENTS
 import AddPlayer           from './admin/AddPlayer.jsx';
+import AddBlog             from './admin/AddBlog.jsx';
+import Blog           		 from './Blog.jsx';
 import Login 							 from './admin/Login.jsx';
 import Create 						 from './admin/Create.jsx';
 import PlayerSearch        from './playerSearch.jsx';
@@ -44,13 +46,16 @@ class Header extends React.Component {
 		let addPlayer;
 		let loginLink;
 		let logoutLink;
+		let addBlogPost;
 		
 		if(isLoggedIn) { //TODO: Add changelistener for when someone logs in.
 			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div onClick={this.handleClick} className={"section-tab " + (route == '/admin/add-player' ? 'selected' : '')}>Add Player</div></Link>;
+			addBlogPost = <Link className="section-link" to={ '/admin/add-post' }><div onClick={this.handleClick} className={"section-tab " + (route == '/admin/add-post' ? 'selected' : '')}>New Post</div></Link>;
 			logoutLink = <a onClick={this.logoutUser}>Log Out</a>;
 			loginLink = null;
 		}else {
 			addPlayer = null;
+			addBlogPost = null;
 			logoutLink = null;
 			loginLink = <Link className="section-link" to={ '/login' }><div onClick={this.handleClick} className={"section-tab " + (route == '/login' ? 'selected' : '')}>Login</div></Link>;
 		}
@@ -71,6 +76,8 @@ class Header extends React.Component {
 						<Link className="section-link" to={ '/top/qb' }><div className={"section-tab " + (route == '/top/qb' ? 'selected' : '')} onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/rb' }><div className={"section-tab " + (route == '/top/rb' ? 'selected' : '')} onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className={"section-tab " + (route == '/top/wr' ? 'selected' : '')} onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
+						<Link className="section-link" to={ '/blog' }><div className={"section-tab " + (route == '/blog' ? 'selected' : '')} onClick={this.handleClick}>Blog</div></Link>&nbsp;
+						{addBlogPost}
 						{loginLink}
 						{addPlayer}
 					</section>
@@ -143,6 +150,8 @@ render((
       <Route path="top/:id" component={ TopList } />
       <Route path="admin/add-player" component={ AddPlayer } onEnter={ requireAuth } />
       <Route path="admin/edit-player/:id" component={ AddPlayer } />
+      <Route path="admin/add-post" component={AddBlog} />
+      <Route path="blog" component={ Blog } />
       <Route path="login" component={ Login } />
       <Route path="create" component={ Create } onEnter={ requireAuth } />
     </Route>

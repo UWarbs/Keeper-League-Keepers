@@ -83,7 +83,6 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
     this.setState({experience: e.target.value});
   }
   handleWriteupChange(e) {
-  	console.log(e);
     this.setState({writeup: e, writeupLength: e.length});
   }
   handleSubmit(e) {

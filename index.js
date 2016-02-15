@@ -10,7 +10,6 @@ var routes 	 	 = require('./api/routes/routes');
 require('babel-core/register')({
     presets: ['react']
 });
-
 var isDevelopment = (process.env.NODE_ENV !== 'production');
 var server = new Hapi.Server(
 	{

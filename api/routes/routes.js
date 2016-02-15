@@ -55,6 +55,14 @@ exports.register = function(server, options, next) {
 	  		view: 'default'
 	  	}
 	  },
+
+	 	{
+	  	method: 'GET',
+	  	path: '/blog',
+	  	handler: {
+	  		view: 'default'
+	  	}
+	  },
 	  
 	  {
 	    method: 'GET',
@@ -92,7 +100,7 @@ exports.register = function(server, options, next) {
 			handler: function(req, res) {
 				var position = encodeURIComponent(req.params.position);
 				var pos = position.toUpperCase();
-				//make 10 constant or a param.
+				//TODO: make 10 constant or a param.
 				knex('players').where('position_abbrev', pos).orderBy('rating', 'desc').limit(10)
 					.then(function(players) {
 						return res(players)
@@ -102,6 +110,27 @@ exports.register = function(server, options, next) {
 					})
 			}
 		},
+
+		{
+			method: 'POST',
+			path: '/api/new-blog',
+			handler: function(req, res) {
+				var data = req.payload;
+				//TODO: Validation ... joi?
+				knex('blogs').insert({
+					author: data.author,
+					title: data.title,
+					content: data.content
+				}).then(function(data) {
+					console.log('succesful blog insert');
+					return res(data);
+				}).catch(function(err) {
+					console.log(err);
+					return res(err);
+				});
+			}
+		},
+
 
 		{
 			method: 'POST',

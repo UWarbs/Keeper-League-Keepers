@@ -32,5 +32,16 @@ export default {
 		AppDispatcher.handleServerAction({
 			actionType: Constants.LOGOUT_USER
 		})
+	},
+
+	//TODO: Maybe setting actionTypes that never are used in the store's switch case would be a good time to clear the page and display a sucess message, because all the error checks have passed
+	createBlogPost: (content) => {
+		Api.post('/api/new-blog', data)
+		.then(function(content) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.NEW_BLOG,
+				content: content
+			});
+		});
 	}
 }
