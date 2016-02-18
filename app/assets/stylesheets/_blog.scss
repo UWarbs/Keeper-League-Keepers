@@ -1,10 +1,54 @@
 @import "variables";
 
-.blog-page-wrapper {
+
+//READ BLOG
+.blog-page-wrapper,
+.blog-creation-wrapper {
 	max-width: 800px;
 	margin: 0 auto;
 }
 
-.blog-post-container {
-	@extend .top-position-list;
+section.blog-post-container {
+	border: 1px solid black;
+	box-shadow: $box-shadow;
+	text-align: left;
+	padding: 10px 30px;
+	margin-bottom: 50px;
+}
+
+.blog-title-container {
+	text-align: center;
+}
+
+.blog-author {
+	display: block;
+}
+
+.blog-content {
+	padding-top: 25px;
+}
+
+//Add BLOG
+.quill-container {
+	margin-bottom: 20px;
+}
+
+div.ql-editor {
+	min-height: 300px;
+}
+
+.label.blog-title {
+	color: black;
+	padding-left: 0px;
+	font-size: 16px;
+}
+
+.blog-title-label {
+	padding-left: 0px;
+	text-align: left;
+	margin-bottom: 15px;
+}
+
+.title-input {
+	width: 300px;
 }

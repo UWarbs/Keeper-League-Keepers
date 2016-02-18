@@ -91,8 +91,6 @@ class Blog extends React.Component {
 
 	render() {
 		let blogs = this.state.blogs || null;
-		console.log('blog render');
-		console.log(blogs);
 		let blogList = [];
 		
 		if(blogs) {

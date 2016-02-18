@@ -67,12 +67,12 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
 
   render() {
   	return (
-	  	<div className="form-container">
+	  	<div className="blog-creation-wrapper">
 	  		<form className="blog-form" onSubmit={this.handleSubmit}>
 	  			<div className="col-md-12">
-						<div className="col-md-6">
-							<label className="label" htmlFor="title">Title</label>
-							<input type="text" htmlFor="blog-title" name="title" value={this.state.title} onChange={this.handleTitleChange} required/>
+						<div className="col-md-6 blog-title-label">
+							<label className="label blog-title" htmlFor="title">Title</label>
+							<input className="title-input" type="text" htmlFor="blog-title" name="title" value={this.state.title} onChange={this.handleTitleChange} required/>
 						</div>
 					</div>
 
