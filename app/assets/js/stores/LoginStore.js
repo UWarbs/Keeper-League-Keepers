@@ -49,7 +49,7 @@ class LoginStore extends EventEmitter {
 	}
 
 	//getters for the properties it got from the action.
-  getUser() {
+  get user() {
   	console.log('getUser() function.');
   	console.log(this._user);
     return this._user;

@@ -157,7 +157,7 @@ class PlayerSearch extends React.Component {
 			}else {
 				var filters = ['first_name', 'last_name'];
 				fullPlayerList = potentialPlayers.filter(this.refs.search.filter(filters));
-				fullPlayerList.forEach(function(player, index, array) { //TODO: arrow func 
+				fullPlayerList.forEach(function(player, index, array) { 
 					playerNameList.push(player);
 				});
 			}

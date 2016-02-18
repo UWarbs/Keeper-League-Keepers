@@ -115,7 +115,7 @@ class App extends React.Component {
   
   onChange() {
   	console.log('LOGIN STORE THROWS CHANGE')
-  	let user = LoginStore.getUser() || null;
+  	let user = LoginStore.user || null;
   	this.setState({
   		user: user
   	});
@@ -150,7 +150,7 @@ render((
       <Route path="top/:id" component={ TopList } />
       <Route path="admin/add-player" component={ AddPlayer } onEnter={ requireAuth } />
       <Route path="admin/edit-player/:id" component={ AddPlayer } />
-      <Route path="admin/add-post" component={AddBlog} />
+      <Route path="admin/add-post" component={AddBlog} onEnter={ requireAuth } />
       <Route path="blog" component={ Blog } />
       <Route path="login" component={ Login } />
       <Route path="create" component={ Create } onEnter={ requireAuth } />

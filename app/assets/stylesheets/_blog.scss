@@ -1,1 +1,10 @@
 @import "variables";
+
+.blog-page-wrapper {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.blog-post-container {
+	@extend .top-position-list;
+}

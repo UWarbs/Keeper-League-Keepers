@@ -49,5 +49,14 @@ module.exports = {
 				list: list
 			});
 		});
+	},
+	getAllBlogPosts: function() {
+		Api.get('/api/all-blogs')
+		.then(function(blogs) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_ALL_BLOGS,
+				blogs: blogs
+			});
+		});
 	}
 };

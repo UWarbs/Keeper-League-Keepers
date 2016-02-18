@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 
 import AuthenticatedComponent from '../admin/AuthenticatedComponent.jsx';
 import BlogStore from '../../stores/BlogStore';
+import AuthAction from '../../actions/AuthAction';
 
 export default AuthenticatedComponent(class AddBlog extends React.Component {
 	constructor() {
@@ -11,6 +12,7 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
 		this.onChange = this.onChange.bind(this);
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleContentChange = this.handleContentChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 		this.state = {
 			title: null,
 			author: null,
@@ -23,7 +25,7 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   }
 
 	componentDidMount() {
-
+		this.setState({author: this.props.user.username})
 	}
 
 	componentWillUnmount() {
@@ -31,7 +33,7 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   }
 
   handleTitleChange(e) {
-    this.setState({firstName: e.target.value});
+    this.setState({title: e.target.value});
   }
   
   handleContentChange(e) {
@@ -50,7 +52,6 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
 
   	this.setState({
   		title: null,
-  		author: null,
   		content: null
   	});
   }
@@ -65,20 +66,24 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   }
 
   render() {
-  	<div className="form-container">
-  		<form className="blog-form">
-  			<div className="col-md-12">
-					<div className="col-md-6">
-						<label className="label" htmlFor="title">Title</label>
-						<input type="text" htmlFor="blog-title" name="title" value={this.state.title} onChange={this.handleTitleChange} required/>
+  	return (
+	  	<div className="form-container">
+	  		<form className="blog-form" onSubmit={this.handleSubmit}>
+	  			<div className="col-md-12">
+						<div className="col-md-6">
+							<label className="label" htmlFor="title">Title</label>
+							<input type="text" htmlFor="blog-title" name="title" value={this.state.title} onChange={this.handleTitleChange} required/>
+						</div>
 					</div>
-				</div>
 
-				<div className="col-md-12 quill-container">
-					<ReactQuill theme="snow" value={this.state.content} onChange={this.handleContentChange} />
-				</div>
-  		</form>
-  	</div>
+					<div className="col-md-12 quill-container">
+						<ReactQuill theme="snow" value={this.state.content} onChange={this.handleContentChange} />
+					</div>
+
+					<input className="btn btn-primary add-post" type="submit" htmlFor="submit-post" value="Submit Post" />
+	  		</form>
+	  	</div>
+  	)
   }
 
 })

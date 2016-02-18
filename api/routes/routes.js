@@ -79,6 +79,20 @@ exports.register = function(server, options, next) {
 		},
 
 		{
+	    method: 'GET',
+		  path: '/api/all-blogs',
+		  handler: function(req, res) {
+		  	knex.select().table('blogs')
+		  		.then(function(blogs) {
+		  			return res(blogs);
+		  		}).catch(function(err) {
+		  			console.log(err);
+		  			return err;
+		  		});
+		  }
+		},
+
+		{
 			method: 'GET',
 			path: '/api/player/{id}',
 			handler: function(req, res) {

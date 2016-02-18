@@ -1,37 +1,29 @@
 "use strict";
 import React from 'react';
 import { Link }  from 'react-router'; //for editing link to blog-edit/:id etc
+import BlogStore from '../stores/BlogStore';
+import PlayerServerActions from '../actions/PlayerServerActions';
 
 
 class BlogPost extends React.Component {
-	constructor() {
-		super();
-		this.parseHtml = this.parseHtml.bind(this);
-	}
-
-  parseHtml() {
-  	return {__html: this.props.blog.contents};
-  }
-
 	render() {
-
 		return (
 			<section className="blog-post-container">
-				<BlogTitle />
-				<BlogContent />
+				<BlogTitle title={this.props.title} author={this.props.author} date={this.props.date}/>
+				<BlogContent content={this.props.content} />
 			</section>
     )
 	}
 }
-//Blog Post Proptypes
-// BlogPost.propTypes = {
-// 	title: React.PropTypes.String,
-// 	author: React.Proptypes.String,
-// 	date: React.PropTypes.String,
-// 	content: React.PropTypes.String
-// };
 
-module.exports = BlogPost;
+//Blog Post Proptypes
+BlogPost.propTypes = {
+	title: React.PropTypes.String,
+	author: React.PropTypes.String,
+	date: React.PropTypes.String,
+	content: React.PropTypes.String
+};
+
 
 class BlogTitle extends React.Component {
 	render() {
@@ -49,11 +41,19 @@ class BlogTitle extends React.Component {
 }
 
 class BlogContent extends React.Component {
+	constructor() {
+		super();
+		this.parseHtml = this.parseHtml.bind(this);
+	}
+  
+  parseHtml() {
+  	return {__html: this.props.content};
+  }
+
 	render() {
-		let content = this.props.content || 'Blah blah blah blah blah blah blah';
 		return (
 			<section className="blog-content-container">
-				<div className="blog-content">{content}</div>
+				<div className="blog-content" dangerouslySetInnerHTML={this.parseHtml()}></div>
 			</section>
 		)
 	}
@@ -63,19 +63,54 @@ class BlogContent extends React.Component {
 class Blog extends React.Component {
 	constructor() {
 		super()
+		this.onChange = this.onChange.bind(this);
 		this.state = {
-			blogs: null  //rather not start null, maybe load top 5?
+			blogs: null  
 		}
 	}
+
+	componentWillMount() {
+    BlogStore.addChangeListener(this.onChange);
+  }
+
+	componentDidMount() {
+		PlayerServerActions.getAllBlogPosts();
+	}
+
+	componentWillUnmount() {
+    BlogStore.removeChangeListener(this.onChange);
+  }
+
+  onChange() {
+		this.setState({
+	  	blogs: BlogStore.getAllPosts()
+	  });  		
+  }
 
 	//on load - foreach blog in blogs create new <BlogPost author={} date={} title={} content={} />
 
 	render() {
-		//let blogsToLoad = []
-		// {blogs}
+		let blogs = this.state.blogs || null;
+		console.log('blog render');
+		console.log(blogs);
+		let blogList = [];
+		
+		if(blogs) {
+			blogs.forEach(function(blog, index, array) {
+				blogList.push(<BlogPost key={blog.id} title={blog.title} author={blog.author} date={blog.created_at} content={blog.content} />);
+			});			
+		}
+
+
+		return (
+			<div className="blog-page-wrapper">
+				{blogList}
+			</div>
+		)
 	}
 }
 
+module.exports = Blog;
 
 /*
 Blog
