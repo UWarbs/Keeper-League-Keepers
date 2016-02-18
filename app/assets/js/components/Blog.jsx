@@ -18,10 +18,10 @@ class BlogPost extends React.Component {
 
 //Blog Post Proptypes
 BlogPost.propTypes = {
-	title: React.PropTypes.String,
-	author: React.PropTypes.String,
-	date: React.PropTypes.String,
-	content: React.PropTypes.String
+	title: React.PropTypes.string,
+	author: React.PropTypes.string,
+	date: React.PropTypes.string,
+	content: React.PropTypes.string
 };
 
 
@@ -95,7 +95,12 @@ class Blog extends React.Component {
 		
 		if(blogs) {
 			blogs.forEach(function(blog, index, array) {
-				blogList.push(<BlogPost key={blog.id} title={blog.title} author={blog.author} date={blog.created_at} content={blog.content} />);
+				let formatDate = new Date(blog.created_at);
+				let day = formatDate.getDate();
+				let month = formatDate.getMonth();
+				let year = formatDate.getFullYear();
+				let finalDate = month + '-' + day + '-' + year;
+				blogList.push(<BlogPost key={blog.id} title={blog.title} author={blog.author} date={finalDate} content={blog.content} />);
 			});			
 		}
 

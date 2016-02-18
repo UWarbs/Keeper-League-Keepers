@@ -6,7 +6,6 @@ import Constants from '../constants/Constants';
 
 export default {
 	createUser: (jwt) => {
-		console.log(jwt);
 		//save JWT in localstorage
 		localStorage.setItem('jwt', jwt);
 		//dispatch action to all stores
@@ -17,8 +16,6 @@ export default {
 	},
 
 	loginUser: (jwt) => {
-		console.log('login user called with this jwt');
-		console.log(jwt);
 		//save JWT in localstorage
 		localStorage.setItem('jwt', jwt);
 		//dispatch action to all stores

@@ -12,7 +12,7 @@ class TopListItem extends React.Component {
 		let rank = this.props.rank;
 		return (
 			<li className="top-position-list">
-				<p><strong>#{rank}: {player.first_name} {player.last_name}, {player.team} ({player.rating})</strong></p>
+				<p className="player-card-info"><strong>#{rank}: {player.first_name} {player.last_name}, {player.team} ({player.rating})</strong></p>
 				<p>{player.writeup}</p>
 			</li>
 		);

@@ -131,7 +131,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 					<div className="col-md-12">
 						<div className="col-md-6">
 							<label className="label" htmlFor="position">Position</label>
-							<select className="form-control" htmlFor="create-player" value={this.state.position} onChange={this.handlePositionChange} required>
+							<select className="form-control create-select" htmlFor="create-player" value={this.state.position} onChange={this.handlePositionChange} required>
 								<option value={position}>{position}</option>
 								<option value="Quarterback">Quarterback</option>
 								<option value="Kicker">Kicker</option>
@@ -143,7 +143,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 						
 						<div className="col-md-6">
 							<label className="label" htmlFor="team">Team</label>
-							<select className="form-control" htmlFor="create-player" value={this.state.team} onChange={this.handleTeamChange} required> 
+							<select className="form-control create-select" htmlFor="create-player" value={this.state.team} onChange={this.handleTeamChange} required> 
 								<option value={team}>{team}</option>
 								<option value="Seattle Seahawks">SEA</option>
 								<option value="San Francisco 49ers">SF</option>
