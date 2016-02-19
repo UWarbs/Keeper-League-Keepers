@@ -12,7 +12,6 @@
 	background-size: cover;	
 	position: relative;
 	background-position: center 30%;
-	min-height: 300px;
 }
 .header-container {
 	text-align: center;
@@ -46,11 +45,13 @@
 
 .hero-container {
 	text-align: center;
+	position: relative;
 	.marketing-copy {
 		color: white;
 		text-shadow: $text-shadow;
-		width: 50%;
+		width: 65%;
     margin: 30px auto;
+    margin-bottom: 50px;
 	}
 }
 

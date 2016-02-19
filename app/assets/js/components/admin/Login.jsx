@@ -53,7 +53,7 @@ class Login extends React.Component {
 		}
 		return (
 			<div>
-				<h2 className="page-header">Log in</h2>
+				<h3 className="page-header">Log in</h3>
 				<form role="form">
 				<div className="form-group">
 					{errorEl}

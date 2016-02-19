@@ -73,7 +73,7 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   render() {
   	return (
 	  	<div className="blog-creation-wrapper">
-	  		<h2 className="page-header">New Blog Post</h2>
+	  		<h3 className="page-header">New Blog Post</h3>
 	  		<form className="blog-form" onSubmit={this.handleSubmit}>
 	  			<div className="col-md-12">
 						<div className="col-md-6 blog-title-label">

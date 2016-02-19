@@ -111,7 +111,7 @@ class Blog extends React.Component {
 
 		return (
 			<div className="blog-page-wrapper">
-				<h2 className="page-header">KLK BLOG</h2>
+				<h3 className="page-header">KLK BLOG</h3>
 				{blogList}
 			</div>
 		)

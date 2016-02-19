@@ -63,25 +63,27 @@ class Header extends React.Component {
 
 		return (
 			<div className="header">
-				<nav className="header-container">
-					<div className="logo"><Link to={ '/' }>KLK</Link></div>
-					<h1 className="site-title">Keeper League Keepers</h1>
-					<div className="header-link-container">
-						{logoutLink}
-						{addBlogPost}
-						{loginLink}
-						{addPlayer}
+				<div className="container">
+					<nav className="header-container row">
+						<div className="logo col-md-4"><Link to={ '/' }>KLK</Link></div>
+						<h1 className="site-title col-md-4">Keeper League Keepers</h1>
+						<div className="header-link-container col-md-4">
+							{logoutLink}
+							{addBlogPost}
+							{loginLink}
+							{addPlayer}
+						</div>
+					</nav>
+					<div className="hero-container clearfix">
+						<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football dynasty league site.</h2>
+						<section className="section-tabs col-md-12">
+							<Link className="section-link" to={ '/' }><div className={"section-tab " + (route == '/' ? 'selected' : '')} onClick={this.handleClick}>Search</div></Link>&nbsp;
+							<Link className="section-link" to={ '/top/qb' }><div className={"section-tab " + (route == '/top/qb' ? 'selected' : '')} onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
+							<Link className="section-link" to={ '/top/rb' }><div className={"section-tab " + (route == '/top/rb' ? 'selected' : '')} onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
+							<Link className="section-link" to={ '/top/wr' }><div className={"section-tab " + (route == '/top/wr' ? 'selected' : '')} onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
+							<Link className="section-link" to={ '/blog' }><div className={"section-tab " + (route == '/blog' ? 'selected' : '')} onClick={this.handleClick}>Blog</div></Link>&nbsp;
+						</section>
 					</div>
-				</nav>
-				<div className="hero-container">
-					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football dynasty league site.</h2>
-					<section className="section-tabs">
-						<Link className="section-link" to={ '/' }><div className={"section-tab " + (route == '/' ? 'selected' : '')} onClick={this.handleClick}>Search</div></Link>&nbsp;
-						<Link className="section-link" to={ '/top/qb' }><div className={"section-tab " + (route == '/top/qb' ? 'selected' : '')} onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
-						<Link className="section-link" to={ '/top/rb' }><div className={"section-tab " + (route == '/top/rb' ? 'selected' : '')} onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
-						<Link className="section-link" to={ '/top/wr' }><div className={"section-tab " + (route == '/top/wr' ? 'selected' : '')} onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
-						<Link className="section-link" to={ '/blog' }><div className={"section-tab " + (route == '/blog' ? 'selected' : '')} onClick={this.handleClick}>Blog</div></Link>&nbsp;
-					</section>
 				</div>
 			</div>
 		);

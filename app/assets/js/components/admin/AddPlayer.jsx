@@ -115,7 +115,7 @@ export default AuthenticatedComponent(class AddPlayer extends React.Component {
 		//Best practices WILL be used. REASON. WILL. PREVAIL.
 		return(
 			<div className="form-container">
-				<h2 className="page-header">New Player</h2>
+				<h3 className="page-header">New Player</h3>
 				<form className="add-player-form" name="create-player" onSubmit={this.handleSubmit}>
 					
 					<div className="col-md-12">

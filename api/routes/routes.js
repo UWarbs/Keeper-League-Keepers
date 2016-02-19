@@ -82,7 +82,7 @@ exports.register = function(server, options, next) {
 	    method: 'GET',
 		  path: '/api/all-blogs',
 		  handler: function(req, res) {
-		  	knex.select().table('blogs')
+		  	knex.select().table('blogs').orderBy('id', 'desc')
 		  		.then(function(blogs) {
 		  			return res(blogs);
 		  		}).catch(function(err) {
