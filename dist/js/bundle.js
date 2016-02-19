@@ -42211,7 +42211,7 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
 	/** @author Brian Cavalier */
 	/** @author John Hann */
 
@@ -45251,6 +45251,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
 	var _ListStore = __webpack_require__(299);
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
@@ -45285,6 +45287,7 @@
 			value: function render() {
 				var player = this.props.player;
 				var rank = this.props.rank;
+				var id = this.props.player.id;
 				return _react2.default.createElement(
 					'li',
 					{ className: 'top-position-list' },
@@ -45306,6 +45309,11 @@
 							player.rating,
 							')'
 						)
+					),
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ className: 'player-edit-link', to: '/admin/edit-player/' + id },
+						'EDIT PLAYER'
 					),
 					_react2.default.createElement(
 						'p',
