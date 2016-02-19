@@ -8,7 +8,7 @@ import PlayerServerActions from '../actions/PlayerServerActions';
 class BlogPost extends React.Component {
 	render() {
 		return (
-			<section className="blog-post-container">
+			<section className="blog-post-container col-md-12">
 				<BlogTitle title={this.props.title} author={this.props.author} date={this.props.date}/>
 				<BlogContent content={this.props.content} />
 			</section>

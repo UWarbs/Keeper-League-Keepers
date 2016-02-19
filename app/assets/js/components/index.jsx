@@ -126,8 +126,10 @@ class App extends React.Component {
   	return (
   		<div>
   			<Header user={this.state.user} path={this.props.location.pathname} />	
-  			<div className="main-page-container">
-  				{this.props.children}
+  			<div className="main-page-container container">
+  				<div className="main-page-row row">
+  					{this.props.children}
+  				</div>
   			</div>
   		</div>
   		)
