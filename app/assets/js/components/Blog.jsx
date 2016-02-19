@@ -97,7 +97,7 @@ class Blog extends React.Component {
 			blogs.forEach(function(blog, index, array) {
 				let formatDate = new Date(blog.created_at);
 				let day = formatDate.getDate();
-				let month = formatDate.getMonth();
+				let month = formatDate.getMonth() + 1;
 				let year = formatDate.getFullYear();
 				let finalDate = month + '-' + day + '-' + year;
 				blogList.push(<BlogPost key={blog.id} title={blog.title} author={blog.author} date={finalDate} content={blog.content} />);

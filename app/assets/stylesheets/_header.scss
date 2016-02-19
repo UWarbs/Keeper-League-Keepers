@@ -96,6 +96,10 @@
     1px 1px 0 #000;  
 }
 
-.admin-link {
+.admin-link,
+.admin-link:hover {
 	margin-right: 5px;
+	color: white;
+  text-transform: uppercase;
+  font-weight: 700;
 }
