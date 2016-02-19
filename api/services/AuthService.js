@@ -35,8 +35,8 @@ class AuthService {
 	}
 
 	login(username, password) {
-		console.log('login called with:');
-		console.log(username, password);
+		// console.log('login called with:');
+		// console.log(username, password);
 		
 		return when(request({
 			url: '/sessions/create',
@@ -49,10 +49,15 @@ class AuthService {
 		}))
 		.then(function(response) {
 			//get JWT back
-			let jwt = response.id_token;
-			//trigger LoginAction and give jwt
-			AuthActions.loginUser(jwt);
-			return true;
+			let status = response.status;
+			if(status === 201) {
+				let jwt = response.id_token;
+				//trigger LoginAction and give jwt
+				AuthActions.loginUser(jwt);
+				return { loggedIn: true };
+			}else {
+				return { loggedIn: false, message: response.message };
+			}
 		})
 		.catch(function(err) {
 			console.log('error in authservice logging in user');

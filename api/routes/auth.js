@@ -22,16 +22,8 @@ function getUsers(knex) {
 }
 
 function addNewUser(knex, user) {
-	console.log('ADD NEW FUNC');
-	console.log(user);
-	//bcrypt password here.
-	
 	bcrypt.genSalt(10, function(err, salt) {
 		bcrypt.hash(user.password, salt, function(err, hash) {
-
-			console.log('HASH');
-			console.log(hash);
-
 			knex('users').insert({
 				username: user.username,
 				password: hash,
@@ -132,18 +124,17 @@ exports.register = function(server, options, next) {
 						
 						var user = _.find(users, userScheme.userSearch);
 
-						var correctPassword = bcrypt.compareSync(req.payload.password, user.password); 
-						console.log('checking pw...');
-						console.log(correctPassword);
-					  
 					  if (!user) {
 					  	console.log('didnt find user');
-					    return res({status: 401, message: 'Username or password do not match', user: user});
-					  }			
+					    return res({status: 401, message: 'Incorrect Username/Password'});
+					  }									
+
+					  var correctPassword = bcrypt.compareSync(req.payload.password, user.password); 
+						console.log('checking pw...');
 					  
 					  if (!correctPassword) {
 					  	console.log('wrong password');
-					    return res({status: 401, message: 'Username or password do not match'});
+					    return res({status: 401, message: 'Incorrect Username/Password'});
 					  }
 
 					  return res({
