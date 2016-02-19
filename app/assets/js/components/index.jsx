@@ -155,7 +155,7 @@ render((
       <Route path="admin/add-post" component={AddBlog} onEnter={ requireAuth } />
       <Route path="blog" component={ Blog } />
       <Route path="login" component={ Login } />
-      <Route path="create" component={ Create } onEnter={ requireAuth } />
+      <Route path="create" component={ Create } />
     </Route>
   </Router>
 ), document.getElementById('app-container') )
