@@ -4,14 +4,14 @@
 
 // knex.schema.createTable('players', function(table) {
 //   table.increments('id');
-//   table.string('first_name');
-//   table.string('last_name');
-//   table.string('position');
-//   table.string('position_abbrev');
-//   table.string('team');
-//   table.string('team_abbrev');
-// 	 table.string('writeup');
-//   table.integer('rating');
+//   table.string('first_name').notNullable();
+//   table.string('last_name').notNullable();
+//   table.string('position').notNullable();
+//   table.string('position_abbrev').notNullable();
+//   table.string('team').notNullable();
+//   table.string('team_abbrev').notNullable();
+// 	 table.string('writeup').notNullable();
+//   table.integer('rating').notNullable();
 //   table.integer('age')
 //   table.integer('experience');
 // 	 table.timestamp('created_at').defaultTo(knex.fn.now())
@@ -23,9 +23,9 @@
 
 // knex.schema.createTable('users', function(table) {
 //   table.increments('id');
-//   table.string('username');
-//   table.string('email').unique();
-//   table.string('password', 60);
+//   table.string('username').notNullable();
+//   table.string('email').notNullable().unique();
+//   table.string('password', 60).notNullable();
 // 	 table.timestamp('created_at').defaultTo(knex.fn.now())
 //   table.timestamp('updated_at').defaultTo(knex.fn.now())
 // }).catch(function(e) {
