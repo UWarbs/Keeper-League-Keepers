@@ -9,7 +9,7 @@ export default (ComposedComponent) => {
 		// static willTransitionTo(transition) {
 		// 	if (!LoginStore.isLoggedIn()) {
 		// 		console.log('supposed to transition');
-		// 		transition.redirect('/login', {}, {'nextPath' : transition.path});
+		// 		transition.redirect('/', {}, {'nextPath' : transition.path});
 		// 	}
 		// }
 
@@ -35,7 +35,7 @@ export default (ComposedComponent) => {
 			LoginStore.addChangeListener(this.changeListener);
 		}
 
-		ComponentWIllUnMount() {
+		componentWillUnMount() {
 			LoginStore.removeChangeListener(this.changeListener);
 		}
 

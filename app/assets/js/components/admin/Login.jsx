@@ -1,6 +1,7 @@
 'use strict';
 import Auth from '../../../../../api/services/AuthService';
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 
 class Login extends React.Component {
@@ -17,9 +18,10 @@ class Login extends React.Component {
 	login(e) {
 		e.preventDefault();
 		Auth.login(this.state.user, this.state.password)
-			.catch(function(err) {
-				console.log('Error logging in', err);
-			});
+		.catch(function(err) {
+			console.log('Error logging in', err);
+		});
+		browserHistory.push('/');
 	}
 
 	handleNameChange(e) {
@@ -33,6 +35,7 @@ class Login extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2 className="page-header">Log in</h2>
 				<form role="form">
 				<div className="form-group">
 					<input type="text" value={this.state.username} onChange={this.handleNameChange}  placeholder="Username" />

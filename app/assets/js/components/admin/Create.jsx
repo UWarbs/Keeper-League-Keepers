@@ -33,6 +33,7 @@ class Create extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2 className="page-header">Create User</h2>
 				<form role="form">
 				<div className="form-group">
 					<input type="text" value={this.state.username} onChange={this.handleNameChange}  placeholder="Username" />

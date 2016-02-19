@@ -37,10 +37,11 @@ class Header extends React.Component {
 
 	logoutUser() {
 		AuthActions.logoutUser();
+		browserHistory.push('/');
 	}
 	
 	render () {
-		let isLoggedIn = LoginStore.isLoggedIn() || this.props.user;
+		let isLoggedIn = this.props.user; //LoginStore.isLoggedIn() || this.props.user;
 		let route = this.props.path;
 		console.log('index render with user: ', isLoggedIn);	
 		let addPlayer;
@@ -49,15 +50,15 @@ class Header extends React.Component {
 		let addBlogPost;
 		
 		if(isLoggedIn) { //TODO: Add changelistener for when someone logs in.
-			addPlayer = <Link className="section-link" to={ '/admin/add-player' }><div onClick={this.handleClick} className={"section-tab " + (route == '/admin/add-player' ? 'selected' : '')}>Add Player</div></Link>;
-			addBlogPost = <Link className="section-link" to={ '/admin/add-post' }><div onClick={this.handleClick} className={"section-tab " + (route == '/admin/add-post' ? 'selected' : '')}>New Post</div></Link>;
-			logoutLink = <a onClick={this.logoutUser}>Log Out</a>;
+			addPlayer = <Link className="admin-link" to={ '/admin/add-player' }>Add Player</Link>;
+			addBlogPost = <Link className="admin-link" to={ '/admin/add-post' }>New Post</Link>;
+			logoutLink = <a className="admin-link" onClick={this.logoutUser}>Log Out</a>;
 			loginLink = null;
 		}else {
 			addPlayer = null;
 			addBlogPost = null;
 			logoutLink = null;
-			loginLink = <Link className="section-link" to={ '/login' }><div onClick={this.handleClick} className={"section-tab " + (route == '/login' ? 'selected' : '')}>Login</div></Link>;
+			loginLink = <Link className="admin-link" to={ '/login' }>Login</Link>;
 		}
 
 		return (
@@ -67,19 +68,19 @@ class Header extends React.Component {
 					<h1 className="site-title">Keeper League Keepers</h1>
 					<div className="header-link-container">
 						{logoutLink}
+						{addBlogPost}
+						{loginLink}
+						{addPlayer}
 					</div>
 				</nav>
 				<div className="hero-container">
-					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football keeper league site.</h2>
+					<h2 className="marketing-copy">Welcome to Keeper League Keepers, the premier Fantasy Football dynasty league site.</h2>
 					<section className="section-tabs">
 						<Link className="section-link" to={ '/' }><div className={"section-tab " + (route == '/' ? 'selected' : '')} onClick={this.handleClick}>Search</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/qb' }><div className={"section-tab " + (route == '/top/qb' ? 'selected' : '')} onClick={this.handleClick}>Top QBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/rb' }><div className={"section-tab " + (route == '/top/rb' ? 'selected' : '')} onClick={this.handleClick}>Top RBs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/top/wr' }><div className={"section-tab " + (route == '/top/wr' ? 'selected' : '')} onClick={this.handleClick}>Top WRs</div></Link>&nbsp;
 						<Link className="section-link" to={ '/blog' }><div className={"section-tab " + (route == '/blog' ? 'selected' : '')} onClick={this.handleClick}>Blog</div></Link>&nbsp;
-						{addBlogPost}
-						{loginLink}
-						{addPlayer}
 					</section>
 				</div>
 			</div>
@@ -109,16 +110,16 @@ class App extends React.Component {
 		}
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount() { //Will app ever unmount?
     LoginStore.removeChangeListener(this.onChange);
   }
   
   onChange() {
-  	console.log('LOGIN STORE THROWS CHANGE')
+  	console.log('LOGIN STORE THROWS CHANGE');
   	let user = LoginStore.user || null;
-  	this.setState({
-  		user: user
-  	});
+	  this.setState({
+	  	user: user
+	  });  		
   }
 
   render() {

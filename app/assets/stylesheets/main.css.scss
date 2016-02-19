@@ -2,6 +2,7 @@
 @import "forms";
 @import "header";
 @import "overrides";
+@import "pages"; 
 @import "player_search";
 @import "quill";
 @import "top_lists";
@@ -45,6 +46,12 @@ h3 {
 p {
 	line-height: 1.6em;
 	font-family:'Montserrat', sans-serif;
+}
+
+a,
+a:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
 
 #app-container {

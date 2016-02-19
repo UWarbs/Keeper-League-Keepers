@@ -1,6 +1,6 @@
 {
   "name": "keeper-league-keepers",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Website for rating fantasy league keepers",
   "main": "index.js",
   "scripts": {

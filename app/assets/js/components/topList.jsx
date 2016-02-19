@@ -72,7 +72,7 @@ class TopListContainer extends React.Component {
 
 		return (
 			<div className="top-list-container">
-				<h2 className="top-list-header">TOP 10 {position}s</h2>
+				<h2 className="page-header">TOP 10 {position}s</h2>
 				<ul className="top-list-ul">
 					{topList}
 				</ul>
