@@ -381,7 +381,7 @@
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-post', component: _AddBlog2.default, onEnter: requireAuth }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'blog', component: _Blog2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default, onEnter: requireAuth })
+			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default })
 		)
 	), document.getElementById('app-container'));
 
