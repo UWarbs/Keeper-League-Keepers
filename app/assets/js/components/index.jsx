@@ -154,6 +154,7 @@ render((
       <Route path="admin/add-player" component={ AddPlayer } onEnter={ requireAuth } />
       <Route path="admin/edit-player/:id" component={ AddPlayer } />
       <Route path="admin/add-post" component={AddBlog} onEnter={ requireAuth } />
+      <Route path="admin/edit-blog/:id" component={ AddBlog } />
       <Route path="blog" component={ Blog } />
       <Route path="login" component={ Login } />
       <Route path="create" component={ Create } onEnter={ requireAuth } />

@@ -2,14 +2,14 @@
 import React from 'react';
 import { Link }  from 'react-router'; //for editing link to blog-edit/:id etc
 import BlogStore from '../stores/BlogStore';
-import PlayerServerActions from '../actions/PlayerServerActions';
+import AuthAction from '../actions/AuthAction';
 
 
 class BlogPost extends React.Component {
 	render() {
 		return (
 			<section className="blog-post-container col-md-12">
-				<BlogTitle title={this.props.title} author={this.props.author} date={this.props.date}/>
+				<BlogTitle id={this.props.id} title={this.props.title} author={this.props.author} date={this.props.date}/>
 				<BlogContent content={this.props.content} />
 			</section>
     )
@@ -21,7 +21,8 @@ BlogPost.propTypes = {
 	title: React.PropTypes.string,
 	author: React.PropTypes.string,
 	date: React.PropTypes.string,
-	content: React.PropTypes.string
+	content: React.PropTypes.string,
+	id: React.PropTypes.number
 };
 
 
@@ -30,8 +31,11 @@ class BlogTitle extends React.Component {
 		let title = this.props.title || 'test';
 		let author = this.props.author || 'john smith';
 		let date = this.props.date || 'Feb 23, 1991';
+		let id = this.props.id;
+		console.log(this.props);
 		return (
 			<div className="blog-title-container">
+				<span className="blog-edit"><Link to={ `/admin/edit-blog/${id}` }>EDIT POST</Link></span>
 				<h1 className="blog-title">{title}</h1>
 				<span className="blog-author">{author}</span>
 				<span className="blog-date">{date}</span>
@@ -74,7 +78,7 @@ class Blog extends React.Component {
   }
 
 	componentDidMount() {
-		PlayerServerActions.getAllBlogPosts();
+		AuthAction.getAllBlogPosts();
 	}
 
 	componentWillUnmount() {
@@ -100,7 +104,7 @@ class Blog extends React.Component {
 				let month = formatDate.getMonth() + 1;
 				let year = formatDate.getFullYear();
 				let finalDate = month + '-' + day + '-' + year;
-				blogList.push(<BlogPost key={blog.id} title={blog.title} author={blog.author} date={finalDate} content={blog.content} />);
+				blogList.push(<BlogPost key={blog.id} id={blog.id} title={blog.title} author={blog.author} date={finalDate} content={blog.content} />);
 			});			
 		}
 

@@ -373,6 +373,7 @@
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-player', component: _AddPlayer2.default, onEnter: requireAuth }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/edit-player/:id', component: _AddPlayer2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'admin/add-post', component: _AddBlog2.default, onEnter: requireAuth }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'admin/edit-blog/:id', component: _AddBlog2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'blog', component: _Blog2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'create', component: _Create2.default, onEnter: requireAuth })
@@ -26529,7 +26530,9 @@
 	  CREATE_USER: 'CREATE_USER',
 	  LOGOUT_USER: 'LOGOUT_USER',
 	  NEW_BLOG: 'NEW_BLOG',
-	  GET_ALL_BLOGS: 'GET_ALL_BLOGS'
+	  GET_ALL_BLOGS: 'GET_ALL_BLOGS',
+	  GET_SINGLE_BLOG: 'GET_SINGLE_BLOG',
+	  EDIT_BLOG: 'EDIT_BLOG'
 	};
 
 /***/ },
@@ -27173,14 +27176,6 @@
 					list: list
 				});
 			});
-		},
-		getAllBlogPosts: function getAllBlogPosts() {
-			Api.get('/api/all-blogs').then(function (blogs) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.GET_ALL_BLOGS,
-					blogs: blogs
-				});
-			});
 		}
 	};
 
@@ -27208,6 +27203,20 @@
 			});
 		},
 		getSinglePlayer: function getSinglePlayer(url) {
+			return new Promise(function (resolve, reject) {
+				request.get(url).end(function (err, res) {
+					if (err) {
+						console.error(err);
+					}
+					if (res.status === 404) {
+						reject();
+					} else {
+						resolve(JSON.parse(res.text));
+					}
+				});
+			});
+		},
+		getSingleBlogPost: function getSingleBlogPost(url) {
 			return new Promise(function (resolve, reject) {
 				request.get(url).end(function (err, res) {
 					if (err) {
@@ -28683,6 +28692,33 @@
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.NEW_BLOG,
 					content: content
+				});
+			});
+		},
+
+		getSingleBlogPost: function getSingleBlogPost(id) {
+			_Api2.default.getSingleBlogPost('/api/blog/' + id).then(function (blog) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.GET_SINGLE_BLOG,
+					blog: blog
+				});
+			});
+		},
+
+		editBlogPost: function editBlogPost(id, content) {
+			_Api2.default.post('/api/edit-blog/' + id, content).then(function (blog) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.EDIT_BLOG,
+					blog: blog
+				});
+			});
+		},
+
+		getAllBlogPosts: function getAllBlogPosts() {
+			_Api2.default.get('/api/all-blogs').then(function (blogs) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.GET_ALL_BLOGS,
+					blogs: blogs
 				});
 			});
 		}
@@ -40652,7 +40688,8 @@
 	    _this.state = {
 	      title: null,
 	      author: null,
-	      content: null
+	      content: null,
+	      id: null
 	    };
 	    return _this;
 	  }
@@ -40666,6 +40703,10 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.setState({ author: this.props.user.username });
+	      var id = this.props.params.id || null;
+	      if (id) {
+	        _AuthAction2.default.getSingleBlogPost(id);
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -40686,13 +40727,14 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
-	      // let id = this.props.params.id;
-	      // if (id) { //editing
-	      // 	PlayerServerActions.editPlayer(id, this.state);
-	      // }else { //newplayer
-	      // 	PlayerServerActions.addNewPlayer(this.state);
-	      // }
-	      _AuthAction2.default.createBlogPost(this.state);
+	      var id = this.state.id;
+	      if (id) {
+	        //editing
+	        _AuthAction2.default.editBlogPost(id, this.state);
+	      } else {
+	        //newplayer
+	        _AuthAction2.default.createBlogPost(this.state);
+	      }
 
 	      this.setState({
 	        title: null,
@@ -40702,11 +40744,12 @@
 	  }, {
 	    key: 'onChange',
 	    value: function onChange() {
-	      var blog = _BlogStore2.default.getSingleblog();
+	      var blog = _BlogStore2.default.getSingleBlog();
 	      this.setState({
 	        title: blog.title,
 	        author: blog.author,
-	        content: blog.content
+	        content: blog.content,
+	        id: blog.id
 	      });
 	    }
 	  }, {
@@ -40804,10 +40847,9 @@
 				setAllPosts(action.blogs);
 				BlogStore.emit(CHANGE_EVENT);
 				break;
-			case AppConstants.GET_BLOG:
-				setBlog(action.content);
+			case AppConstants.GET_SINGLE_BLOG:
+				setBlog(action.blog);
 				BlogStore.emit(CHANGE_EVENT);
-				break;
 			default:
 				return true;
 		}
@@ -40832,9 +40874,9 @@
 
 	var _BlogStore2 = _interopRequireDefault(_BlogStore);
 
-	var _PlayerServerActions = __webpack_require__(248);
+	var _AuthAction = __webpack_require__(253);
 
-	var _PlayerServerActions2 = _interopRequireDefault(_PlayerServerActions);
+	var _AuthAction2 = _interopRequireDefault(_AuthAction);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40859,7 +40901,7 @@
 				return _react2.default.createElement(
 					'section',
 					{ className: 'blog-post-container col-md-12' },
-					_react2.default.createElement(BlogTitle, { title: this.props.title, author: this.props.author, date: this.props.date }),
+					_react2.default.createElement(BlogTitle, { id: this.props.id, title: this.props.title, author: this.props.author, date: this.props.date }),
 					_react2.default.createElement(BlogContent, { content: this.props.content })
 				);
 			}
@@ -40874,7 +40916,8 @@
 		title: _react2.default.PropTypes.string,
 		author: _react2.default.PropTypes.string,
 		date: _react2.default.PropTypes.string,
-		content: _react2.default.PropTypes.string
+		content: _react2.default.PropTypes.string,
+		id: _react2.default.PropTypes.number
 	};
 
 	var BlogTitle = (function (_React$Component2) {
@@ -40892,9 +40935,20 @@
 				var title = this.props.title || 'test';
 				var author = this.props.author || 'john smith';
 				var date = this.props.date || 'Feb 23, 1991';
+				var id = this.props.id;
+				console.log(this.props);
 				return _react2.default.createElement(
 					'div',
 					{ className: 'blog-title-container' },
+					_react2.default.createElement(
+						'span',
+						{ className: 'blog-edit' },
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/admin/edit-blog/' + id },
+							'EDIT POST'
+						)
+					),
 					_react2.default.createElement(
 						'h1',
 						{ className: 'blog-title' },
@@ -40971,7 +41025,7 @@
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				_PlayerServerActions2.default.getAllBlogPosts();
+				_AuthAction2.default.getAllBlogPosts();
 			}
 		}, {
 			key: 'componentWillUnmount',
@@ -41001,7 +41055,7 @@
 						var month = formatDate.getMonth() + 1;
 						var year = formatDate.getFullYear();
 						var finalDate = month + '-' + day + '-' + year;
-						blogList.push(_react2.default.createElement(BlogPost, { key: blog.id, title: blog.title, author: blog.author, date: finalDate, content: blog.content }));
+						blogList.push(_react2.default.createElement(BlogPost, { key: blog.id, id: blog.id, title: blog.title, author: blog.author, date: finalDate, content: blog.content }));
 					});
 				}
 
@@ -44942,8 +44996,7 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/admin/edit-player/' + id },
-	          'EDIT PLAYER ',
-	          id
+	          'EDIT PLAYER'
 	        ),
 	        _react2.default.createElement(
 	          'h3',

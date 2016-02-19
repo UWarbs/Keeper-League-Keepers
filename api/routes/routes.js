@@ -126,6 +126,22 @@ exports.register = function(server, options, next) {
 		},
 
 		{
+			method: 'GET',
+			path: '/api/blog/{id}',
+			handler: function(req, res) {
+				var id = encodeURIComponent(req.params.id);
+				knex('blogs').where('id', id)
+				.then(function(blog) {
+					return(res(blog));
+				}).catch(function(err){
+					console.log(err);
+					return res(err);
+				});
+
+			}
+		},
+
+		{
 			method: 'POST',
 			path: '/api/new-blog',
 			handler: function(req, res) {
@@ -144,7 +160,28 @@ exports.register = function(server, options, next) {
 				});
 			}
 		},
-
+		
+		{
+			method: 'POST',
+			path: '/api/edit-blog/{id}',
+			handler: function(req, res) {
+				var data = req.payload;
+				var id = encodeURIComponent(req.params.id);
+				knex('blogs')
+				.where('id', id)
+				.update({
+					author: data.author,
+					title: data.title,
+					content: data.content,
+				}).then(function(data) {
+					console.log('succesful update');
+					return res(data);
+				}).catch(function(err) {
+					console.log(err);
+					return res(err);
+				});
+			}
+		},
 
 		{
 			method: 'POST',

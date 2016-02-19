@@ -16,7 +16,8 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
 		this.state = {
 			title: null,
 			author: null,
-			content: null
+			content: null,
+			id: null
 		}
 	}
 
@@ -25,7 +26,11 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   }
 
 	componentDidMount() {
-		this.setState({author: this.props.user.username})
+		this.setState({author: this.props.user.username});
+		let id = this.props.params.id || null;
+    if(id) {
+    	AuthAction.getSingleBlogPost(id); 	
+    }
 	}
 
 	componentWillUnmount() {
@@ -42,13 +47,12 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
 
   handleSubmit(e) {
   	e.preventDefault();
-  	// let id = this.props.params.id;
-  	// if (id) { //editing
-  	// 	PlayerServerActions.editPlayer(id, this.state);
-  	// }else { //newplayer
-  	// 	PlayerServerActions.addNewPlayer(this.state);
-  	// }
-		AuthAction.createBlogPost(this.state);
+  	let id = this.state.id;
+  	if (id) { //editing
+  		AuthAction.editBlogPost(id, this.state);
+  	}else { //newplayer
+  		AuthAction.createBlogPost(this.state);
+  	}
 
   	this.setState({
   		title: null,
@@ -57,11 +61,12 @@ export default AuthenticatedComponent(class AddBlog extends React.Component {
   }
 
   onChange() {
-  	let blog = BlogStore.getSingleblog();
+  	let blog = BlogStore.getSingleBlog();
   	this.setState({
   		title: blog.title,
   		author: blog.author,
-  		content: blog.content
+  		content: blog.content,
+  		id: blog.id
   	});
   }
 

@@ -45,7 +45,7 @@ class PlayerCard extends React.Component {
       		<p className="player-card-pos">{player.position_abbrev}</p>
       		<p className="player-card-team">{player.team}</p>
       	</span>
-      	<Link to={ `/admin/edit-player/${id}` }>EDIT PLAYER {id}</Link>
+      	<Link to={ `/admin/edit-player/${id}` }>EDIT PLAYER</Link>
       	<h3 className="player-card-name">{player.first_name}&nbsp;{player.last_name}</h3>
       	<p className="player-card-writeup" dangerouslySetInnerHTML={this.parseHtml()} />
       </div>

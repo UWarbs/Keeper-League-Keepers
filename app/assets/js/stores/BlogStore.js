@@ -45,10 +45,9 @@ AppDispatcher.register(function(payload) {
 			setAllPosts(action.blogs);
 			BlogStore.emit(CHANGE_EVENT);
 			break;
-		case AppConstants.GET_BLOG:
-			setBlog(action.content);
-			BlogStore.emit(CHANGE_EVENT);
-			break;
+		case AppConstants.GET_SINGLE_BLOG:
+			setBlog(action.blog);
+			BlogStore.emit(CHANGE_EVENT);			
     default: 
     	return true;
 	}

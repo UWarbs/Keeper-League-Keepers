@@ -30,6 +30,20 @@ module.exports = {
 				});			
 		});
 	},
+	getSingleBlogPost: function(url) {
+		return new Promise(function (resolve, reject) {
+			request
+				.get(url)
+				.end(function (err, res) {
+					if (err) { console.error(err); }
+					if (res.status === 404) {
+						reject();
+					}else {
+						resolve(JSON.parse(res.text));
+					}
+				});			
+		});
+	},
 	post: function(url, data) {
 		return new Promise(function (resolve, reject) {
 			request

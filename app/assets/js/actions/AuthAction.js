@@ -41,5 +41,35 @@ export default {
 				content: content
 			});
 		});
+	},
+
+	getSingleBlogPost: (id) => {
+		Api.getSingleBlogPost('/api/blog/' + id)
+		.then(function(blog) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_SINGLE_BLOG,
+				blog: blog
+			});			
+		})
+	},
+
+	editBlogPost: (id, content) => {
+		Api.post('/api/edit-blog/' + id, content)
+		.then(function(blog) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.EDIT_BLOG,
+				blog: blog
+			});
+		});		
+	},
+
+	getAllBlogPosts: () => {
+		Api.get('/api/all-blogs')
+		.then(function(blogs) {
+			AppDispatcher.handleServerAction({
+				actionType: Constants.GET_ALL_BLOGS,
+				blogs: blogs
+			});
+		});
 	}
 }
