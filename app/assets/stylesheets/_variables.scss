@@ -1,9 +1,16 @@
 $font-smooth: rgba(0,0,0,.01) 0 0 1px;
 $text-shadow: 1px 1px 1px #000;
-$box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);
+$box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
 $site-font: 'Play', sans-serif;
 $paragraph_font: 'Montserrat', 'sans-serif';
-$blue: #3872D5;
+
+
+$dark_blue: #193441;
+$blue: #3E606F;  //TABS
+$light_blue: #91AA9D; //TAB HOVER 
+$tan_blue: #D1DBBD;
+$white: #FCFFF5;
+
 $grey: #F1F1F1;
-$hover-blue: #4763FF;
+$hover-blue: #91AA9D;
 $f_weight_bold: 700;

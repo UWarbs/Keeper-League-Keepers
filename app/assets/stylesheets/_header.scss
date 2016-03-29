@@ -5,7 +5,7 @@
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.3)
     ),url('../images/field_bg.png');
-	// background: white;
+	// background: $white;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
@@ -15,28 +15,32 @@
 }
 .header-container {
 	text-align: center;
-	padding: 20px;
+	padding: 0px 20px;
+	height: 45px;
+	padding-top: 12px;
+	background-color: $blue;
 	.logo,
 	.site-title,
 	.header-link-container {
 		display: inline-block;
 	}
 	.logo {
-		float: left;
-		font-size: 36px;
+		text-align: left;
 	}
 	.site-title{
-		color: white;
+		color: $white;
 		text-shadow: $text-shadow;
 		margin: 0;
+		font-size: 20px;
 	}
 
 	.header-link-container {
-		float: right;
+		text-align: right;
 		.header-link,
 		.header-link:hover,
 		.header-link:active,
 		.header-link:visited {
+			font-family: $site-font;
 			color: black;
 			text-decoration: none;
 		}
@@ -47,11 +51,12 @@
 	text-align: center;
 	position: relative;
 	.marketing-copy {
-		color: white;
+		color: $white;
 		text-shadow: $text-shadow;
 		width: 65%;
-    margin: 30px auto;
+    margin: 100px auto;
     margin-bottom: 50px;
+    font-weight: $f_weight_bold;
 	}
 }
 
@@ -63,7 +68,7 @@
 	.section-tab {
 		padding: 5px 10px;
 		display: inline-block;
-		background-color: white;
+		background-color: $white;
 		cursor: pointer;
 		-webkit-border-radius: 4px 4px 0px 0px;
 		-moz-border-radius: 4px 4px 0px 0px;
@@ -74,10 +79,10 @@
     letter-spacing: 2px;
 	}
 	.section-tab:hover {
-		background-color: $hover-blue;
+		background-color: $light-blue;
 	}
 	.section-tab.selected {
-		background-color: white;
+		background-color: $white;
 	}
 }
 
@@ -86,10 +91,10 @@
 .section-link:active,
 .section-link:focus {
 	text-decoration: none;
-	color: white;
+	color: $white;
 }
 .section-link {
-	color: white;
+	color: $white;
 	text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -100,7 +105,7 @@
 .admin-link,
 .admin-link:hover {
 	margin-right: 5px;
-	color: white;
+	color: $white;
   text-transform: uppercase;
   font-weight: 700;
 }

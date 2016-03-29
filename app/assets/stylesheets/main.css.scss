@@ -49,9 +49,16 @@ p {
 }
 
 a,
-a:hover {
+a:hover,
+a:active,
+a:visited {
+	color: $blue;
 	cursor: pointer;
 	text-decoration: none;
+}
+
+a:hover {
+	color: $light_blue;
 }
 
 #app-container {

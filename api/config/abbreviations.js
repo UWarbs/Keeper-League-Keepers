@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 module.exports = {
 	position: function(position) {
 		var position = position.toLowerCase();
