@@ -34,11 +34,13 @@ class PlayerCard extends React.Component {
 
 	render() {
 		let player 			= this.props.player;
+		
+		let rank = this.props.rank != null ? '#' + this.props.rank + ': ' : '';
+		
 		let id          = player.id;
 		let parentClass = 'player-card-container ' + this.props.className; //ternary here for no name
-		let writeup     = player.writeup;
-		//set className variables bases on comparing or not
-		//var playerCard = player card using className variables and other variables based on comparing or not.
+		let writeup     = <p className="player-card-writeup" dangerouslySetInnerHTML={this.parseHtml()} />;
+
 		return (
       <div className={parentClass}>
       	<span className="player-card-details">
@@ -46,8 +48,8 @@ class PlayerCard extends React.Component {
       		<p className="player-card-team">{player.team}</p>
       	</span>
       	<Link to={ `/admin/edit-player/${id}` }>EDIT PLAYER</Link>
-      	<h3 className="player-card-name">{player.first_name}&nbsp;{player.last_name}</h3>
-      	<p className="player-card-writeup" dangerouslySetInnerHTML={this.parseHtml()} />
+      	<h3 className="player-card-name">{rank}{player.first_name}&nbsp;{player.last_name}</h3>
+      	{writeup}
       </div>
     )
 	}

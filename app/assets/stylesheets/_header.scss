@@ -36,12 +36,12 @@
 
 	.header-link-container {
 		text-align: right;
-		.header-link,
-		.header-link:hover,
-		.header-link:active,
-		.header-link:visited {
+		.admin-link,
+		.admin-link:hover,
+		.admin-link:active,
+		.admin-link:visited {
 			font-family: $site-font;
-			color: black;
+			color: $white;
 			text-decoration: none;
 		}
 	}

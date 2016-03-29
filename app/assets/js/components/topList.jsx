@@ -2,8 +2,10 @@ import React from 'react';
 import { Link }  from 'react-router';
 
 import ListStore 				   from '../stores/ListStore';
+import PlayerCard          from './PlayerCard.jsx';
 import PlayerServerActions from '../actions/PlayerServerActions';
 import PlayerStore 				 from '../stores/PlayerStore';
+
 
 class TopListItem extends React.Component {
 	constructor() {
@@ -13,11 +15,10 @@ class TopListItem extends React.Component {
 		let player = this.props.player;
 		let rank = this.props.rank;
 		let id = this.props.player.id;
+		let playerCard = <PlayerCard player={player} rank={rank} isComparing={false} />
 		return (
 			<li className="top-position-list">
-				<p className="player-card-info"><strong>#{rank}: {player.first_name} {player.last_name}, {player.team} ({player.rating})</strong></p>
-				<Link className="player-edit-link" to={ `/admin/edit-player/${id}` }>EDIT PLAYER</Link>
-				<p>{player.writeup}</p>
+				{playerCard}
 			</li>
 		);
 	}
