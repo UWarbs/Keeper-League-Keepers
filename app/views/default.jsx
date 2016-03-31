@@ -17,7 +17,7 @@ var Default = React.createClass({
 	        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'></link>
 	        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 	        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	        <script src="http://cdn.quilljs.com/latest/quill.js"></script>
+	        <script src="//cdn.quilljs.com/latest/quill.js"></script>
 	      </head>
 	      <body>
 	        <div id="app-container"></div>
