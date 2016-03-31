@@ -27142,50 +27142,67 @@
 /* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// TODO: ES6 this guy
 	"use strict";
 
-	var AppDispatcher = __webpack_require__(236);
-	var Constants = __webpack_require__(240);
-	var Api = __webpack_require__(249);
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
-	module.exports = {
+	var _Api = __webpack_require__(249);
+
+	var _Api2 = _interopRequireDefault(_Api);
+
+	var _AppDispatcher = __webpack_require__(236);
+
+	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
+
+	var _Constants = __webpack_require__(240);
+
+	var _Constants2 = _interopRequireDefault(_Constants);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
 		getSinglePlayer: function getSinglePlayer(id) {
-			Api.getSinglePlayer('/api/player/' + id).then(function (player) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.GET_SINGLE_PLAYER,
+			_Api2.default.getSinglePlayer('/api/player/' + id).then(function (player) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.GET_SINGLE_PLAYER,
 					player: player
 				});
 			});
 		},
+
 		getAllPlayers: function getAllPlayers() {
-			Api.get('/api/all-players').then(function (players) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.GET_PLAYERS,
+			_Api2.default.get('/api/all-players').then(function (players) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.GET_PLAYERS,
 					players: players
 				});
 			});
 		},
+
 		addNewPlayer: function addNewPlayer(data) {
-			Api.post('/api/new-player', data).then(function (player) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.NEW_PLAYER,
+			_Api2.default.post('/api/new-player', data).then(function (player) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.NEW_PLAYER,
 					player: player
 				});
 			});
 		},
+
 		editPlayer: function editPlayer(id, data) {
-			Api.post('/api/edit-player/' + id, data).then(function (player) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.EDIT_PLAYER,
+			_Api2.default.post('/api/edit-player/' + id, data).then(function (player) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.EDIT_PLAYER,
 					player: player
 				});
 			});
 		},
+
 		getList: function getList(id) {
-			Api.get('/api/top/' + id).then(function (list) {
-				AppDispatcher.handleServerAction({
-					actionType: Constants.GET_LIST,
+			_Api2.default.get('/api/top/' + id).then(function (list) {
+				_AppDispatcher2.default.handleServerAction({
+					actionType: _Constants2.default.GET_LIST,
 					list: list
 				});
 			});
@@ -44503,7 +44520,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//mixins: [PureRenderMixin], want this back in
 
 	var SearchResults = (function (_React$Component) {
 		_inherits(SearchResults, _React$Component);

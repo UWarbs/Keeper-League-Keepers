@@ -2,9 +2,8 @@
 *  It finds a player's DB entry based on user input or if the player doesn't exist, displays a helpful error message to the user.
 **/
 "use strict";
-import React from 'react';
-import PureRenderMixin from 'pure-render-mixin';
-//mixins: [PureRenderMixin], want this back in
+import React 							 from 'react';
+import PureRenderMixin 		 from 'pure-render-mixin';
 import PlayerStore   			 from '../stores/PlayerStore';
 import PlayerCard    			 from '../components/PlayerCard.jsx';
 import PlayerName    			 from './shared/playerName.jsx';

@@ -1,11 +1,10 @@
-// TODO: ES6 this guy
 "use strict";
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var Constants     = require('../constants/Constants');
-var Api 					= require('../Api');
+import Api from '../Api';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import Constants from '../constants/Constants';
 
-module.exports = {
-	getSinglePlayer: function(id) {
+export default {
+	getSinglePlayer: (id) => {
 		Api.getSinglePlayer('/api/player/' + id)
 		.then(function(player) {
 			AppDispatcher.handleServerAction({
@@ -14,7 +13,8 @@ module.exports = {
 			});			
 		})
 	},
-	getAllPlayers: function() {
+
+	getAllPlayers: () => {
 		Api.get('/api/all-players')
 		.then(function(players) {
 			AppDispatcher.handleServerAction({
@@ -23,7 +23,8 @@ module.exports = {
 			});			
 		});
 	},
-	addNewPlayer: function(data) {
+
+	addNewPlayer: (data) => {
 		Api.post('/api/new-player', data)
 		.then(function(player) {
 			AppDispatcher.handleServerAction({
@@ -32,7 +33,8 @@ module.exports = {
 			});
 		});
 	},
-	editPlayer: function(id, data) {
+
+	editPlayer: (id, data) => {
 		Api.post('/api/edit-player/' + id, data)
 		.then(function(player) {
 			AppDispatcher.handleServerAction({
@@ -41,7 +43,8 @@ module.exports = {
 			});
 		});
 	},
-	getList: function(id) {
+
+	getList: (id) => {
 		Api.get('/api/top/' + id)
 		.then(function(list) {
 			AppDispatcher.handleServerAction({
@@ -49,5 +52,5 @@ module.exports = {
 				list: list
 			});
 		});
-	},
+	}
 };
