@@ -104,7 +104,6 @@ exports.register = function(server, options, next) {
 					console.log(err);
 					return res(err);
 				});
-
 			}
 		},
 
@@ -190,7 +189,8 @@ exports.register = function(server, options, next) {
 				var data = req.payload;
 				var positionAbbrev = Abbreviations.position(data.position);
 				var teamAbbrev = Abbreviations.team(data.team);
-				//TODO: Validation ... joi?
+				//TODO: Validation
+				//DbValidation.validateNewPlayer(data, knex);
 				knex('players').insert({
 					first_name: data.firstName,
 					last_name: data.lastName,

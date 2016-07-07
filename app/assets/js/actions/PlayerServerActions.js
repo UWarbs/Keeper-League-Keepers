@@ -1,5 +1,5 @@
 "use strict";
-import Api from '../Api';
+import Api from '../ApiEndpoints';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import Constants from '../constants/Constants';
 

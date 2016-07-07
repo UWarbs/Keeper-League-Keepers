@@ -27148,9 +27148,9 @@
 		value: true
 	});
 
-	var _Api = __webpack_require__(249);
+	var _ApiEndpoints = __webpack_require__(249);
 
-	var _Api2 = _interopRequireDefault(_Api);
+	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
 
 	var _AppDispatcher = __webpack_require__(236);
 
@@ -27164,7 +27164,7 @@
 
 	exports.default = {
 		getSinglePlayer: function getSinglePlayer(id) {
-			_Api2.default.getSinglePlayer('/api/player/' + id).then(function (player) {
+			_ApiEndpoints2.default.getSinglePlayer('/api/player/' + id).then(function (player) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.GET_SINGLE_PLAYER,
 					player: player
@@ -27173,7 +27173,7 @@
 		},
 
 		getAllPlayers: function getAllPlayers() {
-			_Api2.default.get('/api/all-players').then(function (players) {
+			_ApiEndpoints2.default.get('/api/all-players').then(function (players) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.GET_PLAYERS,
 					players: players
@@ -27182,7 +27182,7 @@
 		},
 
 		addNewPlayer: function addNewPlayer(data) {
-			_Api2.default.post('/api/new-player', data).then(function (player) {
+			_ApiEndpoints2.default.post('/api/new-player', data).then(function (player) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.NEW_PLAYER,
 					player: player
@@ -27191,7 +27191,7 @@
 		},
 
 		editPlayer: function editPlayer(id, data) {
-			_Api2.default.post('/api/edit-player/' + id, data).then(function (player) {
+			_ApiEndpoints2.default.post('/api/edit-player/' + id, data).then(function (player) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.EDIT_PLAYER,
 					player: player
@@ -27200,7 +27200,7 @@
 		},
 
 		getList: function getList(id) {
-			_Api2.default.get('/api/top/' + id).then(function (list) {
+			_ApiEndpoints2.default.get('/api/top/' + id).then(function (list) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.GET_LIST,
 					list: list
@@ -28674,9 +28674,9 @@
 		value: true
 	});
 
-	var _Api = __webpack_require__(249);
+	var _ApiEndpoints = __webpack_require__(249);
 
-	var _Api2 = _interopRequireDefault(_Api);
+	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
 
 	var _AppDispatcher = __webpack_require__(236);
 
@@ -28718,7 +28718,7 @@
 
 		//TODO: Maybe setting actionTypes that never are used in the store's switch case would be a good time to clear the page and display a sucess message, because all the error checks have passed
 		createBlogPost: function createBlogPost(content) {
-			_Api2.default.post('/api/new-blog', content).then(function (content) {
+			_ApiEndpoints2.default.post('/api/new-blog', content).then(function (content) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.NEW_BLOG,
 					content: content
@@ -28727,7 +28727,7 @@
 		},
 
 		getSingleBlogPost: function getSingleBlogPost(id) {
-			_Api2.default.getSingleBlogPost('/api/blog/' + id).then(function (blog) {
+			_ApiEndpoints2.default.getSingleBlogPost('/api/blog/' + id).then(function (blog) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.GET_SINGLE_BLOG,
 					blog: blog
@@ -28736,7 +28736,7 @@
 		},
 
 		editBlogPost: function editBlogPost(id, content) {
-			_Api2.default.post('/api/edit-blog/' + id, content).then(function (blog) {
+			_ApiEndpoints2.default.post('/api/edit-blog/' + id, content).then(function (blog) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.EDIT_BLOG,
 					blog: blog
@@ -28745,7 +28745,7 @@
 		},
 
 		getAllBlogPosts: function getAllBlogPosts() {
-			_Api2.default.get('/api/all-blogs').then(function (blogs) {
+			_ApiEndpoints2.default.get('/api/all-blogs').then(function (blogs) {
 				_AppDispatcher2.default.handleServerAction({
 					actionType: _Constants2.default.GET_ALL_BLOGS,
 					blogs: blogs
@@ -28929,8 +28929,10 @@
 				var length = this.state.writeupLength;
 				var team = this.state.team || 'SELECT A TEAM';
 				var position = this.state.position || 'SELECT A POSITION';
-				console.log('addPlayer render props:');
-				console.log(this.props.userLoggedIn);
+
+				//TODO: necessary to render every keystroke?
+				//console.log('addPlayer render props:');
+				//console.log(this.props.userLoggedIn);
 				//Best practices WILL be used. REASON. WILL. PREVAIL.
 				return _react2.default.createElement(
 					'div',

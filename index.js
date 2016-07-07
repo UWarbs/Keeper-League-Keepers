@@ -1,11 +1,13 @@
 var dateFormat = require('dateformat');
 var format     = "dd mmm HH:MM:ss";
+var fs    	   = require('fs');
 var Hapi       = require('hapi');
-var knex       = require('./knexfile');
 var path 			 = require('path');
-var Player     = require('./api/models/Player');
 var request    = require('request');
+var knex       = require('./knexfile');
+var Player     = require('./api/models/Player');
 var routes 	 	 = require('./api/routes/routes');
+
 
 require('babel-core/register')({
     presets: ['react']
@@ -43,6 +45,31 @@ var plugins = [
 	}
 ];
 
+/*
+addPlayersToDB();
+
+function addPlayersToDB() {
+	var data = fs.readFileSync('parsedPlayers.json');
+	var players =  JSON.parse(data);
+
+	for (var i = 0; i < players.length; i++) {
+		var player = players[i];
+		knex('players').insert({
+			first_name: player.firstName,
+			last_name: player.lastName,
+			position: player.pos,
+			team: player.team,
+			rating: player.rating,
+			age: player.age
+		}).then(function(player) {
+			console.log('succesful insert');
+		}).catch(function(err) {
+			console.log(err);
+		});
+	}
+}
+*/
+
 server.register(plugins, function (err) {
   if (err) { throw err; }
   // Add the React-rendering view engine
@@ -54,8 +81,7 @@ server.register(plugins, function (err) {
       path: 'app/views'
   });
 
-  // server.renderToString()
-	  
+  
 	server.start(function(err) {
 	  if (err) { console.log('start errror'); throw err; }
 	  server.log('info', 'Server running at: ' + server.info.uri);

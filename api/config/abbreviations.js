@@ -129,9 +129,20 @@ module.exports = {
 				abbrev = 'BUF';
 				break;
 			default:
+				console.log("team name foulup");
 				abbrev = team + '[error]';
 				break;							
 		}
 		return abbrev;
+	},
+
+	getFirstName: function(name) {
+		var firstName = name.split(' ').slice(0, -1).join(' ');
+		return firstName;
+	},
+
+	getLastName: function(name) {
+		var lastName = name.split(' ').slice(-1).join(' ');
+		return lastName;
 	}
 }
