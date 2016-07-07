@@ -114,7 +114,7 @@ exports.register = function(server, options, next) {
 				var position = encodeURIComponent(req.params.position);
 				var pos = position.toUpperCase();
 				//TODO: make 10 constant or a param.
-				knex('players').where('position_abbrev', pos).orderBy('rating', 'desc').limit(10)
+				knex('players').where('position', pos).orderBy('rating', 'asc').limit(10)
 					.then(function(players) {
 						return res(players)
 					}).catch(function(err) {
@@ -194,8 +194,7 @@ exports.register = function(server, options, next) {
 				knex('players').insert({
 					first_name: data.firstName,
 					last_name: data.lastName,
-					position: data.position,
-					position_abbrev: positionAbbrev,
+					position: positionAbbrev,
 					team: data.team,
 					team_abbrev: teamAbbrev,
 					rating: data.rating,
@@ -225,8 +224,7 @@ exports.register = function(server, options, next) {
 				.update({
 					first_name: data.firstName,
 					last_name: data.lastName,
-					position: data.position,
-					position_abbrev: positionAbbrev,
+					position: positionAbbrev,
 					team: data.team,
 					team_abbrev: teamAbbrev,
 					rating: data.rating,

@@ -151,7 +151,7 @@
 			value: function render() {
 				var isLoggedIn = this.props.user; //LoginStore.isLoggedIn() || this.props.user;
 				var route = this.props.path;
-				console.log('index render with user: ', isLoggedIn);
+				// console.log('index render with user: ', isLoggedIn);	
 				var addPlayer = undefined;
 				var loginLink = undefined;
 				var logoutLink = undefined;
@@ -42297,7 +42297,7 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process) {/** @license MIT License (c) copyright 2010-2014 original author or authors */
 	/** @author Brian Cavalier */
 	/** @author John Hann */
 
@@ -45018,7 +45018,7 @@
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'player-card-pos' },
-	            player.position_abbrev
+	            player.position
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -45108,7 +45108,7 @@
 					_react2.default.createElement(
 						'span',
 						{ className: 'search-pos' },
-						player.position_abbrev
+						player.position
 					)
 				);
 			}

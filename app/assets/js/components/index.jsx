@@ -43,7 +43,7 @@ class Header extends React.Component {
 	render () {
 		let isLoggedIn = this.props.user; //LoginStore.isLoggedIn() || this.props.user;
 		let route = this.props.path;
-		console.log('index render with user: ', isLoggedIn);	
+		// console.log('index render with user: ', isLoggedIn);	
 		let addPlayer;
 		let loginLink;
 		let logoutLink;

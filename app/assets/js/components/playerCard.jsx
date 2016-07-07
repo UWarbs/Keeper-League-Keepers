@@ -44,7 +44,7 @@ class PlayerCard extends React.Component {
 		return (
       <div className={parentClass}>
       	<span className="player-card-details">
-      		<p className="player-card-pos">{player.position_abbrev}</p>
+      		<p className="player-card-pos">{player.position}</p>
       		<p className="player-card-team">{player.team}</p>
       	</span>
       	<Link to={ `/admin/edit-player/${id}` }>EDIT PLAYER</Link>
