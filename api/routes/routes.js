@@ -109,12 +109,14 @@ exports.register = function(server, options, next) {
 
 		{
 			method: 'GET',
-			path: '/api/top/{position}',
+			path: '/api/top/{position}/{offset}',
 			handler: function(req, res) {
 				var position = encodeURIComponent(req.params.position);
 				var pos = position.toUpperCase();
+				var offsetParam = encodeURIComponent(req.params.offset) || 0;
+				var offset = offsetParam * 10
 				//TODO: make 10 constant or a param.
-				knex('players').where('position', pos).orderBy('rating', 'asc').limit(10)
+				knex('players').where('position', pos).orderBy('rating', 'asc').offset(offset).limit(10)
 					.then(function(players) {
 						return res(players)
 					}).catch(function(err) {

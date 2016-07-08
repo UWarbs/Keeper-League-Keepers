@@ -186,7 +186,7 @@ class PlayerSearch extends React.Component {
 		}
 
 		return (
-			<div className='player-search-container'>
+			<div className='mid-page-container'>
 				<h3 className='player-search-copy'>Search any player name to get our analysts' in-depth opinion on their keeper league worth.</h3>
 				<SearchHelper className='player-search-input' type='text' placeholder='e.g Russell Wilson' ref='search' onChange={this.searchUpdated} defaultStyle={false} value={searchTerm} />
 				<SearchResults 

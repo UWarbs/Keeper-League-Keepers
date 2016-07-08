@@ -28,7 +28,7 @@ class LoginStore extends EventEmitter {
   }
 
 	_registerToActions(actionObj) {
-		console.log(actionObj);
+		// console.log(actionObj);
 		let action = actionObj.action;
 		switch(action.actionType) {
 			case AppConstants.LOGIN_USER:

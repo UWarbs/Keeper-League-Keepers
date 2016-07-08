@@ -44,8 +44,8 @@ export default {
 		});
 	},
 
-	getList: (id) => {
-		Api.get('/api/top/' + id)
+	getList: (id, offset) => {
+		Api.get('/api/top/' + id + '/' + offset)
 		.then(function(list) {
 			AppDispatcher.handleServerAction({
 				actionType: Constants.GET_LIST,

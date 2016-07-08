@@ -10,6 +10,9 @@ var CHANGE_EVENT = 'change'; //have different change events??? one for all playe
 var _allPlayers = [];
 var _player;
 var _list;
+//var _previousPosition;
+//var _currentPosition;
+
 function setPlayers (players) {
 	_allPlayers = players;
 }
@@ -18,6 +21,7 @@ function setPlayer (player) {
 }
 function setList (list) {
 	_list = list;
+	//_previousPosition = list[0].position;
 }
 // Define the public event listeners and getters that
 // the views will use to listen for changes and retrieve
@@ -61,7 +65,14 @@ AppDispatcher.register(function(payload) {
 			PlayerStore.emit(CHANGE_EVENT);
 			break;
 		case AppConstants.GET_LIST:
+			//_currentPosition = action.list[0].position;
+			//console.log("currentPosition: " + _currentPosition);
+			//console.log("previousPOsition: " + _previousPosition);
+			// if ( _currentPosition != _previousPosition) {
+				// console.log('should be 0 offsest');
+			// }
 			setList(action.list);
+			//console.log("offset action offset: " + action.offset);
 			PlayerStore.emit(CHANGE_EVENT); 
 			break;
     default: 
