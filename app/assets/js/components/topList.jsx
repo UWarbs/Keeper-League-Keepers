@@ -2,6 +2,7 @@ import React from 'react';
 import { Link }  from 'react-router';
 
 import ListStore 				   from '../stores/ListStore';
+import Pagination          from './shared/Pagination.jsx';
 import PlayerCard          from './PlayerCard.jsx';
 import PlayerServerActions from '../actions/PlayerServerActions';
 import PlayerStore 				 from '../stores/PlayerStore';
@@ -47,12 +48,13 @@ class TopListContainer extends React.Component {
 	  PlayerServerActions.getList(id, offset);
 	}
 
-	//Switch from one positio list to another
+	//Switch from one position list to another
 	//reset pagination offset to 0
   componentWillReceiveProps(nextProps) {
   	let id = nextProps.params.id
   	if(id != this.props.params.id) {
   		let offset = 0;
+  		this.setState({offset: offset})
 			PlayerServerActions.getList(id, offset);		
   	}
 	}
@@ -63,28 +65,31 @@ class TopListContainer extends React.Component {
 
   onChange() {
   	let list = PlayerStore.getList();
-  	console.log('onchange');
-  	//TODO TODO TODO Check current position vs previous position and set offset back to 0
   	this.setState({
   		list: list,
   		position: this.props.params.id
   	})
   }
 
+  //Todo: Instead of setting state in these functions maybe make offset be a param in the list returned
+  //from PlayerStore.getList() so that it just sets state once in onChange instead of twice.
+  //also...Combine into one function with bool isNext check
   handleNext() {
   	let id = this.props.params.id;
   	var offset = this.state.offset += 1;
-  	PlayerServerActions.getList(id, offset);	//TODO TODO TODO
-  	
+  	PlayerServerActions.getList(id, offset);
   	this.setState({
   		offset: offset
   	})
   }
 
   handlePrevious() {
+  	let id = this.props.params.id;
   	var offset = this.state.offset;
+
   	if(offset > 0) {
   		offset -= 1;
+  		PlayerServerActions.getList(id, offset);	
   		this.setState({
   			offset: offset
   		})
@@ -97,12 +102,12 @@ class TopListContainer extends React.Component {
 		let offset = this.state.offset;
 		let topList = [];
 
-		let next = React.createElement('a', {className: 'next-players', onClick: this.handleNext}, 'Next 10');
-		let previous = React.createElement('a', {className: 'previous-players', onClick: this.handlePrevious}, 'Previous 10');
+		let handleNext = this.handleNext;
+		let handlePrevious = this.handlePrevious;
 		
 		if ( list ) {
 			list.forEach(function(player, index, array) {
-				topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={index + 1} />);
+				topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={player.rating} />);
 			});
 		}else {
 			// topList.push(<h3>Loading...</h3>);  //only if the load time takes long
@@ -111,10 +116,11 @@ class TopListContainer extends React.Component {
 		return (
 			<div className="top-list-container col-md-12">
 				<h3 className="page-header">TOP 10 {position}s</h3>
+				<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset}/>
 				<ul className="mid-page-container top-list-ul">
 					{topList}
 				</ul>
-				{next}
+				<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset}/>
 			</div> 
 		);
 	}
