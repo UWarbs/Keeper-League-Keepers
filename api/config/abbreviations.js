@@ -23,7 +23,7 @@ module.exports = {
 				abbrev = 'D/ST';
 				break;
 			default:
-				abbrev = 'NA';
+				abbrev = position.toUpperCase();
 				break;
 		}
 		return abbrev;
@@ -129,8 +129,7 @@ module.exports = {
 				abbrev = 'BUF';
 				break;
 			default:
-				console.log("team name foulup");
-				abbrev = team + '[error]';
+				abbrev = team.toUpperCase();
 				break;							
 		}
 		return abbrev;

@@ -23,7 +23,7 @@ exports.register = function(server, options, next) {
 			},
 		},
 	  
-	  // Add main app route
+	  // Add main app routes
 	  {
 	  	method: 'GET',
 	  	path: '/',
@@ -220,6 +220,7 @@ exports.register = function(server, options, next) {
 				var id = encodeURIComponent(req.params.id);
 				var positionAbbrev = Abbreviations.position(data.position);
 				var teamAbbrev = Abbreviations.team(data.team);
+				console.log("POS " + data.position + " TEAM: " + data.team);
 				//TODO: Validation ... joi?
 				knex('players')
 				.where('id', id)

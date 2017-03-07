@@ -1,0 +1,15 @@
+@import "variables";
+
+.pagination-container {
+	margin: 0 auto;
+	padding: 10px;
+
+	.previous {
+		float: left;
+	}
+
+	.next {
+		float: right;
+	}
+
+}

@@ -87,3 +87,14 @@ server.register(plugins, function (err) {
 	  server.log('info', 'Server running at: ' + server.info.uri);
 	});
 });
+
+
+
+//reasons why i stopped working on this
+// relies soley on user created content and subjective ranking.
+
+//reason why im starting again
+// -Use it as practice to model value/rank of players in current year and next years...  2017, 2018, 2019, 2020, 2021 probably.
+// factors: retirement, injuries, team, other players on team etc.
+// - This means the site would add value without outside content. Also a great way to practice. 
+// - Also show results of previous year.. ex: 2016: I project 11/100 best receiver. Actual: 27th/100 ... my bad.

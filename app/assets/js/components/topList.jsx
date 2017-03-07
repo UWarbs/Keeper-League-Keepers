@@ -15,8 +15,9 @@ class TopListItem extends React.Component {
 	render() {
 		let player = this.props.player;
 		let rank = this.props.rank;
+		let positionRank = this.props.positionRank;
 		let id = this.props.player.id;
-		let playerCard = <PlayerCard player={player} rank={rank} isComparing={false} />
+		let playerCard = <PlayerCard player={player} rank={rank} positionRank={positionRank} isComparing={false} />
 		return (
 			<li className="top-position-list">
 				{playerCard}
@@ -100,29 +101,47 @@ class TopListContainer extends React.Component {
 		let list  = this.state.list;
 		let position = this.state.position;
 		let offset = this.state.offset;
-		let topList = [];
-
 		let handleNext = this.handleNext;
 		let handlePrevious = this.handlePrevious;
-		
-		if ( list ) {
-			list.forEach(function(player, index, array) {
-				topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={player.rating} />);
-			});
-		}else {
-			// topList.push(<h3>Loading...</h3>);  //only if the load time takes long
-		} 
+		let topList = [];
+		var listOver = false;
 
-		return (
-			<div className="top-list-container col-md-12">
-				<h3 className="page-header">TOP 10 {position}s</h3>
-				<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset}/>
-				<ul className="mid-page-container top-list-ul">
-					{topList}
-				</ul>
-				<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset}/>
-			</div> 
-		);
+
+		//Error finding list.
+		if(!list) {
+			return (
+				<div className="top-list-container col-md-12">
+					<h3 className="page-header">Error finding {position}s</h3>
+				</div>
+			);
+		}else {
+			if (list.length != 0) {
+				listOver = false;
+				list.forEach(function(player, index, array) {
+					//var positionRank = (index + 1) + offset;         
+					var positionRank = offset == 0 ? (index + 1) : ((10 * offset) + index) + 1;
+					topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={player.rating} positionRank={positionRank} />);
+				});
+			}else {
+				listOver = true;
+				topList.push(<p key="0">No More Players.</p>);
+			}	
+
+			return (
+				<div className="top-list-container col-md-12">
+					<h3 className="page-header">{position}s</h3>
+					
+					<ul className="mid-page-container top-list-ul">
+						<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset} listOver={listOver}/>
+						{topList}
+						<Pagination handleNext={handleNext} handlePrevious={handlePrevious} offset={offset} listOver={listOver}/>
+					</ul>
+					
+				</div> 
+			);	
+		}
+
+
 	}
 }
 
