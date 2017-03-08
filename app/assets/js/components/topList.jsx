@@ -118,7 +118,6 @@ class TopListContainer extends React.Component {
 			if (list.length != 0) {
 				listOver = false;
 				list.forEach(function(player, index, array) {
-					//var positionRank = (index + 1) + offset;         
 					var positionRank = offset == 0 ? (index + 1) : ((10 * offset) + index) + 1;
 					topList.push(<TopListItem key={player.id} id={player.id} player={player} rank={player.rating} positionRank={positionRank} />);
 				});
